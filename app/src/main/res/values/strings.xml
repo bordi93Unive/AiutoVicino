@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AiutoVicino</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">AiutoVicino</string>
+    <string name="nav_header_subtitle">859041@stud.unive.it</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_services">Servizi</string>
+    <string name="menu_score">Portafoglio</string>
+    <string name="menu_settings">Impostazioni</string>
+
+
+</resources>
