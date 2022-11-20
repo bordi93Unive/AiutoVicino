@@ -1,4 +1,4 @@
-package com.unive.aiutovicino.ui.gallery;
+package com.example.myapplication.ui.gallery;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.unive.aiutovicino.databinding.FragmentGalleryBinding;
+import com.example.myapplication.databinding.FragmentGalleryBinding;
 
 public class GalleryFragment extends Fragment {
 

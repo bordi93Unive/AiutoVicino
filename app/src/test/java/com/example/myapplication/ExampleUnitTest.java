@@ -1,4 +1,4 @@
-package com.unive.aiutovicino;
+package com.example.myapplication;
 
 import org.junit.Test;
 
