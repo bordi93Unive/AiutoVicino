@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.aiutovicino.databinding.FragmentLoginBinding;
+import com.example.aiutovicino.ui.convalida.ConvalidaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginFragment extends Fragment {
@@ -17,8 +18,7 @@ public class LoginFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        LoginViewModel homeViewModel =
-                new ViewModelProvider(this).get(LoginViewModel.class);
+        LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -31,7 +31,7 @@ public class LoginFragment extends Fragment {
             }
         });
         /*final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);*/
+        loginViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);*/
         return root;
     }
 
