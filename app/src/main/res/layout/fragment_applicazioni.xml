@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MyAnnunci.MyAnnunciFragment" >
+    tools:context=".ui.applicazioni.ApplicazioniFragment" >
 
     <TextView
-        android:id="@+id/text_myannunci"
+        android:id="@+id/text_myapplicazioni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

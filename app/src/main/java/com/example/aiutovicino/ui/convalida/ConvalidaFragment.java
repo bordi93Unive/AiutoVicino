@@ -1,6 +1,7 @@
 package com.example.aiutovicino.ui.convalida;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.aiutovicino.databinding.FragmentConvalidaBinding;
 import com.example.aiutovicino.databinding.FragmentHomeBinding;
 import com.example.aiutovicino.ui.home.HomeViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ConvalidaFragment extends Fragment {
 
@@ -27,6 +29,15 @@ private FragmentConvalidaBinding binding;
 
         final TextView textView = binding.textConvalida;
         convalidaViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+            /**Bottone su convalida*/
+            binding.buttonConvalida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Premuto bottone", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         return root;
     }
 

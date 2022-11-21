@@ -18,16 +18,16 @@
         tools:layout="@layout/fragment_portafoglio" />
 
     <fragment
-        android:id="@+id/nav_myannunci"
-        android:name="com.example.aiutovicino.ui.MyAnnunci.MyAnnunciFragment"
+        android:id="@+id/nav_annunci"
+        android:name="com.example.aiutovicino.ui.annunci.AnnunciFragment"
         android:label="@string/menu_myannunci"
-        tools:layout="@layout/fragment_myannunci" />
+        tools:layout="@layout/fragment_annunci" />
 
     <fragment
-        android:id="@+id/nav_myapplicazioni"
-        android:name="com.example.aiutovicino.ui.MyApplicazioni.MyApplicazioniFragment"
+        android:id="@+id/nav_applicazioni"
+        android:name="com.example.aiutovicino.ui.applicazioni.ApplicazioniFragment"
         android:label="@string/menu_myapplicazioni"
-        tools:layout="@layout/fragment_myapplicazioni" />
+        tools:layout="@layout/fragment_applicazioni" />
 
     <fragment
         android:id="@+id/nav_convalida"

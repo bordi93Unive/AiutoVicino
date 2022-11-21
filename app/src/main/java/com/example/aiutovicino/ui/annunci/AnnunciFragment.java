@@ -1,4 +1,4 @@
-package com.example.aiutovicino.ui.MyAnnunci;
+package com.example.aiutovicino.ui.annunci;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,22 +8,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.aiutovicino.databinding.FragmentMyannunciBinding;
 
-public class MyAnnunciFragment extends Fragment {
+import com.example.aiutovicino.databinding.FragmentAnnunciBinding;
 
-private FragmentMyannunciBinding binding;
+public class AnnunciFragment extends Fragment {
+
+private FragmentAnnunciBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        MyAnnunciViewModel myAnnunciViewModel =
-                new ViewModelProvider(this).get(MyAnnunciViewModel.class);
+        AnnunciViewModel annunciViewModel =
+                new ViewModelProvider(this).get(AnnunciViewModel.class);
 
-    binding = FragmentMyannunciBinding.inflate(inflater, container, false);
+    binding = FragmentAnnunciBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
         final TextView textView = binding.textMyannunci;
-        myAnnunciViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        annunciViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

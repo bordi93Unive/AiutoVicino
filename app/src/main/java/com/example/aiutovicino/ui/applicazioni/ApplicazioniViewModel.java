@@ -1,14 +1,14 @@
-package com.example.aiutovicino.ui.MyApplicazioni;
+package com.example.aiutovicino.ui.applicazioni;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MyApplicazioniViewModel extends ViewModel {
+public class ApplicazioniViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public MyApplicazioniViewModel() {
+    public ApplicazioniViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Qui vedremo le mie applicazioni");
     }

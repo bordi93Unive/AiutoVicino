@@ -13,12 +13,12 @@
             android:icon="@drawable/ic_menu_portafoglio"
             android:title="@string/menu_portafoglio" />
         <item
-            android:id="@+id/nav_myannunci"
-            android:icon="@drawable/ic_menu_myannunci"
+            android:id="@+id/nav_annunci"
+            android:icon="@drawable/ic_menu_annunci"
             android:title="@string/menu_myannunci" />
         <item
-            android:id="@+id/nav_myapplicazioni"
-            android:icon="@drawable/ic_menu_myapplicazioni"
+            android:id="@+id/nav_applicazioni"
+            android:icon="@drawable/ic_menu_applicazioni"
             android:title="@string/menu_myapplicazioni" />
         <item
             android:id="@+id/nav_convalida"

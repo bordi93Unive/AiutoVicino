@@ -1,14 +1,14 @@
-package com.example.aiutovicino.ui.MyAnnunci;
+package com.example.aiutovicino.ui.annunci;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MyAnnunciViewModel extends ViewModel {
+public class AnnunciViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public MyAnnunciViewModel() {
+    public AnnunciViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Qui vedremo i miei annunci");
     }

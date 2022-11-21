@@ -1,8 +1,11 @@
 package com.example.aiutovicino;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toolbar;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import androidx.navigation.NavController;
@@ -20,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**cose da non toccare mai almeno che non sappia cosa stai facendo**/
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        //setContentView((R.layout.fragment_home));
         setSupportActionBar(binding.appBarMain.toolbar);
+        /***/
+
 
         /** sta roba serve per abilitare il messaggio toast che compare dal basso**/
         /**se voglio rimetterlo devo ricreare un oggettot grafico di nomefab dentro app_bar_main-xml**/
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_portafoglio, R.id.nav_myannunci,R.id.nav_myapplicazioni,
+                R.id.nav_home, R.id.nav_portafoglio, R.id.nav_annunci,R.id.nav_applicazioni,
                 R.id.nav_convalida,R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
@@ -52,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    /**azione che scateno quando viene premuto l'hamburger. Se lo tolgo non va l'hamburger*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -62,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 }
