@@ -1,20 +1,17 @@
-package com.example.myapplication;
+package com.example.aiutovicino;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.aiutovicino.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,19 +26,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+
+        /** sta roba serve per abilitare il messaggio toast che compare dal basso**/
+        /**se voglio rimetterlo devo ricreare un oggettot grafico di nomefab dentro app_bar_main-xml**/
+        /**l'oggetto deve essere un FloatingActionButton**/
+        /*binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_portafoglio, R.id.nav_myannunci,R.id.nav_myapplicazioni,
+                R.id.nav_convalida,R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

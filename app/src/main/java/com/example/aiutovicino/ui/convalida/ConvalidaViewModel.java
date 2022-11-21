@@ -1,16 +1,16 @@
-package com.example.myapplication.ui.home;
+package com.example.aiutovicino.ui.convalida;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class ConvalidaViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public ConvalidaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("Roba da convalidare per l'admin");
     }
 
     public LiveData<String> getText() {

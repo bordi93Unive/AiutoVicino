@@ -1,16 +1,16 @@
-package com.example.myapplication.ui.gallery;
+package com.example.aiutovicino.ui.portafoglio;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class PortafoglioViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public PortafoglioViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("Qui vedremo i coin dell'utente ecc");
     }
 
     public LiveData<String> getText() {
