@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.aiutovicino.LoginActivity;
 import com.example.aiutovicino.MainActivity;
 import com.example.aiutovicino.databinding.FragmentHomeBinding;
 import com.example.aiutovicino.databinding.FragmentLogoutBinding;
@@ -29,8 +30,7 @@ private FragmentLogoutBinding binding;
         binding = FragmentLogoutBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textLogout;
-        logoutViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        startActivity(new Intent(getActivity(), LoginActivity.class));
 
         return root;
     }

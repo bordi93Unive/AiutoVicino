@@ -1,15 +1,19 @@
 package com.example.aiutovicino.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.aiutovicino.MainActivity;
+import com.example.aiutovicino.controller.UserController;
+import com.example.aiutovicino.model.UserModel;
 import com.example.aiutovicino.databinding.FragmentLoginBinding;
-import com.example.aiutovicino.ui.convalida.ConvalidaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginFragment extends Fragment {
@@ -26,8 +30,20 @@ public class LoginFragment extends Fragment {
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Premuto bottone", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                boolean login = false;
+                UserModel user = UserController.getUserByEmail(binding.username.getText().toString());
+
+                if(user != null && user.password.equals(binding.password.getText().toString())){
+                    login = true;
+                }
+
+                if(!login){
+                    Snackbar.make(view, "Utente e/o password errati", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+                else{
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                }
             }
         });
         /*final TextView textView = binding.textHome;
