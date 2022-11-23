@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.example.aiutovicino.R;
 import com.example.aiutovicino.adapter.AnnunciAdapter;
 import com.example.aiutovicino.controller.AnnuncioController;
 import com.example.aiutovicino.databinding.FragmentHomeBinding;
@@ -33,8 +35,7 @@ private FragmentHomeBinding binding;
         listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Snackbar.make(view, "Cliccato l'annuncio di indice " + i, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment);
             }
         });
 
