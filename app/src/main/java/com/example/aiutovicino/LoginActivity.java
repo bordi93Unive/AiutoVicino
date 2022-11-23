@@ -24,10 +24,11 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        NavController navController = Navigation.findNavController(this, R.id.);
-       // mAppBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-       // NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        setSupportActionBar(binding.toolbarLogin);
 
-        //setSupportActionBar(binding.appBarLogin.toolbar);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_login);
+        mAppBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+
     }
 }

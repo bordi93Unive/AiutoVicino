@@ -16,7 +16,7 @@
     <string name="menu_logout">Logout</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="Nome">Nome</string>
-    <string name="Cognome">Nome</string>
+    <string name="Cognome">Cognome</string>
     <string name="prompt_email">Email</string>
     <string name="nickname">Nickname</string>
     <string name="prompt_password">Password</string>
