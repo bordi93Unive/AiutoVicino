@@ -1,4 +1,4 @@
-package com.example.aiutovicino.ui.annunci;
+package it.unive.aiutovicino.ui.annunci;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

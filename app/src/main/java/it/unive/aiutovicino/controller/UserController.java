@@ -1,6 +1,6 @@
-package com.example.aiutovicino.controller;
+package it.unive.aiutovicino.controller;
 
-import com.example.aiutovicino.model.UserModel;
+import it.unive.aiutovicino.model.UserModel;
 
 public class UserController {
 

@@ -1,4 +1,4 @@
-package com.example.aiutovicino.ui.login;
+package it.unive.aiutovicino.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.aiutovicino.MainActivity;
-import com.example.aiutovicino.controller.UserController;
-import com.example.aiutovicino.model.UserModel;
-import com.example.aiutovicino.databinding.FragmentLoginBinding;
+import it.unive.aiutovicino.MainActivity;
+import it.unive.aiutovicino.controller.UserController;
+import it.unive.aiutovicino.model.UserModel;
+import it.unive.aiutovicino.databinding.FragmentLoginBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginFragment extends Fragment {

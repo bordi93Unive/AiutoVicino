@@ -1,4 +1,4 @@
-package com.example.aiutovicino.ui.annunci;
+package it.unive.aiutovicino.ui.annunci;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

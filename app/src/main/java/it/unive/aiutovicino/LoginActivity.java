@@ -1,4 +1,4 @@
-package com.example.aiutovicino;
+package it.unive.aiutovicino;
 
 import androidx.appcompat.app.AppCompatActivity;
 
