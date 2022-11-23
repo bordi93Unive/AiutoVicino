@@ -18,5 +18,6 @@
         android:id="@+id/registrazioneFragment"
         android:name="com.example.aiutovicino.ui.registrazione.RegistrazioneFragment"
         android:label="Registrazione"
-        tools:layout="@layout/fragment_registrazione" />
+        tools:layout="@layout/fragment_registrazione" >
+    </fragment>
 </navigation>
