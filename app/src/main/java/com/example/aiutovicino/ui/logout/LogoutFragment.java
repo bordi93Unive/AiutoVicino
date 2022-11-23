@@ -22,10 +22,8 @@ public class LogoutFragment extends Fragment {
 
 private FragmentLogoutBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        LogoutViewModel logoutViewModel =
-                new ViewModelProvider(this).get(LogoutViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LogoutViewModel logoutViewModel = new ViewModelProvider(this).get(LogoutViewModel.class);
 
         binding = FragmentLogoutBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
