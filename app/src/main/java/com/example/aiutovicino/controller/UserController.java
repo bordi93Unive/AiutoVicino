@@ -6,7 +6,7 @@ public class UserController {
 
     public static UserModel getUserByEmail(String $email){
         if($email.equals("ugo@ugami.it")){
-            return new UserModel(1, "ugo@ugami.it", "ughino");
+            return new UserModel(1, "ugo@ugami.it", "ughino", "Ughino");
         }
         return null;
     }

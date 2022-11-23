@@ -1,5 +1,7 @@
 package com.example.aiutovicino.ui.login;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,19 +11,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.aiutovicino.MainActivity;
+import com.example.aiutovicino.R;
 import com.example.aiutovicino.controller.UserController;
 import com.example.aiutovicino.model.UserModel;
 import com.example.aiutovicino.databinding.FragmentLoginBinding;
+import com.example.aiutovicino.ui.registrazione.RegistrazioneFragment;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+
         LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
@@ -44,6 +49,15 @@ public class LoginFragment extends Fragment {
                 else{
                     startActivity(new Intent(getActivity(), MainActivity.class));
                 }
+            }
+        });
+
+        binding.buttonRegistrazione.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Navigation.findNavController(view).navigate(R.id.action_LoginFragment_to_RegistrationFragment);
+                //startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
         /*final TextView textView = binding.textHome;

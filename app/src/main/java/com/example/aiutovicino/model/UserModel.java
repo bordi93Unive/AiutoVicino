@@ -5,12 +5,14 @@ public class UserModel {
     public String email;
     public String password;
     public String surname;
+    public String nickname;
     public String name;
     public boolean state;
 
-    public UserModel(int id, String email, String password) {
+    public UserModel(int id, String email, String password,String nickname) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
     }
 }
