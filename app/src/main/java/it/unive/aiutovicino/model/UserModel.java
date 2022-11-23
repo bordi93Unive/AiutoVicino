@@ -1,4 +1,4 @@
-package com.example.aiutovicino.model;
+package it.unive.aiutovicino.model;
 
 public class UserModel {
     public int id;

@@ -1,4 +1,4 @@
-package com.example.aiutovicino.ui.applicazioni;
+package it.unive.aiutovicino.ui.applicazioni;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.aiutovicino.databinding.FragmentApplicazioniBinding;
+import it.unive.aiutovicino.databinding.FragmentApplicazioniBinding;
 
 public class ApplicazioniFragment extends Fragment {
 
