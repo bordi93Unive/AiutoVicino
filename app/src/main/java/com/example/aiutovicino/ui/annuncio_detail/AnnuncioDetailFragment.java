@@ -10,7 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.aiutovicino.R;
+import com.example.aiutovicino.controller.AnnuncioController;
 import com.example.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
+import com.example.aiutovicino.model.AnnuncioModel;
 
 public class AnnuncioDetailFragment extends Fragment {
 
@@ -21,6 +24,28 @@ public class AnnuncioDetailFragment extends Fragment {
 
         binding = FragmentAnnuncioDetailBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        Bundle b = this.getArguments();
+
+        AnnuncioModel annuncio = AnnuncioController.getAnnouncment((int)b.get("id"));
+
+        if(annuncio == null){
+            //torna indietro
+        }
+        else{
+            binding.textAnnuncioTitle.setText(annuncio.title);
+            switch(annuncio.id_category) {
+                case 1:
+                    binding.annuncioIcon.setImageResource(R.drawable.category_anziani);
+                    break;
+                case 2:
+                    binding.annuncioIcon.setImageResource(R.drawable.category_bambini);
+                    break;
+                case 3:
+                    binding.annuncioIcon.setImageResource(R.drawable.category_cani);
+                    break;
+            }
+        }
 
         return root;
     }

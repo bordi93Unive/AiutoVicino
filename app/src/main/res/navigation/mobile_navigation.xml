@@ -47,6 +47,6 @@
     <fragment
         android:id="@+id/annuncioDetailFragment"
         android:name="com.example.aiutovicino.ui.annuncio_detail.AnnuncioDetailFragment"
-        android:label="fragment_annuncio_detail"
+        android:label="Dettaglio Annuncio"
         tools:layout="@layout/fragment_annuncio_detail" />
 </navigation>

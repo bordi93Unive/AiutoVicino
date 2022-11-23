@@ -16,11 +16,13 @@ import com.example.aiutovicino.R;
 import com.example.aiutovicino.adapter.AnnunciAdapter;
 import com.example.aiutovicino.controller.AnnuncioController;
 import com.example.aiutovicino.databinding.FragmentHomeBinding;
+import com.example.aiutovicino.model.AnnuncioModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class HomeFragment extends Fragment {
 
 private FragmentHomeBinding binding;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -28,14 +30,18 @@ private FragmentHomeBinding binding;
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        AnnuncioModel[] annunci = AnnuncioController.getAllAnnouncments();
+
         ListView listAnnunci = (ListView) binding.listHome;
-        AnnunciAdapter annunciAdapter = new AnnunciAdapter(root.getContext(), AnnuncioController.getAllAnnouncments());
+        AnnunciAdapter annunciAdapter = new AnnunciAdapter(root.getContext(), annunci);
         listAnnunci.setAdapter(annunciAdapter);
 
         listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment);
+                Bundle b = new Bundle();
+                b.putInt("id", annunci[i].id);
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);
             }
         });
 

@@ -4,8 +4,8 @@ import com.example.aiutovicino.model.UserModel;
 
 public class UserController {
 
-    public static UserModel getUserByEmail(String $email){
-        if($email.equals("ugo@ugami.it")){
+    public static UserModel getUserByEmail(String email){
+        if(email.equals("ugo@ugami.it")){
             return new UserModel(1, "ugo@ugami.it", "ughino", "Ughino");
         }
         return null;
