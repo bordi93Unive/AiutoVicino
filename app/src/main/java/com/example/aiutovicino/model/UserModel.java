@@ -9,10 +9,13 @@ public class UserModel {
     public String name;
     public boolean state;
 
-    public UserModel(int id, String email, String password,String nickname) {
+    public UserModel(int id, String name, String surname, String email, String password,String nickname,boolean state) {
         this.id = id;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.state = state;
     }
 }

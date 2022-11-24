@@ -57,7 +57,6 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
 
                 Navigation.findNavController(view).navigate(R.id.action_LoginFragment_to_RegistrationFragment);
-                //startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
         /*final TextView textView = binding.textHome;

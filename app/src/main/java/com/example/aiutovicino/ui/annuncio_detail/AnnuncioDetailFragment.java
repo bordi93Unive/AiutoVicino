@@ -1,19 +1,19 @@
 package com.example.aiutovicino.ui.annuncio_detail;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
+import androidx.navigation.Navigation;
 import com.example.aiutovicino.R;
 import com.example.aiutovicino.controller.AnnuncioController;
 import com.example.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
 import com.example.aiutovicino.model.AnnuncioModel;
+import com.google.android.material.snackbar.Snackbar;
 
 public class AnnuncioDetailFragment extends Fragment {
 
@@ -28,11 +28,12 @@ public class AnnuncioDetailFragment extends Fragment {
         Bundle b = this.getArguments();
 
         AnnuncioModel annuncio = AnnuncioController.getAnnouncment((int)b.get("id"));
-
+        //annuncio=null;
         if(annuncio == null){
-            //torna indietro
+            /*TODO*/ //NON FUNZIONA
+            Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
         }
-        else{
+        else {
             binding.textAnnuncioTitle.setText(annuncio.title);
             switch(annuncio.id_category) {
                 case 1:
@@ -45,7 +46,23 @@ public class AnnuncioDetailFragment extends Fragment {
                     binding.annuncioIcon.setImageResource(R.drawable.category_cani);
                     break;
             }
+            binding.textDate.setText(annuncio.date);
+            binding.textTime.setText(annuncio.time);
+            binding.textLocation.setText(annuncio.place);
+            binding.textPartecipanti.setText((String.valueOf(annuncio.partecipants_number)));
+
+            binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
+            binding.textDescrizione.setText(annuncio.description);
         }
+            /**TODO se premi il bottone poi non posso più andare su Home */
+        binding.buttonApplicati.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Ti sei applicato con successo", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                Navigation.findNavController(view).navigate(R.id.action_annuncioDetailFragment_to_nav_applicazioni);
+            }
+        });
 
         return root;
     }
