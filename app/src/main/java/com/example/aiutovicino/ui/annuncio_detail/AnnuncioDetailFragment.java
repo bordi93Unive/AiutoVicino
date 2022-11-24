@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+
+import com.example.aiutovicino.MainActivity;
 import com.example.aiutovicino.R;
 import com.example.aiutovicino.controller.AnnuncioController;
 import com.example.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
@@ -28,10 +30,9 @@ public class AnnuncioDetailFragment extends Fragment {
         Bundle b = this.getArguments();
 
         AnnuncioModel annuncio = AnnuncioController.getAnnouncment((int)b.get("id"));
-        //annuncio=null;
+
         if(annuncio == null){
-            /*TODO*/ //NON FUNZIONA
-            Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
+            Navigation.findNavController(this.getActivity(), R.id.nav_host_fragment_content_main).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
         }
         else {
             binding.textAnnuncioTitle.setText(annuncio.title);

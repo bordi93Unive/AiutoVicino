@@ -51,9 +51,11 @@
         tools:layout="@layout/fragment_annuncio_detail" >
         <action
             android:id="@+id/action_annuncioDetailFragment_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_home"/>
         <action
             android:id="@+id/action_annuncioDetailFragment_to_nav_applicazioni"
-            app:destination="@id/nav_applicazioni" />
+            app:destination="@id/nav_applicazioni"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
