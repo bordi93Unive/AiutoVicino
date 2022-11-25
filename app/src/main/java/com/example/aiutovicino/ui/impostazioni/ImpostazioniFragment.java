@@ -44,8 +44,6 @@ private FragmentImpostazioniBinding binding;
             binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user.setUserModel(binding.modNome.getText().toString(), binding.modCognome.getText().toString(),
-                                  binding.modEmail.getText().toString(), binding.modNickname.getText().toString());
 
                 Snackbar.make(view, "Dati aggiornati", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

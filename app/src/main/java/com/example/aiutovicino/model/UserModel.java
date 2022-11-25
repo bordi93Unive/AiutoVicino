@@ -19,30 +19,4 @@ public class UserModel {
         this.state = state;
     }
 
-    public void setUserModel(String name, String surname, String email, String nickname){
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.nickname = nickname;
-    }
-
-    public void getUserModel(String name, String surname, String email, String nickname){
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.nickname = nickname;
-    }
-
-
-
-    public String getName(){
-        return this.name;
-    }
-
-    public String getSurname(){
-        return this.name;
-    }
-    public String getEmail(){
-        return this.email;
-    }
 }

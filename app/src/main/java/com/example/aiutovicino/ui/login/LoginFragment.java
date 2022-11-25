@@ -48,10 +48,7 @@ public class LoginFragment extends Fragment {
                             .setAction("Action", null).show();
                 }
                 else{
-                    Bundle b = new Bundle();
-                    b.putInt("idUser", user.id);
-                    //mi porto dietro l'id dell'utente
-                    startActivity(new Intent(getActivity(), MainActivity.class),b);
+                    startActivity(new Intent(getActivity(), MainActivity.class));
                 }
             }
         });
