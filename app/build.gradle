@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.aiutovicino'
+    namespace 'it.unive.aiutovicino'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.aiutovicino"
+        applicationId "it.unive.aiutovicino"
         minSdk 23
         targetSdk 32
         versionCode 1

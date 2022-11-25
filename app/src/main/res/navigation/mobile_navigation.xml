@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.aiutovicino.ui.home.HomeFragment"
+        android:name="it.unive.aiutovicino.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,31 +17,31 @@
 
     <fragment
         android:id="@+id/nav_portafoglio"
-        android:name="com.example.aiutovicino.ui.portafoglio.PortafoglioFragment"
+        android:name="it.unive.aiutovicino.ui.portafoglio.PortafoglioFragment"
         android:label="@string/menu_portafoglio"
         tools:layout="@layout/fragment_portafoglio" />
 
     <fragment
         android:id="@+id/nav_annunci"
-        android:name="com.example.aiutovicino.ui.annunci.AnnunciFragment"
+        android:name="it.unive.aiutovicino.ui.annunci.AnnunciFragment"
         android:label="@string/menu_myannunci"
         tools:layout="@layout/fragment_annunci" />
 
     <fragment
         android:id="@+id/nav_applicazioni"
-        android:name="com.example.aiutovicino.ui.applicazioni.ApplicazioniFragment"
+        android:name="it.unive.aiutovicino.ui.applicazioni.ApplicazioniFragment"
         android:label="@string/menu_myapplicazioni"
         tools:layout="@layout/fragment_applicazioni" />
 
     <fragment
         android:id="@+id/nav_convalida"
-        android:name="com.example.aiutovicino.ui.convalida.ConvalidaFragment"
+        android:name="it.unive.aiutovicino.ui.convalida.ConvalidaFragment"
         android:label="@string/menu_convalida"
         tools:layout="@layout/fragment_convalida" />
 
     <fragment
         android:id="@+id/nav_impostazioni"
-        android:name="com.example.aiutovicino.ui.impostazioni.ImpostazioniFragment"
+        android:name="it.unive.aiutovicino.ui.impostazioni.ImpostazioniFragment"
         android:label="@string/menu_impostazioni"
         tools:layout="@layout/fragment_impostazioni" >
         <action
@@ -51,13 +51,13 @@
 
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.example.aiutovicino.ui.logout.LogoutFragment"
+        android:name="it.unive.aiutovicino.ui.logout.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
 
     <fragment
         android:id="@+id/annuncioDetailFragment"
-        android:name="com.example.aiutovicino.ui.annuncio_detail.AnnuncioDetailFragment"
+        android:name="it.unive.aiutovicino.ui.annuncio_detail.AnnuncioDetailFragment"
         android:label="Dettaglio Annuncio"
         tools:layout="@layout/fragment_annuncio_detail" >
         <action
