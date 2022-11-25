@@ -25,6 +25,10 @@
             android:icon="@drawable/ic_menu_convalida"
             android:title="@string/menu_convalida" />
         <item
+            android:id="@+id/nav_impostazioni"
+            android:icon="@drawable/ic_menu_impostazioni"
+            android:title="@string/menu_impostazioni" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_logout"
             android:title="@string/menu_logout" />

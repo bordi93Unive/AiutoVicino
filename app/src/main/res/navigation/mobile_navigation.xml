@@ -40,10 +40,21 @@
         tools:layout="@layout/fragment_convalida" />
 
     <fragment
+        android:id="@+id/nav_impostazioni"
+        android:name="com.example.aiutovicino.ui.impostazioni.ImpostazioniFragment"
+        android:label="@string/menu_impostazioni"
+        tools:layout="@layout/fragment_impostazioni" >
+        <action
+            android:id="@+id/action_nav_impostazioni_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_logout"
         android:name="com.example.aiutovicino.ui.logout.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
+
     <fragment
         android:id="@+id/annuncioDetailFragment"
         android:name="com.example.aiutovicino.ui.annuncio_detail.AnnuncioDetailFragment"

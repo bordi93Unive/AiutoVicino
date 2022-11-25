@@ -21,6 +21,7 @@
     <string name="nickname">Nickname</string>
     <string name="prompt_password">Password</string>
     <string name="action_login">Entra</string>
+    <string name="Annulla">Annulla</string>
     <string name="action_sign_in">Registrati</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
@@ -120,5 +121,6 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="cambia_dati">Modifica Dati</string>
 
 </resources>

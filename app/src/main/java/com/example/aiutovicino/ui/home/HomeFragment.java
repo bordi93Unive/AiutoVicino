@@ -17,6 +17,7 @@ import com.example.aiutovicino.adapter.AnnunciAdapter;
 import com.example.aiutovicino.controller.AnnuncioController;
 import com.example.aiutovicino.databinding.FragmentHomeBinding;
 import com.example.aiutovicino.model.AnnuncioModel;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 public class HomeFragment extends Fragment {
@@ -30,6 +31,8 @@ private FragmentHomeBinding binding;
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        Bundle b = this.getArguments();
+
         AnnuncioModel[] annunci = AnnuncioController.getAllAnnouncments();
 
         ListView listAnnunci = (ListView) binding.listHome;
@@ -39,11 +42,14 @@ private FragmentHomeBinding binding;
         listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle b = new Bundle();
+                /*Bundle b = new Bundle();
                 b.putInt("id", annunci[i].id);
-                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);*/
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment);
             }
         });
+
+
 
         return root;
     }

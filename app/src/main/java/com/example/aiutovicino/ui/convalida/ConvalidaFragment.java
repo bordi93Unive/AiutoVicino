@@ -27,17 +27,6 @@ private FragmentConvalidaBinding binding;
         binding = FragmentConvalidaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textConvalida;
-        convalidaViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-            /**Bottone su convalida*/
-            binding.buttonConvalida.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Premuto bottone", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         return root;
     }
 

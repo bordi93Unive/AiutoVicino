@@ -31,12 +31,13 @@ public class LoginFragment extends Fragment {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        UserModel user = UserController.getUserByEmail(binding.username.getText().toString());
 
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean login = false;
-                UserModel user = UserController.getUserByEmail(binding.username.getText().toString());
+
 
                 if(user != null && user.password.equals(binding.password.getText().toString())){
                     login = true;
@@ -47,15 +48,19 @@ public class LoginFragment extends Fragment {
                             .setAction("Action", null).show();
                 }
                 else{
-                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    Bundle b = new Bundle();
+                    b.putInt("idUser", user.id);
+                    //mi porto dietro l'id dell'utente
+                    startActivity(new Intent(getActivity(), MainActivity.class),b);
                 }
             }
         });
 
+
+
         binding.buttonRegistrazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Navigation.findNavController(view).navigate(R.id.action_LoginFragment_to_RegistrationFragment);
             }
         });
