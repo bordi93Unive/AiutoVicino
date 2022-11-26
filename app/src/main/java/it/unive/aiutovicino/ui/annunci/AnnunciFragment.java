@@ -43,6 +43,13 @@ private FragmentAnnunciBinding binding;
             }
         });
 
+        binding.buttonCrea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_nav_annunci_to_nav_annuncio_crea);
+            }
+        });
+
         return root;
     }
 

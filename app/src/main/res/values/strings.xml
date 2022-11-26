@@ -122,5 +122,13 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="cambia_dati">Modifica Dati</string>
+    <string name="hint_dropdown">Scegli Cateogoria</string>
+    <string name="menu_crea_annuncio">Crea Annuncio</string>
+    <string name="Descrizione">Descrizione</string>
+    <string name="Luogo">Luogo</string>
+    <string name="Partecipanti">Partecipanti</string>
+    <string name="Coin">Coin</string>
+    <string name="Orario">Orario</string>
+    <string name="Data">Data</string>
 
 </resources>
