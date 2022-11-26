@@ -19,7 +19,11 @@
         android:id="@+id/nav_portafoglio"
         android:name="it.unive.aiutovicino.ui.portafoglio.PortafoglioFragment"
         android:label="@string/menu_portafoglio"
-        tools:layout="@layout/fragment_portafoglio" />
+        tools:layout="@layout/fragment_portafoglio" >
+        <action
+            android:id="@+id/action_nav_portafoglio_to_classificaFragment"
+            app:destination="@id/classificaFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_annunci"
@@ -79,4 +83,9 @@
         android:name="it.unive.aiutovicino.ui.annuncio_crea.AnnuncioCreaFragment"
         android:label="@string/menu_crea_annuncio"
         tools:layout="@layout/fragment_annuncio_crea" />
+    <fragment
+        android:id="@+id/classificaFragment"
+        android:name="it.unive.aiutovicino.ui.classifica.ClassificaFragment"
+        android:label="Classifica"
+        tools:layout="@layout/fragment_classifica" />
 </navigation>
