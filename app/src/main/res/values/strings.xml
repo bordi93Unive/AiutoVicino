@@ -28,7 +28,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -130,5 +129,12 @@
     <string name="Coin">Coin</string>
     <string name="Orario">Orario</string>
     <string name="Data">Data</string>
+    <string name="Inserisci_Data">Inserisci Data</string>
+    <string name="Inserisci_Orario">Inserisci Orario</string>
+    <string name="Inserisci_Partecipanti">Inserisci numero partecipanti</string>
+    <string name="Inserisci_Luogo">Inserisci Luogo</string>
+    <string name="Inserisci_Descrizione">Inserisci Descrizione</string>
+    <string name="Inserisci_Categoria">Inserisci Categoria</string>
+    <string name="Inserisci_Coin">Inserisci Coin</string>
 
 </resources>

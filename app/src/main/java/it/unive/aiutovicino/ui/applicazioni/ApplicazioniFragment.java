@@ -18,11 +18,10 @@ private FragmentApplicazioniBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        ApplicazioniViewModel applicazioniViewModel =
-                new ViewModelProvider(this).get(ApplicazioniViewModel.class);
+        ApplicazioniViewModel applicazioniViewModel = new ViewModelProvider(this).get(ApplicazioniViewModel.class);
 
-    binding = FragmentApplicazioniBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentApplicazioniBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         final TextView textView = binding.textMyapplicazioni;
         applicazioniViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

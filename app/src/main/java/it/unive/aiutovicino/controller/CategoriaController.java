@@ -17,7 +17,7 @@ public class CategoriaController {
         }
     }
 
-    public static CategoriaModel[] getAllAnnouncments(){
+    public static CategoriaModel[] getAllCategory(){
         CategoriaModel[] categorie = new CategoriaModel[3];
         categorie[0] = new CategoriaModel(1, "Aiuto Lavori", 30);
         categorie[1] =  new CategoriaModel(2, "Baby Sitting", 20);
