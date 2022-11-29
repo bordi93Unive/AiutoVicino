@@ -3,6 +3,7 @@ package it.unive.aiutovicino.ui.annuncio_crea;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.Locale;
 
 import it.unive.aiutovicino.R;
 
@@ -59,8 +61,11 @@ public class AnnuncioCreaFragment extends Fragment {
             }
         });
 
+        //Locale.setDefault(Locale.ITALY);
+
         /** data picker sul textEdit Data*/
         textData = binding.inputData;
+        //textData.setInputType(InputType.TYPE_NULL); messo su xml della box
         textData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,24 +86,25 @@ public class AnnuncioCreaFragment extends Fragment {
 
         /** time picker sul textEdit Orario*/
         textTime = binding.inputOrario;
+        textTime.setInputType(InputType.TYPE_NULL);
         textTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
                 int hour = cldr.get(Calendar.HOUR_OF_DAY);
                 int minutes = cldr.get(Calendar.MINUTE);
-                // time picker dialog
-                pickerTime = new TimePickerDialog(getContext(),
-                        new TimePickerDialog.OnTimeSetListener() {
+                //se a TimePickerDialog non passo il secondo parametro allora viene in stile orologio
+                pickerTime = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                        new TimePickerDialog.OnTimeSetListener () {
                             @Override
-                            public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                                textTime.setText(sHour + ":" + sMinute);
+                            public void onTimeSet(TimePicker timePicker, int sHour, int sMinute) {
+                                textData.setText(hour+ ":" + minutes);
                             }
-                        }, hour, minutes, true);
+
+                        }, hour,minutes,true);
                 pickerTime.show();
             }
         });
-
         return root;
     }
 
