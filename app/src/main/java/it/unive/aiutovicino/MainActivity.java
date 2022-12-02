@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import it.unive.aiutovicino.databinding.ActivityMainBinding;
+import it.unive.aiutovicino.task.AnnuncioTask;
 
 public class MainActivity extends AppCompatActivity {
 
