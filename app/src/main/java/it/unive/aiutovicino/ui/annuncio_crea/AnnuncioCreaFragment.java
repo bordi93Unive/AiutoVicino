@@ -2,6 +2,7 @@ package it.unive.aiutovicino.ui.annuncio_crea;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -18,32 +20,49 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Locale;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 
+import it.unive.aiutovicino.controller.AnnuncioController;
+import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioCreaBinding;
+import it.unive.aiutovicino.model.AnnuncioModel;
+import it.unive.aiutovicino.model.UserModel;
+import it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment;
 
 
 public class AnnuncioCreaFragment extends Fragment {
 
     private FragmentAnnuncioCreaBinding binding;
 
-        String[] item = { "Pulisci Ugo", "Gioca con Ugo", "Aiuta Ugo","Abbraccia Ugo"};
+    View root;
+    EditText description;
+    EditText place;
+    EditText partecipantsNumber;
 
-        Spinner spinner;
-        TextView textData,textTime;
-        ArrayAdapter<String> adapterItems;
-        DatePickerDialog pickerData;
-        TimePickerDialog pickerTime;
+    String[] item = { "Pulisci Ugo", "Gioca con Ugo", "Aiuta Ugo","Abbraccia Ugo"};
+
+    Spinner spinner;
+    TextView textData,textTime;
+    ArrayAdapter<String> adapterItems;
+    DatePickerDialog pickerData;
+    TimePickerDialog pickerTime;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         AnnuncioCreaViewModel annuncioCreaViewModel = new ViewModelProvider(this).get(AnnuncioCreaViewModel.class);
 
         binding = FragmentAnnuncioCreaBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
+
+        description = binding.inputDescrizione;
+        place = binding.inputLuogo;
+        partecipantsNumber = binding.inputPartecipanti;
 
         /** dropdown menù per le categorie*/
         spinner = binding.inputCategoria;
@@ -105,6 +124,13 @@ public class AnnuncioCreaFragment extends Fragment {
                 pickerTime.show();
             }
         });
+
+        binding.buttonCrea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Connection().execute();
+            }
+        });
         return root;
     }
 
@@ -112,6 +138,39 @@ public class AnnuncioCreaFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void createError(){
+        Snackbar.make(root, "Errore durante la creazione", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private void createOk(){
+        Snackbar.make(root, "Annuncio creato", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private class Connection extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object... arg0){
+            AnnuncioModel annuncio = new AnnuncioModel();
+            annuncio.description = description.getText().toString();
+            annuncio.id_category = "1";
+            annuncio.place = place.getText().toString();
+            annuncio.partecipantsNumber = Integer.valueOf(partecipantsNumber.getText().toString());
+
+            return AnnuncioController.insertAnnuncio(annuncio);
+        }
+
+        @Override
+        protected void onPostExecute(Object result)
+        {
+            if(result == null || (Boolean)result == false){
+                createError();
+            } else {
+                createOk();
+            }
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package it.unive.aiutovicino;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,17 +17,26 @@ import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.model.UserModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+
 import it.unive.aiutovicino.databinding.ActivityMainBinding;
 import it.unive.aiutovicino.task.AnnuncioTask;
+import it.unive.aiutovicino.ui.login.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedpreferences;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -34,6 +45,21 @@ public class MainActivity extends AppCompatActivity {
         /**cose da non toccare mai almeno che non sappia cosa stai facendo**/
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        sharedpreferences = getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String json = sharedpreferences.getString("user", "");
+
+        if(json != null && !json.equals("")) {
+            General.user = gson.fromJson(json, UserModel.class);
+        }
+
+        if(General.user == null){
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+
         setContentView(binding.getRoot());
         //setContentView((R.layout.fragment_home));
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -50,17 +76,15 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
 
-        UserModel user = UserController.getUserByID(1);
-
         View header = navigationView.getHeaderView(0);
         TextView textNameSurname = header.findViewById(R.id.id_badge_user_name_surname);
         TextView textEmail = header.findViewById(R.id.id_badge_user_email);
         ImageView image= header.findViewById(R.id.id_badge_image);
 
-        textNameSurname.setText(user.name + " " + user.surname);
-        textEmail.setText(user.email);
+        textNameSurname.setText(General.user.name + " " + General.user.surname);
+        textEmail.setText(General.user.email);
 
-        String mipmapName = "ic_" + user.name.toLowerCase().substring(0,1);
+        String mipmapName = "ic_" + General.user.name.toLowerCase().substring(0,1);
 
         int resID = getResources().getIdentifier(mipmapName , "mipmap", getPackageName());
         image.setImageResource(resID);

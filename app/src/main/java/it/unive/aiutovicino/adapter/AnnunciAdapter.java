@@ -8,21 +8,31 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.model.AnnuncioModel;
 
 public class AnnunciAdapter extends BaseAdapter {
     private LayoutInflater inflter;
-    private AnnuncioModel[] annunci;
+    private List<AnnuncioModel> annunci = new ArrayList<>();
 
-    public AnnunciAdapter(Context context, AnnuncioModel[] annunci){
+    public AnnunciAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
+    }
+    public AnnunciAdapter(Context context, List<AnnuncioModel> annunci){
+        this.inflter = (LayoutInflater.from(context));
+        this.annunci = annunci;
+    }
+
+    public void setAnnunci(List<AnnuncioModel> annunci){
         this.annunci = annunci;
     }
 
     @Override
     public int getCount() {
-        return this.annunci.length;
+        return this.annunci.size();
     }
 
     @Override
@@ -41,16 +51,16 @@ public class AnnunciAdapter extends BaseAdapter {
         TextView title = (TextView)view.findViewById(R.id.adapter_annunci_title);
         TextView description = (TextView)view.findViewById(R.id.adapter_annunci_description);
         ImageView icon = (ImageView) view.findViewById(R.id.adapter_annunci_icon);
-        title.setText(this.annunci[i].title);
-        description.setText(this.annunci[i].description);
-        switch(this.annunci[i].id_category){
-            case 1:
+        title.setText(this.annunci.get(i).title);
+        description.setText(this.annunci.get(i).description);
+        switch(this.annunci.get(i).id_category){
+            case "1":
                 icon.setImageResource(R.drawable.category_anziani);
                 break;
-            case 2:
+            case "2":
                 icon.setImageResource(R.drawable.category_bambini);
                 break;
-            case 3:
+            case "3":
                 icon.setImageResource(R.drawable.category_cani);
                 break;
         }

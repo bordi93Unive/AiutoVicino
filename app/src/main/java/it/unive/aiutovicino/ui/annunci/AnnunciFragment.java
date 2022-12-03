@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import java.util.List;
+
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnuncioController;
@@ -28,7 +30,7 @@ private FragmentAnnunciBinding binding;
         binding = FragmentAnnunciBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        AnnuncioModel[] annunci = AnnuncioController.getAllMyAnnouncments();
+        List<AnnuncioModel> annunci = AnnuncioController.getAllMyAnnouncments();
 
         ListView listAnnunci = (ListView) binding.listMyAnnunci;
         AnnunciAdapter annunciAdapter = new AnnunciAdapter(root.getContext(), annunci);
@@ -38,7 +40,7 @@ private FragmentAnnunciBinding binding;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle b = new Bundle();
-                b.putInt("id", annunci[i].id);
+                b.putString("id", annunci.get(i).id);
                 //Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);
             }
         });
