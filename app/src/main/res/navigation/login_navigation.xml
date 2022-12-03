@@ -19,5 +19,8 @@
         android:name="it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment"
         android:label="Registrazione"
         tools:layout="@layout/fragment_registrazione" >
+        <action
+            android:id="@+id/action_RegistrazioneFragment_to_LoginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

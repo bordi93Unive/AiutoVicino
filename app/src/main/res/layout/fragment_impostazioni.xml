@@ -180,7 +180,7 @@
         android:id="@+id/mod_text_nickname"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="60dp"
         android:hint="@string/Nome"
         android:inputType="text"
         android:paddingLeft="8dp"
@@ -194,6 +194,45 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mod_text_email" />
+
+    <TextView
+        android:id="@+id/mod_text_descrizione"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:hint="@string/Nome"
+        android:inputType="text"
+        android:paddingLeft="8dp"
+        android:paddingTop="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="12dp"
+        android:selectAllOnFocus="true"
+        android:text="Descrizione:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/mod_nickname"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mod_text_nickname" />
+
+    <EditText
+        android:id="@+id/mod_descrizione"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_graphic"
+        android:drawableLeft="@drawable/ic_description"
+        android:drawablePadding="20dp"
+        android:hint="@string/Inserisci_Descrizione"
+        android:inputType="textMultiLine|text"
+        android:paddingLeft="8dp"
+        android:paddingTop="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="12dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.800"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mod_nickname" />
 
     <Button
         android:id="@+id/button_mod_dati"
@@ -209,7 +248,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mod_text_nickname"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintVertical_bias="0.609" />
 
     <Button
         android:id="@+id/button_annulla"
@@ -222,9 +261,10 @@
         android:text="@string/Annulla"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toEndOf="@+id/button_mod_dati"
         app:layout_constraintTop_toBottomOf="@+id/mod_text_nickname"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintVertical_bias="0.609" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

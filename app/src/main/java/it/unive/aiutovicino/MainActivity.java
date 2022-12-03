@@ -31,8 +31,6 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 
 import it.unive.aiutovicino.databinding.ActivityMainBinding;
-import it.unive.aiutovicino.task.AnnuncioTask;
-import it.unive.aiutovicino.ui.login.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 

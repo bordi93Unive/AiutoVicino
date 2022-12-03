@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,12 +32,16 @@ private FragmentHomeBinding binding;
     ListView listAnnunci;
     AnnunciAdapter annunciAdapter;
     List<AnnuncioModel> annunci;
+    ProgressBar progressSpinner;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        progressSpinner = binding.progressBarHome;
 
         listAnnunci = (ListView) binding.listHome;
         annunciAdapter = new AnnunciAdapter(root.getContext());
@@ -54,8 +59,6 @@ private FragmentHomeBinding binding;
             }
         });
 
-
-
         return root;
     }
 
@@ -66,6 +69,11 @@ private FragmentHomeBinding binding;
     }
 
     private class Connection extends AsyncTask {
+        @Override
+        protected void onPreExecute() {
+            progressSpinner.setVisibility(View.VISIBLE);
+        }
+
         @Override
         protected Object doInBackground(Object... arg0)
         {
@@ -78,8 +86,8 @@ private FragmentHomeBinding binding;
                 annunci = (List<AnnuncioModel>)result;
                 annunciAdapter.setAnnunci(annunci);
                 listAnnunci.setAdapter(annunciAdapter);
-
             }
+            progressSpinner.setVisibility(View.GONE);
 
         }
     }

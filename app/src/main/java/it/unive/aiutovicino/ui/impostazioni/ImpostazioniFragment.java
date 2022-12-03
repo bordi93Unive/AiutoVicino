@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,9 @@ public class ImpostazioniFragment extends Fragment {
 
 private FragmentImpostazioniBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+    EditText nome,cognome,email,nickname,descrizione;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //ImpostazioniViewModel impostazioniViewModel = new ViewModelProvider(this).get(ImpostazioniViewModel.class);
 
         binding = FragmentImpostazioniBinding.inflate(inflater, container, false);
@@ -33,17 +35,47 @@ private FragmentImpostazioniBinding binding;
 
         //Bundle b = this.getArguments();
         //UserModel user = UserController.getUserByID((int)b.get("idUser"));
+
+
+        EditText nome = binding.modNome;
+        EditText cognome = binding.modCognome;
+        EditText email = binding.modEmail;
+        EditText nickname = binding.modNickname;
+        EditText descrizione = binding.modDescrizione;
+
         UserModel user = UserController.getUserByID(1);
-        binding.modNome.setText(String.valueOf(user.name));
-        binding.modCognome.setText(String.valueOf(user.surname));
-        binding.modEmail.setText(String.valueOf(user.email));
-        binding.modNickname.setText(String.valueOf(user.nickname));
+        nome.setText(String.valueOf(user.name));
+        cognome.setText(String.valueOf(user.surname));
+        email.setText(String.valueOf(user.email));
+        nickname.setText(String.valueOf(user.nickname));
+        descrizione.setText("Ugo scrive cose a caso.");
 
         //final TextView textView = binding.textImpostazioni;
         //ImpostazioniViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-            binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
+        binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(nome.getText().toString().trim().isEmpty()) {
+                    nome.setError("Compilare il campo nome!");
+                    nome.requestFocus();
+                    return;
+                }
+                if(cognome.getText().toString().trim().isEmpty()) {
+                    cognome.setError("Compilare il campo cognome!");
+                    cognome.requestFocus();
+                    return;
+                }
+                if(email.getText().toString().trim().isEmpty()) {
+                    email.setError("Compilare il campo email!");
+                    email.requestFocus();
+                    return;
+                }
+                if(nickname.getText().toString().trim().isEmpty()) {
+                    nickname.setError("Compilare il campo nickname!");
+                    nickname.requestFocus();
+                    return;
+                }
 
                 Snackbar.make(view, "Dati aggiornati", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

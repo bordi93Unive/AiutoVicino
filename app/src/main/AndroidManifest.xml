@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AiutoVicino"
         tools:targetApi="31" >
+        <!--windowSoftInputMode permette alle snackbar di comparire sopra la tastiera -->
         <activity
+            android:windowSoftInputMode="adjustResize"
+
             android:name=".LoginActivity"
             android:exported="true"
             android:label="Login"
@@ -31,6 +34,7 @@
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.AiutoVicino.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"

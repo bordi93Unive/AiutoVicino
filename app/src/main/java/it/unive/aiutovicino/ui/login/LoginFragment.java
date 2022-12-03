@@ -2,6 +2,7 @@ package it.unive.aiutovicino.ui.login;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,6 +36,7 @@ public class LoginFragment extends Fragment {
     View root;
     EditText username;
     EditText password;
+    ProgressBar progressSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
@@ -44,6 +47,7 @@ public class LoginFragment extends Fragment {
 
         username = binding.username;
         password = binding.password;
+        progressSpinner = binding.progressBarLogin;
 
         sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, root.getContext().MODE_PRIVATE);
 
@@ -51,11 +55,19 @@ public class LoginFragment extends Fragment {
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(username.getText().toString().trim().isEmpty()) {
+                    username.setError("Compilare il campo username!");
+                    username.requestFocus();
+                    return;
+                }
+                if(password.getText().toString().trim().isEmpty()) {
+                    password.setError("Compilare il campo password!");
+                    password.requestFocus();
+                    return;
+                }
                 new Connection().execute();
             }
         });
-
-
 
         binding.buttonRegistrazione.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +95,18 @@ public class LoginFragment extends Fragment {
     }
 
     private class Connection extends AsyncTask {
+        //ProgressDialog progDailog;
+
+        @Override
+        protected void onPreExecute() {
+            progressSpinner.setVisibility(View.VISIBLE);
+            //se voglio fare il loading in modo diverso con la scritta Loading che compare usare il codice qui sotto
+            /*progDailog = new ProgressDialog(getContext());
+            progDailog.setMessage("Loading");
+            progDailog.setCancelable(false);
+            progDailog.show();*/
+        }
+
         @Override
         protected Object doInBackground(Object... arg0){
             return UserController.getAuth(username.getText().toString(), password.getText().toString());
@@ -91,6 +115,7 @@ public class LoginFragment extends Fragment {
         @Override
         protected void onPostExecute(Object result)
         {
+            //progDailog.cancel();
             if(result == null){
                 loginError();
             } else {
@@ -103,9 +128,11 @@ public class LoginFragment extends Fragment {
                 editor.putString("user", json);
 
                 editor.apply();
-                //UserPractice.getInstance().saveUser(user, binding.getRoot().getContext());
+
                 loadMainActivity();
             }
+            //smetto di far girare la progressBar
+            progressSpinner.setVisibility(View.GONE);
         }
     }
 }

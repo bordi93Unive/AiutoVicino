@@ -45,6 +45,9 @@ public class AnnuncioCreaFragment extends Fragment {
     EditText description;
     EditText place;
     EditText partecipantsNumber;
+    EditText coin;
+    EditText date;
+    EditText time;
 
     String[] item = { "Pulisci Ugo", "Gioca con Ugo", "Aiuta Ugo","Abbraccia Ugo"};
 
@@ -63,6 +66,9 @@ public class AnnuncioCreaFragment extends Fragment {
         description = binding.inputDescrizione;
         place = binding.inputLuogo;
         partecipantsNumber = binding.inputPartecipanti;
+        date = binding.inputData;
+        time = binding.inputOrario;
+        coin = binding.inputCoin;
 
         /** dropdown menù per le categorie*/
         spinner = binding.inputCategoria;
@@ -83,9 +89,8 @@ public class AnnuncioCreaFragment extends Fragment {
         //Locale.setDefault(Locale.ITALY);
 
         /** data picker sul textEdit Data*/
-        textData = binding.inputData;
         //textData.setInputType(InputType.TYPE_NULL); messo su xml della box
-        textData.setOnClickListener(new View.OnClickListener() {
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
@@ -96,7 +101,7 @@ public class AnnuncioCreaFragment extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                textData.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
                         }, year, month, day);
                 pickerData.show();
@@ -104,9 +109,8 @@ public class AnnuncioCreaFragment extends Fragment {
         });
 
         /** time picker sul textEdit Orario*/
-        textTime = binding.inputOrario;
-        textTime.setInputType(InputType.TYPE_NULL);
-        textTime.setOnClickListener(new View.OnClickListener() {
+        time.setInputType(InputType.TYPE_NULL);
+        time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
@@ -117,7 +121,7 @@ public class AnnuncioCreaFragment extends Fragment {
                         new TimePickerDialog.OnTimeSetListener () {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int sHour, int sMinute) {
-                                textData.setText(hour+ ":" + minutes);
+                                time.setText(hour+ ":" + minutes);
                             }
 
                         }, hour,minutes,true);
@@ -128,6 +132,38 @@ public class AnnuncioCreaFragment extends Fragment {
         binding.buttonCrea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO sta roba commentata esplode se usata. controllare
+               /* if(textData.getText().toString().isEmpty()) {
+                    textData.setError("Compilare il campo data!");
+                    textData.requestFocus();
+                    return;
+                }
+                if(textTime.getText().toString().trim().isEmpty()) {
+                    textTime.setError("Compilare il campo orario!");
+                    textTime.requestFocus();
+                    return;
+                }*/
+                if(partecipantsNumber.getText().toString().trim().isEmpty()) {
+                    partecipantsNumber.setError("Compilare il campo partecipanti!");
+                    partecipantsNumber.requestFocus();
+                    return;
+                }
+                if(place.getText().toString().trim().isEmpty()) {
+                    place.setError("Compilare il campo luogo!");
+                    place.requestFocus();
+                    return;
+                }
+                if(description.getText().toString().trim().isEmpty()) {
+                    description.setError("Compilare il campo descrizione!");
+                    description.requestFocus();
+                    return;
+                }
+                if(coin.getText().toString().trim().isEmpty()) {
+                    coin.setError("Compilare il campo coin!");
+                    coin.requestFocus();
+                    return;
+                }
+
                 new Connection().execute();
             }
         });
