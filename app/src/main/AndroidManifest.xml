@@ -12,10 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AiutoVicino"
         tools:targetApi="31" >
-        <!--windowSoftInputMode permette alle snackbar di comparire sopra la tastiera -->
+        <!--windowSoftInputMode permette alle snackbar di comparire sopra la tastiera
+        noHistory true messo per evitare dalla home di tornare al login-->
         <activity
             android:windowSoftInputMode="adjustResize"
-
+            android:noHistory="true"
             android:name=".LoginActivity"
             android:exported="true"
             android:label="Login"
@@ -32,6 +33,7 @@
         </activity> <!-- se voglio cambiare dove inizia l'app cambio l'activity qui sotto -->
         <activity
             android:name=".MainActivity"
+            android:noHistory="true"
             android:exported="false"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize"

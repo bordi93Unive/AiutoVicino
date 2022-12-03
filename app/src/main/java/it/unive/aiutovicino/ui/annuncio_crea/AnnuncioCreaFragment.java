@@ -132,17 +132,17 @@ public class AnnuncioCreaFragment extends Fragment {
         binding.buttonCrea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO sta roba commentata esplode se usata. controllare
-               /* if(textData.getText().toString().isEmpty()) {
-                    textData.setError("Compilare il campo data!");
-                    textData.requestFocus();
+                //TODO non funziona il seterror sui picker
+                if(date.getText().toString().isEmpty()) {
+                    date.setError("Compilare il campo data!");
+                    date.requestFocus();
                     return;
                 }
-                if(textTime.getText().toString().trim().isEmpty()) {
-                    textTime.setError("Compilare il campo orario!");
-                    textTime.requestFocus();
+                if(time.getText().toString().trim().isEmpty()) {
+                    time.setError("Compilare il campo orario!");
+                    time.requestFocus();
                     return;
-                }*/
+                }
                 if(partecipantsNumber.getText().toString().trim().isEmpty()) {
                     partecipantsNumber.setError("Compilare il campo partecipanti!");
                     partecipantsNumber.requestFocus();

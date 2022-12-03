@@ -81,6 +81,7 @@ public class LoginFragment extends Fragment {
 
     private void loadMainActivity(){
         startActivity(new Intent(getActivity(), MainActivity.class));
+
     }
 
     private void loginError(){

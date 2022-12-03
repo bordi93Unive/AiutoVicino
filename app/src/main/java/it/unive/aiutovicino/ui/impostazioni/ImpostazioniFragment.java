@@ -41,6 +41,7 @@ private FragmentImpostazioniBinding binding;
         EditText cognome = binding.modCognome;
         EditText email = binding.modEmail;
         EditText nickname = binding.modNickname;
+        EditText password = binding.modPassword;
         EditText descrizione = binding.modDescrizione;
 
         UserModel user = UserController.getUserByID(1);
@@ -48,6 +49,7 @@ private FragmentImpostazioniBinding binding;
         cognome.setText(String.valueOf(user.surname));
         email.setText(String.valueOf(user.email));
         nickname.setText(String.valueOf(user.nickname));
+        password.setText(String.valueOf(user.password));
         descrizione.setText("Ugo scrive cose a caso.");
 
         //final TextView textView = binding.textImpostazioni;
@@ -74,6 +76,11 @@ private FragmentImpostazioniBinding binding;
                 if(nickname.getText().toString().trim().isEmpty()) {
                     nickname.setError("Compilare il campo nickname!");
                     nickname.requestFocus();
+                    return;
+                }
+                if(password.getText().toString().trim().isEmpty()) {
+                    password.setError("Compilare il campo password!");
+                    password.requestFocus();
                     return;
                 }
 
