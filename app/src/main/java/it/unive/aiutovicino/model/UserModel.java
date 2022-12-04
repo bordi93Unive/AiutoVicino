@@ -8,6 +8,7 @@ public class UserModel {
     public String name;
     public String surname;
     public String nickname;
+    public String descrizione;
     public boolean state;
 
     public UserModel(){

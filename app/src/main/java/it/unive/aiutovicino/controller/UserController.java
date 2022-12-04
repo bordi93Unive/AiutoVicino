@@ -2,34 +2,18 @@ package it.unive.aiutovicino.controller;
 
 import android.net.Uri;
 import android.util.Log;
-
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpEntity;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpResponse;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.NameValuePair;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.HttpClient;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.entity.UrlEncodedFormEntity;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.methods.HttpPost;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.impl.client.DefaultHttpClient;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.message.BasicNameValuePair;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-
 import javax.net.ssl.HttpsURLConnection;
-
 import it.unive.aiutovicino.model.UserModel;
+
 
 public class UserController {
 
@@ -118,6 +102,46 @@ public class UserController {
             }
         } catch (IOException e) {
             Log.e("Error", "Login");
+        }
+
+        return result;
+    }
+
+    public static Boolean updateData(UserModel user){
+        boolean result = false;
+        try {
+            URL url = new URL("METTERE LINK");
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            Uri.Builder builder = new Uri.Builder()
+                    .appendQueryParameter("email", user.email)
+                    .appendQueryParameter("password", user.password)
+                    .appendQueryParameter("name", user.name)
+                    .appendQueryParameter("surname", user.surname)
+                    .appendQueryParameter("nickname", user.nickname)
+                    .appendQueryParameter("description", "");
+            String query = builder.build().getEncodedQuery();
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(query);
+            writer.flush();
+            writer.close();
+            os.close();
+
+            int responseCode=conn.getResponseCode();
+
+            String response = "";
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                result = true;
+            }
+        } catch (IOException e) {
+            Log.e("Error", "UpdateData");
         }
 
         return result;

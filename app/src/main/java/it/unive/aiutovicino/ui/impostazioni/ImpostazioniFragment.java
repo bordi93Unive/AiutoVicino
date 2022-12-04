@@ -1,10 +1,12 @@
 package it.unive.aiutovicino.ui.impostazioni;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,30 +21,35 @@ import it.unive.aiutovicino.databinding.FragmentImpostazioniBinding;
 import it.unive.aiutovicino.model.AnnuncioModel;
 import it.unive.aiutovicino.model.UserModel;
 import it.unive.aiutovicino.ui.impostazioni.ImpostazioniViewModel;
+import it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment;
+
 import com.google.android.material.snackbar.Snackbar;
 
 public class ImpostazioniFragment extends Fragment {
 
 private FragmentImpostazioniBinding binding;
 
-    EditText nome,cognome,email,nickname,descrizione;
+    EditText nome,cognome,email,nickname,descrizione,password;
+    ProgressBar progressSpinner;
+    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //ImpostazioniViewModel impostazioniViewModel = new ViewModelProvider(this).get(ImpostazioniViewModel.class);
 
         binding = FragmentImpostazioniBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
         //Bundle b = this.getArguments();
         //UserModel user = UserController.getUserByID((int)b.get("idUser"));
 
+        progressSpinner = binding.progressBarImpostazioni;
 
-        EditText nome = binding.modNome;
-        EditText cognome = binding.modCognome;
-        EditText email = binding.modEmail;
-        EditText nickname = binding.modNickname;
-        EditText password = binding.modPassword;
-        EditText descrizione = binding.modDescrizione;
+        nome = binding.modNome;
+        cognome = binding.modCognome;
+        email = binding.modEmail;
+        nickname = binding.modNickname;
+        password = binding.modPassword;
+        descrizione = binding.modDescrizione;
 
         UserModel user = UserController.getUserByID(1);
         nome.setText(String.valueOf(user.name));
@@ -87,7 +94,7 @@ private FragmentImpostazioniBinding binding;
                 Snackbar.make(view, "Dati aggiornati", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                Navigation.findNavController(view).navigate(R.id.action_nav_impostazioni_to_nav_home);
+                new Connection().execute();
 
             }
         });
@@ -102,9 +109,57 @@ private FragmentImpostazioniBinding binding;
         return root;
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void updateError(){
+        Snackbar.make(root, "Errore durante il cambio dati", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private void updateok(){
+        Snackbar.make(root, "Dati aggiornati correttamente", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+
+    private class Connection extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+
+            progressSpinner.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Object doInBackground(Object... arg0){
+            UserModel user = new UserModel();
+            user.name = nome.getText().toString();
+            user.surname = cognome.getText().toString();
+            user.email = email.getText().toString().trim();
+            user.nickname = nickname.getText().toString().trim();
+            user.password = password.getText().toString();
+            user.descrizione = descrizione.getText().toString();
+
+            return UserController.updateData(user);
+        }
+
+        @Override
+        protected void onPostExecute(Object result)
+        {
+            if(result == null || (Boolean)result == false){
+                updateError();
+            } else {
+                updateok();
+                //reindirizzo al fragment home
+                Navigation.findNavController(getView()).navigate(R.id.action_nav_impostazioni_to_nav_home);
+            }
+
+            progressSpinner.setVisibility(View.GONE);
+
+        }
     }
 }
