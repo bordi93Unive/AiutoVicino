@@ -2,6 +2,8 @@ package it.unive.aiutovicino.controller;
 
 import android.net.Uri;
 import android.util.Log;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -54,8 +56,13 @@ public class UserController {
             }
             if(!response.equals(""))
             {
-                JSONObject jObject = new JSONObject(response);
-                user = new UserModel((String)jObject.get("userId"), (String)jObject.get("token"), email, "Ugo", "Ughino");
+                JSONArray JArr = new JSONArray(response);
+                JSONObject jObject = JArr.getJSONObject(0);
+                String id= jObject.getString("id");
+                String token = jObject.getString("token");
+                String name = jObject.getString("name");
+                String surname = jObject.getString("surname");
+                user = new UserModel(id,token,email,name,surname);
             }
         } catch (IOException e) {
             Log.e("Error", "Login");
@@ -110,7 +117,7 @@ public class UserController {
     public static Boolean updateData(UserModel user){
         boolean result = false;
         try {
-            URL url = new URL("METTERE LINK");
+            URL url = new URL("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-updateUser");
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -124,7 +131,7 @@ public class UserController {
                     .appendQueryParameter("name", user.name)
                     .appendQueryParameter("surname", user.surname)
                     .appendQueryParameter("nickname", user.nickname)
-                    .appendQueryParameter("description", "");
+                    .appendQueryParameter("description", user.descrizione);
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
