@@ -86,7 +86,7 @@ public class AnnuncioController {
         }
     }
 
-    public static List<AnnuncioModel> getAllAnnouncments(){
+    public static List<AnnuncioModel> getAllAnnouncements(){
         List<AnnuncioModel> annunci = new ArrayList<>();
 
         try {
@@ -144,7 +144,7 @@ public class AnnuncioController {
         return annunci;
     }
 
-    public static List<AnnuncioModel> getAllMyAnnouncments(){
+    public static List<AnnuncioModel> getAllMyAnnouncements(){
         List<AnnuncioModel> annunci = new ArrayList<>();
 
 

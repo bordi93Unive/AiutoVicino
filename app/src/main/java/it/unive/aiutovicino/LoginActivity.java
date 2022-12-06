@@ -8,6 +8,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.navigation.NavigationView;
+
 import it.unive.aiutovicino.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {

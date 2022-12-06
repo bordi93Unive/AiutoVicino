@@ -30,7 +30,7 @@ private FragmentAnnunciBinding binding;
         binding = FragmentAnnunciBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        List<AnnuncioModel> annunci = AnnuncioController.getAllMyAnnouncments();
+        List<AnnuncioModel> annunci = AnnuncioController.getAllMyAnnouncements();
 
         ListView listAnnunci = (ListView) binding.listMyAnnunci;
         AnnunciAdapter annunciAdapter = new AnnunciAdapter(root.getContext(), annunci);

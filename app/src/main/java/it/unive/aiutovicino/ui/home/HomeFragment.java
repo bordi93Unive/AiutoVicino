@@ -1,15 +1,21 @@
 package it.unive.aiutovicino.ui.home;
 
+import android.content.ClipData;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -28,11 +34,12 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-private FragmentHomeBinding binding;
+    private FragmentHomeBinding binding;
     ListView listAnnunci;
     AnnunciAdapter annunciAdapter;
     List<AnnuncioModel> annunci;
     ProgressBar progressSpinner;
+    SearchView searchView;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,10 +48,13 @@ private FragmentHomeBinding binding;
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        progressSpinner = binding.progressBarHome;
 
+        progressSpinner = binding.progressBarHome;
+        /*searchView = root.findViewById(R.id.action_search);
+        searchView.setVisibility(View.VISIBLE);*/
         listAnnunci = (ListView) binding.listHome;
         annunciAdapter = new AnnunciAdapter(root.getContext());
+
         new Connection().execute();
 
         listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,6 +78,7 @@ private FragmentHomeBinding binding;
         binding = null;
     }
 
+
     private class Connection extends AsyncTask {
         @Override
         protected void onPreExecute() {
@@ -77,7 +88,7 @@ private FragmentHomeBinding binding;
         @Override
         protected Object doInBackground(Object... arg0)
         {
-            return AnnuncioController.getAllAnnouncments();
+            return AnnuncioController.getAllAnnouncements();
         }
 
         @Override

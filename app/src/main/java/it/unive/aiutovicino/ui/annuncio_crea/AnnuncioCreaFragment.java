@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -30,9 +31,11 @@ import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 
 import it.unive.aiutovicino.controller.AnnuncioController;
+import it.unive.aiutovicino.controller.CategoriaController;
 import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioCreaBinding;
 import it.unive.aiutovicino.model.AnnuncioModel;
+import it.unive.aiutovicino.model.CategoriaModel;
 import it.unive.aiutovicino.model.UserModel;
 import it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment;
 
@@ -48,6 +51,7 @@ public class AnnuncioCreaFragment extends Fragment {
     EditText coin;
     EditText date;
     EditText time;
+    ProgressBar progressSpinner;
 
     String[] item = { "Pulisci Ugo", "Gioca con Ugo", "Aiuta Ugo","Abbraccia Ugo"};
 
@@ -63,6 +67,8 @@ public class AnnuncioCreaFragment extends Fragment {
         binding = FragmentAnnuncioCreaBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
+        progressSpinner = binding.progressBarCategorie;
+
         description = binding.inputDescrizione;
         place = binding.inputLuogo;
         partecipantsNumber = binding.inputPartecipanti;
@@ -71,9 +77,11 @@ public class AnnuncioCreaFragment extends Fragment {
         coin = binding.inputCoin;
 
         /** dropdown menù per le categorie*/
+        //new Categoria().execute();
+
         spinner = binding.inputCategoria;
         //spinner.setOnItemSelectedListener(this);
-        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_item_annuncio_crea,item);
+        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_item_annuncio_crea, item);
         spinner.setAdapter(adapterItems);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -205,6 +213,30 @@ public class AnnuncioCreaFragment extends Fragment {
                 createError();
             } else {
                 createOk();
+            }
+        }
+    }
+
+    private class Categoria extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            progressSpinner.setVisibility(View.VISIBLE);
+        }
+        @Override
+        protected Object doInBackground(Object... arg0){
+            return CategoriaController.getAllCategory();
+        }
+
+        @Override
+        protected void onPostExecute(Object result)
+        {
+            if(result == null || (Boolean)result == false){
+                Snackbar.make(root, "Categorie caricate", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } else {
+                Snackbar.make(root, "Errore caricamento categorie", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         }
     }

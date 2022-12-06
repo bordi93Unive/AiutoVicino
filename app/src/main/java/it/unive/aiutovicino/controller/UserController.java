@@ -62,7 +62,9 @@ public class UserController {
                 String token = jObject.getString("token");
                 String name = jObject.getString("name");
                 String surname = jObject.getString("surname");
-                user = new UserModel(id,token,email,name,surname);
+                String nickname = jObject.getString("nickname");
+                Boolean admin = jObject.getBoolean("admin");
+                user = new UserModel(id,token,email,password,name,surname,nickname,admin);
             }
         } catch (IOException e) {
             Log.e("Error", "Login");
@@ -131,7 +133,7 @@ public class UserController {
                     .appendQueryParameter("name", user.name)
                     .appendQueryParameter("surname", user.surname)
                     .appendQueryParameter("nickname", user.nickname)
-                    .appendQueryParameter("description", user.descrizione);
+                    .appendQueryParameter("description", user.description);
             String query = builder.build().getEncodedQuery();
 
             OutputStream os = conn.getOutputStream();
@@ -154,8 +156,8 @@ public class UserController {
         return result;
     }
 
-    public static UserModel getUserByEmail(String email){
-        /*attenzione che questo if viene eseguito appena parte l'app. Quindi prende la stringa hardcoded in fragment_login*/
+   /*public static UserModel getUserByEmail(String email){
+
         if(email.equals("ugo@ugami.it")){
             return creaUgo();
         }
@@ -169,7 +171,7 @@ public class UserController {
 
     public static UserModel creaUgo(){
         return new UserModel("1","Ugo","Ughino", "ugo@ugami.it", "ughino", "Ughino",true);
-    }
+    }*/
 
 
 }

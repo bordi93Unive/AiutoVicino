@@ -8,18 +8,22 @@ public class UserModel {
     public String name;
     public String surname;
     public String nickname;
-    public String descrizione;
+    public String description;
     public boolean state;
+    public boolean admin;
 
     public UserModel(){
     }
 
-    public UserModel(String id, String token, String email, String name, String surname){
+    public UserModel(String id, String token, String email,String password, String name, String surname,String nickname,Boolean admin){
         this.id = id;
         this.token = token;
         this.email = email;
         this.name = name;
         this.surname = surname;
+        this.nickname = nickname;
+        this.admin = admin;
+        this.password = password;
     }
 
     public UserModel(String id, String name, String surname, String email, String password, String nickname, boolean state) {

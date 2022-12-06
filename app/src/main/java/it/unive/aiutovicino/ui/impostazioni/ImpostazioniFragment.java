@@ -1,5 +1,6 @@
 package it.unive.aiutovicino.ui.impostazioni;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnuncioController;
 import it.unive.aiutovicino.controller.UserController;
@@ -24,6 +26,7 @@ import it.unive.aiutovicino.ui.impostazioni.ImpostazioniViewModel;
 import it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 public class ImpostazioniFragment extends Fragment {
 
@@ -32,15 +35,21 @@ private FragmentImpostazioniBinding binding;
     EditText nome,cognome,email,nickname,descrizione,password;
     ProgressBar progressSpinner;
     View root;
+    SharedPreferences sharedpreferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //ImpostazioniViewModel impostazioniViewModel = new ViewModelProvider(this).get(ImpostazioniViewModel.class);
-
         binding = FragmentImpostazioniBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
-        //Bundle b = this.getArguments();
-        //UserModel user = UserController.getUserByID((int)b.get("idUser"));
+        sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String json = sharedpreferences.getString("user", "");
+
+        if(json != null && !json.equals("")) {
+            General.user = gson.fromJson(json, UserModel.class);
+        }
 
         progressSpinner = binding.progressBarImpostazioni;
 
@@ -51,13 +60,14 @@ private FragmentImpostazioniBinding binding;
         password = binding.modPassword;
         descrizione = binding.modDescrizione;
 
-        UserModel user = UserController.getUserByID(1);
-        nome.setText(String.valueOf(user.name));
-        cognome.setText(String.valueOf(user.surname));
-        email.setText(String.valueOf(user.email));
-        nickname.setText(String.valueOf(user.nickname));
-        password.setText(String.valueOf(user.password));
-        descrizione.setText("Ugo scrive cose a caso.");
+
+
+        //UserModel user = UserController.getUserByID(1);
+        nome.setText(String.valueOf(General.user.name));
+        cognome.setText(String.valueOf(General.user.surname));
+        email.setText(String.valueOf(General.user.email));
+        nickname.setText(String.valueOf(General.user.nickname));
+        descrizione.setText(General.user.description);
 
         //final TextView textView = binding.textImpostazioni;
         //ImpostazioniViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -85,14 +95,7 @@ private FragmentImpostazioniBinding binding;
                     nickname.requestFocus();
                     return;
                 }
-                if(password.getText().toString().trim().isEmpty()) {
-                    password.setError("Compilare il campo password!");
-                    password.requestFocus();
-                    return;
-                }
 
-                Snackbar.make(view, "Dati aggiornati", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
                 new Connection().execute();
 
@@ -136,15 +139,15 @@ private FragmentImpostazioniBinding binding;
 
         @Override
         protected Object doInBackground(Object... arg0){
-            UserModel user = new UserModel();
-            user.name = nome.getText().toString();
-            user.surname = cognome.getText().toString();
-            user.email = email.getText().toString().trim();
-            user.nickname = nickname.getText().toString().trim();
-            user.password = password.getText().toString();
-            user.descrizione = descrizione.getText().toString();
+            General.user.name = nome.getText().toString();
+            General.user.surname = cognome.getText().toString();
+            General.user.email = email.getText().toString().trim();
+            General.user.nickname = nickname.getText().toString().trim();
+            if(!password.getText().toString().trim().isEmpty())
+                General.user.password = password.getText().toString().trim();
+            General.user.description = descrizione.getText().toString();
 
-            return UserController.updateData(user);
+            return UserController.updateData(General.user);
         }
 
         @Override

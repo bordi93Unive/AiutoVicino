@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "85a170a9-e892-4f78-bf4e-d3781c17befc",
+		"name": "ING-SW",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Application",
+			"item": [
+				{
+					"name": "getApplicationsByUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUser\" : \"UJ3VwmQ47EeK0WLxCdA7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/applications-getUserApplications",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"applications-getUserApplications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Announcement",
+			"item": [
+				{
+					"name": "insertAnnouncement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"test\",\n    \"idCategory\" : 2,\n    \"idUser\" : \"pozuLDAOncSFjlCkiyp0\",\n    \"place\" :\"Venice\",\n    \"partecipantsNumber\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-insertAnnouncement",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"announcements-insertAnnouncement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllAnnouncement",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-getAllAnnouncements",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"announcements-getAllAnnouncements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnnouncementById",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"j8bzRwdqtb29SOvwBmwA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-getAnnouncementById",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"announcements-getAnnouncementById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apply to announcement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"j8bzRwdqtb29SOvwBmwA\",\n    \"userId\" : \"UJ3VwmQ47EeK0WLxCdA7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-applyToAnnouncement",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"announcements-applyToAnnouncement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] approveAnnouncement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"j8bzRwdqtb29SOvwBmwA\",\n    \"userId\" : \"UJ3VwmQ47EeK0WLxCdA7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-approveAnnouncement",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"announcements-approveAnnouncement"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": " getUserById",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"us-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-getUserById",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"user-getUserById"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"surname\": \"Test\",\n    \"name\": \"Test 2\",\n    \"nickname\": \"mario_rossi\",\n    \"email\": \"1@main.it\",\n    \"password\": \"bXlQYXNzVWFiazJlcUFjM1M1VEtXVUZ0UEI=\",\n    \"description\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-updateUser",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"user-updateUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getNotApprovedUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-getNotApprovedUsers",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"user-getNotApprovedUsers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "getAllCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/categories-getAllCategories",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"categories-getAllCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryById",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/categories-getCategoryById",
+							"protocol": "https",
+							"host": [
+								"europe-west1-ing-sw-c6b56",
+								"cloudfunctions",
+								"net"
+							],
+							"path": [
+								"categories-getCategoryById"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"1@main.it\",\n    \"password\": \"myPass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/login",
+					"protocol": "https",
+					"host": [
+						"europe-west1-ing-sw-c6b56",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"test\",\n    \"email\" : \"1@main.it\",\n    \"name\" : \"Test\",\n    \"surname\" :\"Test\",\n    \"nickname\" :\"mario_rossi\",\n    \"password\" :\"myPass\",\n    \"admin\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/registration",
+					"protocol": "https",
+					"host": [
+						"europe-west1-ing-sw-c6b56",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"082kkjh0m51ryk9qvov7v3h\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/logout",
+					"protocol": "https",
+					"host": [
+						"europe-west1-ing-sw-c6b56",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
