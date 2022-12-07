@@ -17,6 +17,18 @@
         android:clickable="true"
         android:src="@android:drawable/ic_input_add" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_MyAnnunci"
+        style="@style/Base.Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.812"
+        tools:visibility="invisible" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -37,6 +49,7 @@
 
 
             </ListView>
+
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </ScrollView>
 

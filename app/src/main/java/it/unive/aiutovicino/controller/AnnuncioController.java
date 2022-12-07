@@ -31,12 +31,13 @@ import javax.net.ssl.HttpsURLConnection;
 
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.model.AnnuncioModel;
+import it.unive.aiutovicino.model.UserModel;
 
 public class AnnuncioController {
     public static Boolean insertAnnuncio(AnnuncioModel annuncio){
         boolean result = false;
         try {
-            URL url = new URL("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/insertAnnouncement");
+            URL url = new URL("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-insertAnnouncement");
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -45,6 +46,8 @@ public class AnnuncioController {
             conn.setDoOutput(true);
 
             Uri.Builder builder = new Uri.Builder()
+                    .appendQueryParameter("date", annuncio.date)
+                    .appendQueryParameter("hours", annuncio.time)
                     .appendQueryParameter("description", annuncio.description)
                     .appendQueryParameter("idCategory", annuncio.id_category)
                     .appendQueryParameter("idUser", General.user.id)
@@ -73,7 +76,7 @@ public class AnnuncioController {
         return result;
     }
 
-    public static AnnuncioModel getAnnouncment(int id){
+   /* public static AnnuncioModel getAnnouncment(int id){
         switch(id){
             case 1:
                 return new AnnuncioModel("1", "Sfalcio prato", "1","01/01/2023","15:15","Bassano",3,true);
@@ -84,7 +87,7 @@ public class AnnuncioController {
             default:
                 return null;
         }
-    }
+    }*/
 
     public static List<AnnuncioModel> getAllAnnouncements(){
         List<AnnuncioModel> annunci = new ArrayList<>();
@@ -97,18 +100,6 @@ public class AnnuncioController {
             conn.setRequestMethod("GET");
             //conn.setDoInput(true);
             conn.setDoOutput(true);
-
-            /*Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("token", General.user.token);
-            String query = builder.build().getEncodedQuery();
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(query);
-            writer.flush();
-            writer.close();
-            os.close();*/
 
             int responseCode=conn.getResponseCode();
 
@@ -136,9 +127,9 @@ public class AnnuncioController {
                 }
             }
         } catch (IOException e) {
-            Log.e("Error", "Login");
+            Log.e("Error", "GetAllAnnouncements");
         } catch (JSONException e) {
-            Log.e("Error", "Login Json Decode");
+            Log.e("Error", "GetAllAnnouncements Json Decode");
         }
 
         return annunci;
@@ -147,6 +138,56 @@ public class AnnuncioController {
     public static List<AnnuncioModel> getAllMyAnnouncements(){
         List<AnnuncioModel> annunci = new ArrayList<>();
 
+        try {
+            URL url = new URL("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-getAllMyAnnouncements");
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            Uri.Builder builder = new Uri.Builder().appendQueryParameter("idUser", General.user.id);
+            String query = builder.build().getEncodedQuery();
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(query);
+            writer.flush();
+            writer.close();
+            os.close();
+
+            int responseCode=conn.getResponseCode();
+
+            String response = "";
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line=br.readLine()) != null) {
+                    response +=line;
+                }
+            }
+            if(!response.equals("")) {
+                JSONArray jArray = new JSONArray(response);
+                for(int i = 0; i < jArray.length(); i++) {
+                    AnnuncioModel annuncio = new AnnuncioModel();
+                    JSONObject json_data = jArray.getJSONObject(i);
+                    annuncio.id = json_data.getString("id");
+                    annuncio.title = json_data.getString("description");
+                    annuncio.description = json_data.getString("description");
+                    annuncio.id_category = json_data.getString("idCategory");
+                    annuncio.place = json_data.getString("place");
+                    annuncio.partecipantsNumber = json_data.getInt("partecipantsNumber");
+
+                    annunci.add(annuncio);
+                }
+            }
+        } catch (IOException e) {
+            Log.e("Error", "GetAllAnnouncements");
+        } catch (JSONException e) {
+            Log.e("Error", "GetAllAnnouncements Json Decode");
+        }
 
         return annunci;
     }

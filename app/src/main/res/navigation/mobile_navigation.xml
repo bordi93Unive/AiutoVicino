@@ -82,7 +82,11 @@
         android:id="@+id/nav_annuncio_crea"
         android:name="it.unive.aiutovicino.ui.annuncio_crea.AnnuncioCreaFragment"
         android:label="@string/menu_crea_annuncio"
-        tools:layout="@layout/fragment_annuncio_crea" />
+        tools:layout="@layout/fragment_annuncio_crea" >
+        <action
+            android:id="@+id/action_navAnnuncioCrea_to_navAnnunci"
+            app:destination="@id/nav_annunci" />
+    </fragment>
     <fragment
         android:id="@+id/classificaFragment"
         android:name="it.unive.aiutovicino.ui.classifica.ClassificaFragment"

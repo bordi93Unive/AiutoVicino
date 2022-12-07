@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -67,7 +68,7 @@ public class AnnuncioCreaFragment extends Fragment {
         binding = FragmentAnnuncioCreaBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
-        progressSpinner = binding.progressBarCategorie;
+        progressSpinner = binding.progressBarCreaAnnuncio;
 
         description = binding.inputDescrizione;
         place = binding.inputLuogo;
@@ -97,7 +98,7 @@ public class AnnuncioCreaFragment extends Fragment {
         //Locale.setDefault(Locale.ITALY);
 
         /** data picker sul textEdit Data*/
-        //textData.setInputType(InputType.TYPE_NULL); messo su xml della box
+        date.setInputType(InputType.TYPE_NULL);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +118,7 @@ public class AnnuncioCreaFragment extends Fragment {
         });
 
         /** time picker sul textEdit Orario*/
+        //non perdete tempo per i fusi orari, si localizza in base al timezone del telefono in uso
         time.setInputType(InputType.TYPE_NULL);
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +142,6 @@ public class AnnuncioCreaFragment extends Fragment {
         binding.buttonCrea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO non funziona il seterror sui picker
                 if(date.getText().toString().isEmpty()) {
                     date.setError("Compilare il campo data!");
                     date.requestFocus();
@@ -195,13 +196,23 @@ public class AnnuncioCreaFragment extends Fragment {
     }
 
     private class Connection extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+
+            progressSpinner.setVisibility(View.VISIBLE);
+        }
+
         @Override
         protected Object doInBackground(Object... arg0){
             AnnuncioModel annuncio = new AnnuncioModel();
+            annuncio.idUser = General.user.id;
+            annuncio.date = date.getText().toString();
+            annuncio.time = time.getText().toString();
             annuncio.description = description.getText().toString();
             annuncio.id_category = "1";
             annuncio.place = place.getText().toString();
-            annuncio.partecipantsNumber = Integer.valueOf(partecipantsNumber.getText().toString());
+            annuncio.partecipantsNumber = Integer.parseInt(partecipantsNumber.getText().toString());
 
             return AnnuncioController.insertAnnuncio(annuncio);
         }
@@ -209,11 +220,14 @@ public class AnnuncioCreaFragment extends Fragment {
         @Override
         protected void onPostExecute(Object result)
         {
-            if(result == null || (Boolean)result == false){
+            if(result == null || !((Boolean) result)){
                 createError();
             } else {
                 createOk();
+                //reindirizzo al fragment Miei Annunci
+                Navigation.findNavController(getView()).navigate(R.id.action_navAnnuncioCrea_to_navAnnunci);
             }
+            progressSpinner.setVisibility(View.GONE);
         }
     }
 
@@ -221,7 +235,7 @@ public class AnnuncioCreaFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            progressSpinner.setVisibility(View.VISIBLE);
+            //progressSpinner.setVisibility(View.VISIBLE);
         }
         @Override
         protected Object doInBackground(Object... arg0){
