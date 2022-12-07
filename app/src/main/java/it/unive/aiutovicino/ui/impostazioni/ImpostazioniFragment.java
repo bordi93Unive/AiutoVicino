@@ -141,7 +141,7 @@ private FragmentImpostazioniBinding binding;
                 General.user.setPassword(password.getText().toString().trim());
             General.user.setDescription(descrizione.getText().toString());
 
-            return UserController.updateData(General.user);
+            return UserController.update(General.user);
         }
 
         @Override

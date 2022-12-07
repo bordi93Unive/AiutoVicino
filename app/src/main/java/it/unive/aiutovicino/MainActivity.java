@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import it.unive.aiutovicino.controller.CategoriaController;
+import it.unive.aiutovicino.controller.CategoryController;
 import it.unive.aiutovicino.model.UserModel;
 
 import com.google.android.material.navigation.NavigationView;
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Object... arg0)
         {
-            General.categorie = CategoriaController.getAllCategories();
+            General.categories = CategoryController.getAllCategories();
             return null;
         }
     }

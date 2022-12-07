@@ -36,7 +36,7 @@ import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioCreaBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.model.CategoriaModel;
+import it.unive.aiutovicino.model.CategoryModel;
 
 
 public class AnnuncioCreaFragment extends Fragment {
@@ -76,10 +76,10 @@ public class AnnuncioCreaFragment extends Fragment {
         /** dropdown menù per le categorie*/
         //new Categoria().execute();
 
-        String[] items = new String[General.categorie.size()];
+        String[] items = new String[General.categories.size()];
         int index = 0;
-        for(CategoriaModel categoria : General.categorie){
-            items[index++] = categoria.description;
+        for(CategoryModel categoria : General.categories){
+            items[index++] = categoria.getDescription();
         }
 
         spinner = binding.inputCategoria;
@@ -89,9 +89,9 @@ public class AnnuncioCreaFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                CategoriaModel categoria = General.categorie.get(i);
-                coin.setText(String.valueOf(categoria.nCoin) );
-                if(categoria.description.equals("corso")){
+                CategoryModel categoria = General.categories.get(i);
+                coin.setText(String.valueOf(categoria.getCoins()) );
+                if(categoria.getDescription().equals("Corso")){
                     coin.setEnabled(true);
                 }
                 else {
@@ -214,7 +214,7 @@ public class AnnuncioCreaFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object... arg0){
-            CategoriaModel categoria = General.categorie.get(spinner.getSelectedItemPosition());
+            CategoryModel categoria = General.categories.get(spinner.getSelectedItemPosition());
 
             String mydate = "";
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -235,7 +235,7 @@ public class AnnuncioCreaFragment extends Fragment {
             annuncio.place = place.getText().toString();
             annuncio.participantsNumber = Integer.parseInt(partecipantsNumber.getText().toString());
             annuncio.coins = Integer.parseInt(coin.getText().toString());*/
-            return AnnouncementController.insertAnnuncio(annuncio);
+            return AnnouncementController.insert(annuncio);
         }
 
         @Override
