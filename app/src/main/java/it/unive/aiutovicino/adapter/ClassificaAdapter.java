@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import it.unive.aiutovicino.R;
-import it.unive.aiutovicino.model.AnnuncioModel;
 import it.unive.aiutovicino.model.RankingModel;
 
 public class ClassificaAdapter extends BaseAdapter {

@@ -118,11 +118,11 @@ public class RegistrazioneFragment extends Fragment {
         @Override
         protected Object doInBackground(Object... arg0){
             UserModel user = new UserModel();
-            user.name = nome.getText().toString();
-            user.surname = cognome.getText().toString();
-            user.email = email.getText().toString();
-            user.nickname = nickname.getText().toString();
-            user.password = password.getText().toString();
+            user.setName(nome.getText().toString());
+            user.setSurname(cognome.getText().toString());
+            user.setEmail(email.getText().toString());
+            user.setNickname(nickname.getText().toString());
+            user.setPassword(password.getText().toString());
 
             return UserController.register(user);
         }

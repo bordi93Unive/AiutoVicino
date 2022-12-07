@@ -1,23 +1,18 @@
 package it.unive.aiutovicino;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import it.unive.aiutovicino.controller.UserController;
+import it.unive.aiutovicino.controller.CategoriaController;
 import it.unive.aiutovicino.model.UserModel;
-import com.google.android.material.snackbar.Snackbar;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
@@ -85,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
         TextView textEmail = header.findViewById(R.id.id_badge_user_email);
         ImageView image= header.findViewById(R.id.id_badge_image);
 
-        textNameSurname.setText(General.user.name + " " + General.user.surname);
-        textEmail.setText(General.user.email);
+        textNameSurname.setText(General.user.getName() + " " + General.user.getSurname());
+        textEmail.setText(General.user.getEmail());
 
-        String mipmapName = "ic_" + General.user.name.toLowerCase().substring(0,1);
+        String mipmapName = "ic_" + General.user.getName().toLowerCase().substring(0,1);
 
         int resID = getResources().getIdentifier(mipmapName , "mipmap", getPackageName());
         image.setImageResource(resID);
@@ -114,9 +109,11 @@ public class MainActivity extends AppCompatActivity {
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_convalida).setVisible(false);
 
-        if(General.user.admin) {
+        if(General.user.isAdmin()) {
             nav_Menu.findItem(R.id.nav_convalida).setVisible(true);
         }
+
+        new Connection().execute();
 
         return true;
     }
@@ -126,5 +123,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
+    }
+
+    private class Connection extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object... arg0)
+        {
+            General.categorie = CategoriaController.getAllCategories();
+            return null;
+        }
     }
 }

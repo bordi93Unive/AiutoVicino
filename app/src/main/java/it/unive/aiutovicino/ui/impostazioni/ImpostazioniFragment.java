@@ -8,22 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
-import it.unive.aiutovicino.controller.AnnuncioController;
 import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentImpostazioniBinding;
-import it.unive.aiutovicino.model.AnnuncioModel;
 import it.unive.aiutovicino.model.UserModel;
-import it.unive.aiutovicino.ui.impostazioni.ImpostazioniViewModel;
-import it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -63,11 +57,11 @@ private FragmentImpostazioniBinding binding;
 
 
         //UserModel user = UserController.getUserByID(1);
-        nome.setText(String.valueOf(General.user.name));
-        cognome.setText(String.valueOf(General.user.surname));
-        email.setText(String.valueOf(General.user.email));
-        nickname.setText(String.valueOf(General.user.nickname));
-        descrizione.setText(General.user.description);
+        nome.setText(String.valueOf(General.user.getName()));
+        cognome.setText(String.valueOf(General.user.getSurname()));
+        email.setText(String.valueOf(General.user.getEmail()));
+        nickname.setText(String.valueOf(General.user.getNickname()));
+        descrizione.setText(General.user.getDescription());
 
         //final TextView textView = binding.textImpostazioni;
         //ImpostazioniViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
@@ -139,13 +133,13 @@ private FragmentImpostazioniBinding binding;
 
         @Override
         protected Object doInBackground(Object... arg0){
-            General.user.name = nome.getText().toString();
-            General.user.surname = cognome.getText().toString();
-            General.user.email = email.getText().toString().trim();
-            General.user.nickname = nickname.getText().toString().trim();
+            General.user.setName(nome.getText().toString());
+            General.user.setSurname(cognome.getText().toString());
+            General.user.setEmail(email.getText().toString().trim());
+            General.user.setNickname(nickname.getText().toString().trim());
             if(!password.getText().toString().trim().isEmpty())
-                General.user.password = password.getText().toString().trim();
-            General.user.description = descrizione.getText().toString();
+                General.user.setPassword(password.getText().toString().trim());
+            General.user.setDescription(descrizione.getText().toString());
 
             return UserController.updateData(General.user);
         }

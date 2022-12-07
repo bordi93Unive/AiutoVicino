@@ -1,39 +1,103 @@
 package it.unive.aiutovicino.model;
 
 public class UserModel {
-    public String id;
-    public String token;
-    public String email;
-    public String password;
-    public String name;
-    public String surname;
-    public String nickname;
-    public String description;
-    public boolean state;
-    public boolean admin;
+    private String id;
+    private String token;
+    private String email;
+    private String password;
+    private String surname;
+    private String name;
+    private String nickname;
+    private String description;
+    private int score;
+    private boolean admin;
+    private boolean approved;
 
-    public UserModel(){
+    public String getId() {
+        return id;
     }
 
-    public UserModel(String id, String token, String email,String password, String name, String surname,String nickname,Boolean admin){
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
         this.admin = admin;
-        this.password = password;
     }
 
-    public UserModel(String id, String name, String surname, String email, String password, String nickname, boolean state) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-        this.state = state;
+    public boolean isApproved() {
+        return approved;
     }
 
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 }

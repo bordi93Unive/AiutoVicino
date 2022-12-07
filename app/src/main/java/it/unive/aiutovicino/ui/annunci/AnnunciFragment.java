@@ -14,23 +14,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.util.List;
 
-import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.AnnunciAdapter;
-import it.unive.aiutovicino.controller.AnnuncioController;
+import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnunciBinding;
-import it.unive.aiutovicino.model.AnnuncioModel;
+import it.unive.aiutovicino.model.AnnouncementModel;
 
 public class AnnunciFragment extends Fragment {
 
     private FragmentAnnunciBinding binding;
     ListView listAnnunci;
     AnnunciAdapter annunciAdapter;
-    List<AnnuncioModel> annunci;
+    List<AnnouncementModel> annunci;
     ProgressBar progressSpinner;
     View root;
 
@@ -41,19 +40,23 @@ public class AnnunciFragment extends Fragment {
         root = binding.getRoot();
 
         progressSpinner = binding.progressBarMyAnnunci;
+        /*searchView = root.findViewById(R.id.action_search);
+        searchView.setVisibility(View.VISIBLE);*/
+        listAnnunci = (ListView) binding.listMyAnnunci;
+        annunciAdapter = new AnnunciAdapter(root.getContext());
 
-        /**List<AnnuncioModel> annunci = AnnuncioController.getAllMyAnnouncements();**/
-
-        ListView listAnnunci = (ListView) binding.listMyAnnunci;
-        AnnunciAdapter annunciAdapter = new AnnunciAdapter(root.getContext(), annunci);
-        listAnnunci.setAdapter(annunciAdapter);
+        new Connection().execute();
 
         listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Gson gson = new Gson();
+                String json = gson.toJson(annunci.get(i));
+
                 Bundle b = new Bundle();
-                b.putString("id", annunci.get(i).id);
-                //Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);
+                b.putString("announcement", json);
+                b.putString("type", "my_announcement");
+                Navigation.findNavController(view).navigate(R.id.action_nav_annunci_to_annuncioDetailFragment, b);
             }
         });
 
@@ -72,18 +75,8 @@ public class AnnunciFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-    private void createError(){
-        Snackbar.make(root, "Errore caricamento miei annunci", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
 
-    private void createOk(){
-        Snackbar.make(root, "Miei Annunci caricati", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-    }
-
-    private class MieiAnnunci extends AsyncTask {
-
+    private class Connection extends AsyncTask {
         @Override
         protected void onPreExecute() {
             progressSpinner.setVisibility(View.VISIBLE);
@@ -92,13 +85,13 @@ public class AnnunciFragment extends Fragment {
         @Override
         protected Object doInBackground(Object... arg0)
         {
-            return AnnuncioController.getAllMyAnnouncements();
+            return AnnouncementController.getAllMyAnnouncements();
         }
 
         @Override
         protected void onPostExecute(Object result) {
             if (result!= null) {
-                annunci = (List<AnnuncioModel>)result;
+                annunci = (List<AnnouncementModel>)result;
                 annunciAdapter.setAnnunci(annunci);
                 listAnnunci.setAdapter(annunciAdapter);
             }
@@ -106,7 +99,6 @@ public class AnnunciFragment extends Fragment {
 
         }
     }
-
 
 
 }

@@ -31,6 +31,9 @@
         android:label="@string/menu_myannunci"
         tools:layout="@layout/fragment_annunci" >
         <action
+            android:id="@+id/action_nav_annunci_to_annuncioDetailFragment"
+            app:destination="@id/annuncioDetailFragment" />
+        <action
             android:id="@+id/action_nav_annunci_to_nav_annuncio_crea"
             app:destination="@id/nav_annuncio_crea" />
     </fragment>

@@ -1,35 +1,31 @@
 package it.unive.aiutovicino.ui.home;
 
-import android.content.ClipData;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.AnnunciAdapter;
-import it.unive.aiutovicino.controller.AnnuncioController;
+import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentHomeBinding;
-import it.unive.aiutovicino.model.AnnuncioModel;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
+import it.unive.aiutovicino.model.AnnouncementModel;
+import it.unive.aiutovicino.model.UserModel;
+
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -37,7 +33,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     ListView listAnnunci;
     AnnunciAdapter annunciAdapter;
-    List<AnnuncioModel> annunci;
+    List<AnnouncementModel> annunci;
     ProgressBar progressSpinner;
     SearchView searchView;
 
@@ -48,6 +44,16 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        if(General.user == null) {
+            SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
+
+            Gson gson = new Gson();
+            String json = sharedpreferences.getString("user", "");
+
+            if (json != null && !json.equals("")) {
+                General.user = gson.fromJson(json, UserModel.class);
+            }
+        }
 
         progressSpinner = binding.progressBarHome;
         /*searchView = root.findViewById(R.id.action_search);
@@ -64,7 +70,8 @@ public class HomeFragment extends Fragment {
                 String json = gson.toJson(annunci.get(i));
 
                 Bundle b = new Bundle();
-                b.putString("annuncio", json);
+                b.putString("announcement", json);
+                b.putString("type", "announcement");
                 Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);
             }
         });
@@ -88,13 +95,13 @@ public class HomeFragment extends Fragment {
         @Override
         protected Object doInBackground(Object... arg0)
         {
-            return AnnuncioController.getAllAnnouncements();
+            return AnnouncementController.getAllAnnouncements();
         }
 
         @Override
         protected void onPostExecute(Object result) {
             if (result!= null) {
-                annunci = (List<AnnuncioModel>)result;
+                annunci = (List<AnnouncementModel>)result;
                 annunciAdapter.setAnnunci(annunci);
                 listAnnunci.setAdapter(annunciAdapter);
             }

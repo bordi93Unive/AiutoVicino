@@ -15,7 +15,6 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import it.unive.aiutovicino.model.AnnuncioModel;
 import it.unive.aiutovicino.model.CategoriaModel;
 
 public class CategoriaController {
@@ -40,7 +39,7 @@ public class CategoriaController {
         return categorie;
     }*/
 
-    public static List<CategoriaModel> getAllCategory(){
+    public static List<CategoriaModel> getAllCategories(){
 
         List<CategoriaModel> categorie = new ArrayList<>();
 

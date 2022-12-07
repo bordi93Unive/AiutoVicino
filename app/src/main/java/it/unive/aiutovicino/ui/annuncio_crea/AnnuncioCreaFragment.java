@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,21 +24,19 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 
-import it.unive.aiutovicino.controller.AnnuncioController;
-import it.unive.aiutovicino.controller.CategoriaController;
-import it.unive.aiutovicino.controller.UserController;
+import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioCreaBinding;
-import it.unive.aiutovicino.model.AnnuncioModel;
+import it.unive.aiutovicino.model.AnnouncementModel;
 import it.unive.aiutovicino.model.CategoriaModel;
-import it.unive.aiutovicino.model.UserModel;
-import it.unive.aiutovicino.ui.registrazione.RegistrazioneFragment;
 
 
 public class AnnuncioCreaFragment extends Fragment {
@@ -53,8 +51,6 @@ public class AnnuncioCreaFragment extends Fragment {
     EditText date;
     EditText time;
     ProgressBar progressSpinner;
-
-    String[] item = { "Pulisci Ugo", "Gioca con Ugo", "Aiuta Ugo","Abbraccia Ugo"};
 
     Spinner spinner;
     TextView textData,textTime;
@@ -80,14 +76,27 @@ public class AnnuncioCreaFragment extends Fragment {
         /** dropdown menù per le categorie*/
         //new Categoria().execute();
 
+        String[] items = new String[General.categorie.size()];
+        int index = 0;
+        for(CategoriaModel categoria : General.categorie){
+            items[index++] = categoria.description;
+        }
+
         spinner = binding.inputCategoria;
         //spinner.setOnItemSelectedListener(this);
-        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_item_annuncio_crea, item);
+        adapterItems = new ArrayAdapter<String>(getContext(), R.layout.list_item_annuncio_crea, items);
         spinner.setAdapter(adapterItems);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(),"Categoria: " + item[i] , Toast.LENGTH_LONG).show();
+                CategoriaModel categoria = General.categorie.get(i);
+                coin.setText(String.valueOf(categoria.nCoin) );
+                if(categoria.description.equals("corso")){
+                    coin.setEnabled(true);
+                }
+                else {
+                    coin.setEnabled(false);
+                }
             }
 
             @Override
@@ -205,16 +214,28 @@ public class AnnuncioCreaFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object... arg0){
-            AnnuncioModel annuncio = new AnnuncioModel();
-            annuncio.idUser = General.user.id;
-            annuncio.date = date.getText().toString();
-            annuncio.time = time.getText().toString();
-            annuncio.description = description.getText().toString();
-            annuncio.id_category = "1";
-            annuncio.place = place.getText().toString();
-            annuncio.partecipantsNumber = Integer.parseInt(partecipantsNumber.getText().toString());
+            CategoriaModel categoria = General.categorie.get(spinner.getSelectedItemPosition());
 
-            return AnnuncioController.insertAnnuncio(annuncio);
+            String mydate = "";
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                Date date_to_format = (Date)formatter.parse(date.getText().toString());
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                mydate = dateFormat.format(date_to_format);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            AnnouncementModel annuncio = new AnnouncementModel();
+            /*annuncio.idUser = General.user.id;
+            annuncio.date = mydate;
+            annuncio.hours = time.getText().toString();
+            annuncio.description = description.getText().toString();
+            annuncio.idCategory = String.valueOf(categoria.id);
+            annuncio.place = place.getText().toString();
+            annuncio.participantsNumber = Integer.parseInt(partecipantsNumber.getText().toString());
+            annuncio.coins = Integer.parseInt(coin.getText().toString());*/
+            return AnnouncementController.insertAnnuncio(annuncio);
         }
 
         @Override
@@ -230,29 +251,4 @@ public class AnnuncioCreaFragment extends Fragment {
             progressSpinner.setVisibility(View.GONE);
         }
     }
-
-    private class Categoria extends AsyncTask {
-
-        @Override
-        protected void onPreExecute() {
-            //progressSpinner.setVisibility(View.VISIBLE);
-        }
-        @Override
-        protected Object doInBackground(Object... arg0){
-            return CategoriaController.getAllCategory();
-        }
-
-        @Override
-        protected void onPostExecute(Object result)
-        {
-            if(result == null || (Boolean)result == false){
-                Snackbar.make(root, "Categorie caricate", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            } else {
-                Snackbar.make(root, "Errore caricamento categorie", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }
-    }
-
 }

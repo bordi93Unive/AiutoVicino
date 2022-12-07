@@ -12,21 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unive.aiutovicino.R;
-import it.unive.aiutovicino.model.AnnuncioModel;
+import it.unive.aiutovicino.model.AnnouncementModel;
 
 public class AnnunciAdapter extends BaseAdapter {
     private LayoutInflater inflter;
-    private List<AnnuncioModel> annunci = new ArrayList<>();
+    private List<AnnouncementModel> annunci = new ArrayList<>();
 
     public AnnunciAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
     }
-    public AnnunciAdapter(Context context, List<AnnuncioModel> annunci){
+    public AnnunciAdapter(Context context, List<AnnouncementModel> annunci){
         this.inflter = (LayoutInflater.from(context));
         this.annunci = annunci;
     }
 
-    public void setAnnunci(List<AnnuncioModel> annunci){
+    public void setAnnunci(List<AnnouncementModel> annunci){
         this.annunci = annunci;
     }
 
@@ -51,17 +51,23 @@ public class AnnunciAdapter extends BaseAdapter {
         TextView title = (TextView)view.findViewById(R.id.adapter_annunci_title);
         TextView description = (TextView)view.findViewById(R.id.adapter_annunci_description);
         ImageView icon = (ImageView) view.findViewById(R.id.adapter_annunci_icon);
-        title.setText(this.annunci.get(i).title);
-        description.setText(this.annunci.get(i).description);
-        switch(this.annunci.get(i).id_category){
+        title.setText(this.annunci.get(i).getTitle());
+        description.setText(this.annunci.get(i).getDescription());
+        switch(this.annunci.get(i).getIdCategory()){
             case "1":
-                icon.setImageResource(R.drawable.category_anziani);
+                icon.setImageResource(R.drawable.category_corsi);
                 break;
             case "2":
                 icon.setImageResource(R.drawable.category_bambini);
                 break;
             case "3":
+                icon.setImageResource(R.drawable.category_anziani);
+                break;
+            case "4":
                 icon.setImageResource(R.drawable.category_cani);
+                break;
+            case "5":
+                icon.setImageResource(R.drawable.category_trasporti);
                 break;
         }
 

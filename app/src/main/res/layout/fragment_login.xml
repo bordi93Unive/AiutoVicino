@@ -45,7 +45,7 @@
         android:paddingRight="12dp"
         android:paddingBottom="12dp"
         android:selectAllOnFocus="true"
-        android:text="ugo@ugami.it"
+        android:text="matteobordignon93@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titoloLogin"
