@@ -1,5 +1,6 @@
 package it.unive.aiutovicino.ui.home;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -31,11 +31,11 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    ListView listAnnunci;
-    AnnunciAdapter annunciAdapter;
-    List<AnnouncementModel> annunci;
-    ProgressBar progressSpinner;
-    SearchView searchView;
+    private ListView listAnnouncements;
+    private ProgressBar progressSpinner;
+    private AnnunciAdapter announcementAdapter;
+    private List<AnnouncementModel> announcements;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,30 +44,23 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        if(General.user == null) {
-            SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
-
-            Gson gson = new Gson();
-            String json = sharedpreferences.getString("user", "");
-
-            if (json != null && !json.equals("")) {
-                General.user = gson.fromJson(json, UserModel.class);
-            }
-        }
+        General.getUserBySharedPreferences(this.getActivity(), binding.getRoot().getContext().MODE_PRIVATE);
 
         progressSpinner = binding.progressBarHome;
+
+        listAnnouncements = (ListView) binding.listHome;
+        announcementAdapter = new AnnunciAdapter(root.getContext());
+
         /*searchView = root.findViewById(R.id.action_search);
         searchView.setVisibility(View.VISIBLE);*/
-        listAnnunci = (ListView) binding.listHome;
-        annunciAdapter = new AnnunciAdapter(root.getContext());
 
         new Connection().execute();
 
-        listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listAnnouncements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Gson gson = new Gson();
-                String json = gson.toJson(annunci.get(i));
+                String json = gson.toJson(announcements.get(i));
 
                 Bundle b = new Bundle();
                 b.putString("announcement", json);
@@ -101,9 +94,9 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(Object result) {
             if (result!= null) {
-                annunci = (List<AnnouncementModel>)result;
-                annunciAdapter.setAnnunci(annunci);
-                listAnnunci.setAdapter(annunciAdapter);
+                announcements = (List<AnnouncementModel>)result;
+                announcementAdapter.setAnnunci(announcements);
+                listAnnouncements.setAdapter(announcementAdapter);
             }
             progressSpinner.setVisibility(View.GONE);
 

@@ -27,8 +27,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import it.unive.aiutovicino.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    SharedPreferences sharedpreferences;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -43,48 +41,33 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        sharedpreferences = getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
 
-        Gson gson = new Gson();
-        String json = sharedpreferences.getString("user", "");
+        UserModel user = General.getUserBySharedPreferences(this, binding.getRoot().getContext().MODE_PRIVATE);
 
-        if(json != null && !json.equals("")) {
-            General.user = gson.fromJson(json, UserModel.class);
-        }
-
-        if(General.user == null){
+        /** Se le informazioni relative all'utente non sono presenti rimanda alla login */
+        if(user == null){
             startActivity(new Intent(this, LoginActivity.class));
         }
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations
+        /** Inizializza il menù di navigazione laterale */
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_portafoglio, R.id.nav_annunci,R.id.nav_applicazioni,
                 R.id.nav_convalida,R.id.nav_impostazioni,R.id.nav_logout)
                 .setOpenableLayout(drawer)
                 .build();
 
-       /* navigationView.getMenu().getItem(4).setVisible(false);
-        //rendo il menù convalida visibile solo agli admin
-        if(General.user.admin)
-            navigationView.getMenu().getItem(4).setVisible(true);*/
-
-
-
-
+        /** Imposta il nome utente, foto e la relativa email nel menù di navigazione*/
         View header = navigationView.getHeaderView(0);
         TextView textNameSurname = header.findViewById(R.id.id_badge_user_name_surname);
         TextView textEmail = header.findViewById(R.id.id_badge_user_email);
         ImageView image= header.findViewById(R.id.id_badge_image);
 
-        textNameSurname.setText(General.user.getName() + " " + General.user.getSurname());
-        textEmail.setText(General.user.getEmail());
-
-        String mipmapName = "ic_" + General.user.getName().toLowerCase().substring(0,1);
-
+        textNameSurname.setText(user.getName() + " " + user.getSurname());
+        textEmail.setText(user.getEmail());
+        String mipmapName = "ic_" + user.getName().toLowerCase().substring(0,1);
         int resID = getResources().getIdentifier(mipmapName , "mipmap", getPackageName());
         image.setImageResource(resID);
 
@@ -104,15 +87,16 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchview = (SearchView) menuItem.getActionView();
         searchview.setQueryHint("Digita il testo di ricerca");
 
-        //nascondo il menù Convalida e lo mostro solo agli admin
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        /** nasconde il menù Convalida in quanto visibile solamente all'utente avente true nell'attributo admin */
+        //nascondo
+        NavigationView navigationView = findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_convalida).setVisible(false);
 
         if(General.user.isAdmin()) {
             nav_Menu.findItem(R.id.nav_convalida).setVisible(true);
         }
-
+        /** esecuzione di chiamate all'API Category per ottenerne la lista */
         new Connection().execute();
 
         return true;

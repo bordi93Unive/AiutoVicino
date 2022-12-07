@@ -1,7 +1,11 @@
 package it.unive.aiutovicino;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -64,5 +68,20 @@ public class General {
         }
 
         return response;
+    }
+
+    public static UserModel getUserBySharedPreferences(Activity activity, int mode){
+        if(user == null) {
+            SharedPreferences sharedpreferences = activity.getSharedPreferences(SHARED_PREFS, mode);
+            if (sharedpreferences != null) {
+                Gson gson = new Gson();
+                String json = sharedpreferences.getString("user", "");
+
+                if (json != null && !json.equals("")) {
+                    user = gson.fromJson(json, UserModel.class);
+                }
+            }
+        }
+        return user;
     }
 }

@@ -1,8 +1,5 @@
 package it.unive.aiutovicino.ui.login;
 
-import static androidx.navigation.fragment.FragmentKt.findNavController;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -27,12 +24,10 @@ import it.unive.aiutovicino.databinding.FragmentLoginBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
-import java.io.IOException;
-
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    SharedPreferences sharedpreferences;
+    SharedPreferences sharedPreferences;
     View root;
     EditText username;
     EditText password;
@@ -49,12 +44,15 @@ public class LoginFragment extends Fragment {
         password = binding.password;
         progressSpinner = binding.progressBarLogin;
 
-        sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, root.getContext().MODE_PRIVATE);
+        /** inizializzazione delle shared preferences per eventuale utilizzo in caso
+         *  di corretta login da parte dell'utente */
+        sharedPreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, root.getContext().MODE_PRIVATE);
 
 
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /** verifiche su campi email e password per la loro corretta compilazione */
                 if(username.getText().toString().trim().isEmpty()) {
                     username.setError("Compilare il campo username!");
                     username.requestFocus();
@@ -65,6 +63,8 @@ public class LoginFragment extends Fragment {
                     password.requestFocus();
                     return;
                 }
+                /** a seguito delle opportune verifiche sui campi si effettua verifica
+                 *  tramite API della correttezza delle credenziali */
                 new Connection().execute();
             }
         });
@@ -72,6 +72,7 @@ public class LoginFragment extends Fragment {
         binding.buttonRegistrazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /** navigazione verso il fragment della registrazione*/
                 Navigation.findNavController(view).navigate(R.id.action_LoginFragment_to_RegistrationFragment);
             }
         });
@@ -80,11 +81,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void loadMainActivity(){
+        /** avvio activity main*/
         startActivity(new Intent(getActivity(), MainActivity.class));
 
     }
 
     private void loginError(){
+        /** messaggio di errore generico per indicare fallimento login */
         Snackbar.make(root, "Utente e/o password errati", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
@@ -116,23 +119,21 @@ public class LoginFragment extends Fragment {
         @Override
         protected void onPostExecute(Object result)
         {
-            //progDailog.cancel();
             if(result == null){
                 loginError();
             } else {
                 UserModel user = (UserModel)result;
-
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-
+                /** salvataggio dell'oggetto UserModel ottenuto dall'API di Login all'interno
+                 *  delle shared preferences */
+                SharedPreferences.Editor editor = sharedPreferences.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(user);
                 editor.putString("user", json);
-
                 editor.apply();
-
+                /** cambio di activity dopo login avvenuta con successo*/
                 loadMainActivity();
             }
-            //smetto di far girare la progressBar
+            /** cambio visibilità progress bar in GONE*/
             progressSpinner.setVisibility(View.GONE);
         }
     }
