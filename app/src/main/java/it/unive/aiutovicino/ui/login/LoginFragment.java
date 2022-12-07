@@ -9,12 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.MainActivity;
 import it.unive.aiutovicino.R;
@@ -34,9 +31,6 @@ public class LoginFragment extends Fragment {
     ProgressBar progressSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-
-        LoginViewModel loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
@@ -99,16 +93,10 @@ public class LoginFragment extends Fragment {
     }
 
     private class Connection extends AsyncTask {
-        //ProgressDialog progDailog;
-
         @Override
         protected void onPreExecute() {
+            /** cambio visibilità progress bar in VISIBLE*/
             progressSpinner.setVisibility(View.VISIBLE);
-            //se voglio fare il loading in modo diverso con la scritta Loading che compare usare il codice qui sotto
-            /*progDailog = new ProgressDialog(getContext());
-            progDailog.setMessage("Loading");
-            progDailog.setCancelable(false);
-            progDailog.show();*/
         }
 
         @Override
