@@ -1,5 +1,6 @@
 package it.unive.aiutovicino;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,10 +27,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import it.unive.aiutovicino.databinding.ActivityMainBinding;
+import it.unive.aiutovicino.ui.applicazioni.ApplicazioniViewModel;
+
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private ApplicazioniViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         if(user == null){
             startActivity(new Intent(this, LoginActivity.class));
         }
-
+        viewModel = new ViewModelProvider(this).get(ApplicazioniViewModel.class);
         setSupportActionBar(binding.appBarMain.toolbar);
 
 
@@ -84,8 +90,21 @@ public class MainActivity extends AppCompatActivity {
         // Barra di ricerca sulla barra
         getMenuInflater().inflate(R.menu.main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchview = (SearchView) menuItem.getActionView();
-        searchview.setQueryHint("Digita il testo di ricerca");
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Digita il testo di ricerca");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                viewModel.setText(newText);
+                return false;
+            }
+        });
 
         /** nasconde il menù Convalida in quanto visibile solamente all'utente avente true nell'attributo admin */
         //nascondo

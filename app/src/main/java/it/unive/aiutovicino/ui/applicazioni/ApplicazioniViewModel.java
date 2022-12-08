@@ -13,6 +13,10 @@ public class ApplicazioniViewModel extends ViewModel {
         mText.setValue("Qui vedremo le mie applicazioni");
     }
 
+    public void setText(String s){
+        mText.setValue(s);
+    }
+
     public LiveData<String> getText() {
         return mText;
     }
