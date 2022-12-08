@@ -12,12 +12,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import it.unive.aiutovicino.General;
+import it.unive.aiutovicino.model.CategoryModel;
 import it.unive.aiutovicino.model.UserModel;
 
 
@@ -80,7 +83,7 @@ public class UserController {
                     }
 
                     if(jObject.has("admin")) {
-                        user.setDescription(jObject.getString("admin"));
+                        user.setAdmin(jObject.getBoolean("admin"));
                     }
                     else{
                         user.setAdmin(false);
@@ -129,13 +132,13 @@ public class UserController {
                     }
 
                     if(jObject.has("admin")) {
-                        user.setDescription(jObject.getString("admin"));
+                        user.setAdmin(jObject.getBoolean("admin"));
                     }
                     else{
                         user.setAdmin(false);
                     }
 
-                    if(jObject.has("admin")) {
+                    if(jObject.has("approved")) {
                         user.setApproved(jObject.getBoolean("approved"));
                     }
                     else{
@@ -148,5 +151,44 @@ public class UserController {
         }
 
         return user;
+    }
+
+    public static List<UserModel> getNotApprovedUsers() {
+        List<UserModel> users = new ArrayList<>();
+
+        if(General.user.isAdmin()){
+            String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-getNotApprovedUsers", "GET", null);
+            if(!response.equals("")) {
+                try{
+                    JSONArray jArray = new JSONArray(response);
+                    for(int i = 0; i < jArray.length(); i++) {
+                        JSONObject json_data = jArray.getJSONObject(i);
+
+                        if(json_data.has("id") && json_data.has("email") && json_data.has("sunrame") && json_data.has("name")) {
+                            UserModel user = new UserModel();
+                            user.setId(String.valueOf(json_data.getInt("id")));
+                            user.setEmail(json_data.getString("email"));
+                            user.setSurname(json_data.getString("sunrame"));
+                            user.setName(json_data.getString("name"));
+                            if(json_data.has("nickname")) {
+                                user.setNickname(json_data.getString("nickname"));
+                            }
+
+                            if(json_data.has("description")) {
+                                user.setDescription(json_data.getString("description"));
+                            }
+                            user.setApproved(false);
+                            users.add(user);
+                        }
+                    }
+
+                }
+                catch (JSONException e) {
+                    Log.e("Error", "GetNotApprovedUsers Json Decode");
+                }
+            }
+        }
+
+        return users;
     }
 }

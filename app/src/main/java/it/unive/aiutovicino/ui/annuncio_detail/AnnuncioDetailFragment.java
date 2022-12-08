@@ -67,7 +67,10 @@ public class AnnuncioDetailFragment extends Fragment {
                     binding.textApplicazioni.setVisibility(View.VISIBLE);
                     //box con lista utenti applicati annuncio.getUserApplyed();
                     usersApplyed = annuncio.getUserApplyed();
-                    if( usersApplyed != null ) {
+                    if( usersApplyed == null ) {
+                        binding.buttonEliminaAnnuncio.setVisibility(View.VISIBLE);
+                    }
+                    else {
                         StringBuffer textApplyed = new StringBuffer();
                         for (UserModel user : usersApplyed) {
                             //popolo la textbox con il nome di chi si è applicato
@@ -76,6 +79,7 @@ public class AnnuncioDetailFragment extends Fragment {
                         binding.textApplicazioni.setText(textApplyed);
                         binding.buttonConfermaAttivita.setVisibility(View.VISIBLE);
                     }
+
 
 
                     break;

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutionException;
@@ -16,10 +15,7 @@ import java.util.concurrent.ExecutionException;
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.RankingController;
-import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentPortafoglioBinding;
-import it.unive.aiutovicino.model.UserModel;
-import kotlinx.coroutines.scheduling.Task;
 
 public class PortafoglioFragment extends Fragment {
 

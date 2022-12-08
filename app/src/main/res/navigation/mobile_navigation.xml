@@ -95,4 +95,9 @@
         android:name="it.unive.aiutovicino.ui.classifica.ClassificaFragment"
         android:label="Classifica"
         tools:layout="@layout/fragment_classifica" />
+    <fragment
+        android:id="@+id/convalidaUsersFragment"
+        android:name="it.unive.aiutovicino.ui.ConvalidaUsersFragment"
+        android:label="fragment_convalida_users"
+        tools:layout="@layout/fragment_convalida_users" />
 </navigation>

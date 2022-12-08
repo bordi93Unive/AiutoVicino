@@ -1,5 +1,6 @@
 package it.unive.aiutovicino.ui.convalida;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,36 +11,55 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import it.unive.aiutovicino.R;
+import it.unive.aiutovicino.adapter.ConvalidaPagerAdapter;
+import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentConvalidaBinding;
-import it.unive.aiutovicino.databinding.FragmentHomeBinding;
-import it.unive.aiutovicino.ui.home.HomeViewModel;
-import com.google.android.material.snackbar.Snackbar;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class ConvalidaFragment extends Fragment {
 
-private FragmentConvalidaBinding binding;
+    private FragmentConvalidaBinding binding;
 
     SearchView searchView;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        ConvalidaViewModel convalidaViewModel = new ViewModelProvider(this).get(ConvalidaViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentConvalidaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        /*searchView = root.findViewById(R.id.action_search);
-        searchView.setVisibility(View.GONE);*/
+        ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), this.getActivity().getSupportFragmentManager());
+        ViewPager viewPager = binding.viewPager;
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = this.getActivity().findViewById(R.id.tabs);
+        tabs.setVisibility(View.VISIBLE);
+        tabs.setupWithViewPager(viewPager);
+        /*List<UserModel> users;
+        try {
+            users = (List<UserModel>)new Connection().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
 
         return root;
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private class Connection extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object... arg0){
+            return UserController.getNotApprovedUsers();
+        }
     }
 }
