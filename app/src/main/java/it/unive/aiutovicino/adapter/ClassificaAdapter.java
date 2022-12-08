@@ -14,6 +14,7 @@ import it.unive.aiutovicino.model.RankingModel;
 public class ClassificaAdapter extends BaseAdapter {
     private LayoutInflater inflter;
     private RankingModel[] rankings;
+    private Context context;
 
     public ClassificaAdapter(Context context, RankingModel[] rankings){
         this.inflter = (LayoutInflater.from(context));
@@ -38,18 +39,19 @@ public class ClassificaAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.adapter_classifica, null);
-        TextView posizione = (TextView)view.findViewById(R.id.adapter_classifica_posizione);
-        TextView name = (TextView)view.findViewById(R.id.adapter_classifica_name);
-        TextView coins = (TextView)view.findViewById(R.id.adapter_classifica_coins);
+        TextView posizione = (TextView)view.findViewById(R.id.adapter_classifica_rank);
+        TextView nickname = (TextView)view.findViewById(R.id.adapter_classifica_nickname);
+        TextView coins = (TextView)view.findViewById(R.id.adapter_classifica_score);
         ImageView icon = (ImageView) view.findViewById(R.id.adapter_classifica_icon);
 
-        posizione.setText(this.rankings[i].position + ".");
-        name.setText(this.rankings[i].name + this.rankings[i].surname);
-        coins.setText("" + this.rankings[i].coins);
+        nickname.setText(this.rankings[i].nickname);
+        posizione.setText("Rank " + this.rankings[i].position);
+        coins.setText("Coin " + this.rankings[i].coins);
 
-        String mipmapName = "ic_" + this.rankings[i].name.toLowerCase().substring(0,1);
-        /*int resID = getResources().getIdentifier(mipmapName , "mipmap", getPackageName());
-        icon.setImageResource(resID);*/
+
+        String mipmapName = "ic_" +  this.rankings[i].nickname.toLowerCase().substring(0,1);
+        int resID = view.getResources().getIdentifier(mipmapName , "mipmap", view.getContext().getPackageName());
+        icon.setImageResource(resID);
 
 
         return view;

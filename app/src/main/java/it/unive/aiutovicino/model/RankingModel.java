@@ -2,14 +2,12 @@ package it.unive.aiutovicino.model;
 
 public class RankingModel {
     public int position;
-    public String name;
-    public String surname;
+    public String nickname;
     public int coins;
 
-    public RankingModel(int position, String name, String surname, int coins){
+    public RankingModel(int position, String nickname, int coins){
         this.position = position;
-        this.name = name;
-        this.surname = surname;
+        this.nickname = nickname;
         this.coins = coins;
     }
 }

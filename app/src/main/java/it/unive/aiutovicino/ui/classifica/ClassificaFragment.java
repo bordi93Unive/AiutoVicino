@@ -32,8 +32,6 @@ public class ClassificaFragment extends Fragment {
         ClassificaAdapter classificaAdapter = new ClassificaAdapter(root.getContext(), rankings);
         listRankings.setAdapter(classificaAdapter);
 
-
-
         return root;
     }
 

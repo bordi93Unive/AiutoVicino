@@ -6,44 +6,50 @@
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
-    <TextView
-        android:id="@+id/adapter_classifica_posizione"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="1."
+    <ImageView
+        android:id="@+id/adapter_classifica_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:src="@mipmap/ic_a"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/adapter_classifica_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_a"
-        android:layout_marginStart="30dp"
+    <TextView
+        android:id="@+id/adapter_classifica_nickname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Nickname"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/adapter_classifica_posizione"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toEndOf="@+id/adapter_classifica_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263" />
 
     <TextView
-        android:id="@+id/adapter_classifica_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/adapter_classifica_rank"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_marginStart="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/adapter_classifica_icon"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="20dp"
+        android:text="Rank"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/adapter_classifica_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/adapter_classifica_coins"
-        android:layout_width="wrap_content"
+        android:id="@+id/adapter_classifica_score"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="134"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:text="Score:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/adapter_classifica_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
 
