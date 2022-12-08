@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_Confirm"
+        android:id="@+id/adapterUserButtonConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="260dp"
@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/ic_confirm" />
 
     <ImageButton
-        android:id="@+id/button_Cancel"
+        android:id="@+id/adapterUserButtonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="330dp"

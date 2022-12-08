@@ -53,6 +53,19 @@ public class UserController {
         return !response.equals("");
     }
 
+    public static Boolean approveUser(String idUser){
+        if(General.user.isAdmin()) {
+            Map<String, String> queryParameters = new HashMap<>();
+            queryParameters.put("adminUserId", General.user.getId());
+            queryParameters.put("userId", idUser);
+
+            String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-approveUser", "POST", queryParameters);
+
+            return !response.equals("");
+        }
+        return false;
+    }
+
     public static UserModel getAuth(String email, String password) {
         UserModel user = null;
 

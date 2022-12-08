@@ -1,10 +1,12 @@
 package it.unive.aiutovicino.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,11 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unive.aiutovicino.R;
+import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.model.UserModel;
 
 public class UserAdapter extends BaseAdapter {
     private LayoutInflater inflter;
     private List<UserModel> users = new ArrayList<>();
+    private int index = -1;
 
     public UserAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
@@ -50,6 +54,48 @@ public class UserAdapter extends BaseAdapter {
         name.setText(users.get(i).getName() + " " + users.get(i).getSurname());
         email.setText(users.get(i).getEmail());
 
+        ImageButton confirm = view.findViewById(R.id.adapterUserButtonConfirm);
+        ImageButton cancel = view.findViewById(R.id.adapterUserButtonCancel);
+
+        confirm.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                index = i;
+                new Connection().execute();
+            }
+        });
+
+        cancel.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                users.remove(i);
+                notifyDataSetChanged();
+            }
+        });
         return view;
+    }
+
+    private void removeItem(){
+        users.remove(index);
+        notifyDataSetChanged();
+    }
+
+    private class Connection extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object... arg0)
+        {
+            UserModel user = users.get(index);
+            return UserController.approveUser(user.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            if (result!= null) {
+                if((Boolean)result == true){
+                    removeItem();
+                }
+            }
+
+        }
     }
 }
