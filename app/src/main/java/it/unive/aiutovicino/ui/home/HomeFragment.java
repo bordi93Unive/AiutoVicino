@@ -1,7 +1,5 @@
 package it.unive.aiutovicino.ui.home;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +11,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -22,7 +21,7 @@ import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentHomeBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.model.UserModel;
+import it.unive.aiutovicino.ui.SearchViewModel;
 
 import com.google.gson.Gson;
 
@@ -39,7 +38,7 @@ public class HomeFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        SearchViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -50,9 +49,6 @@ public class HomeFragment extends Fragment {
 
         listAnnouncements = (ListView) binding.listHome;
         announcementAdapter = new AnnunciAdapter(root.getContext());
-
-        /*searchView = root.findViewById(R.id.action_search);
-        searchView.setVisibility(View.VISIBLE);*/
 
         new Connection().execute();
 
@@ -66,6 +62,13 @@ public class HomeFragment extends Fragment {
                 b.putString("announcement", json);
                 b.putString("type", "announcement");
                 Navigation.findNavController(view).navigate(R.id.action_nav_home_to_annuncioDetailFragment, b);
+            }
+        });
+
+        viewModel.getFilter().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                announcementAdapter.getFilter().filter(s);
             }
         });
 

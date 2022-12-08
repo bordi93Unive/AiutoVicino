@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -23,18 +24,19 @@ import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnunciBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
+import it.unive.aiutovicino.ui.SearchViewModel;
 
 public class AnnunciFragment extends Fragment {
 
     private FragmentAnnunciBinding binding;
     ListView listAnnunci;
-    AnnunciAdapter annunciAdapter;
+    AnnunciAdapter announcementAdapter;
     List<AnnouncementModel> annunci;
     ProgressBar progressSpinner;
     View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        AnnunciViewModel annunciViewModel = new ViewModelProvider(this).get(AnnunciViewModel.class);
+        SearchViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
 
         binding = FragmentAnnunciBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -43,9 +45,16 @@ public class AnnunciFragment extends Fragment {
         /*searchView = root.findViewById(R.id.action_search);
         searchView.setVisibility(View.VISIBLE);*/
         listAnnunci = (ListView) binding.listMyAnnunci;
-        annunciAdapter = new AnnunciAdapter(root.getContext());
+        announcementAdapter = new AnnunciAdapter(root.getContext());
 
         new Connection().execute();
+
+        viewModel.getFilter().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                announcementAdapter.getFilter().filter(s);
+            }
+        });
 
         listAnnunci.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,8 +101,8 @@ public class AnnunciFragment extends Fragment {
         protected void onPostExecute(Object result) {
             if (result!= null) {
                 annunci = (List<AnnouncementModel>)result;
-                annunciAdapter.setAnnunci(annunci);
-                listAnnunci.setAdapter(annunciAdapter);
+                announcementAdapter.setAnnunci(annunci);
+                listAnnunci.setAdapter(announcementAdapter);
             }
             progressSpinner.setVisibility(View.GONE);
 
