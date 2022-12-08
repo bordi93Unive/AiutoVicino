@@ -34,7 +34,7 @@ public class PortafoglioFragment extends Fragment {
         root = binding.getRoot();
 
         try {
-            int score = (Integer)new Connection().execute().get();
+           new Connection().execute().get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
