@@ -62,7 +62,7 @@
 
     <fragment
         android:id="@+id/nav_logout"
-        android:name="it.unive.aiutovicino.ui.logout.LogoutFragment"
+        android:name="it.unive.aiutovicino.ui.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
 
