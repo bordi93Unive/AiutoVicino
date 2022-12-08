@@ -45,8 +45,11 @@ public class UserAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.adapter_users, null);
-        TextView surname = (TextView)view.findViewById(R.id.adapter_users_surname);
-        surname.setText(users.get(i).getSurname());
+        TextView name = (TextView)view.findViewById(R.id.adapter_users_name_surname);
+        TextView email = (TextView)view.findViewById(R.id.adapter_users_email);
+        name.setText(users.get(i).getName() + " " + users.get(i).getSurname());
+        email.setText(users.get(i).getEmail());
+
         return view;
     }
 }
