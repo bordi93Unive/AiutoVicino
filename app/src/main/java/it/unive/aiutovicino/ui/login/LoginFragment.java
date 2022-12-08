@@ -1,5 +1,6 @@
 package it.unive.aiutovicino.ui.login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -24,7 +25,7 @@ import com.google.gson.Gson;
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    SharedPreferences sharedPreferences;
+    Activity activity;
     View root;
     EditText username;
     EditText password;
@@ -38,10 +39,7 @@ public class LoginFragment extends Fragment {
         password = binding.password;
         progressSpinner = binding.progressBarLogin;
 
-        /** inizializzazione delle shared preferences per eventuale utilizzo in caso
-         *  di corretta login da parte dell'utente */
-        sharedPreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, root.getContext().MODE_PRIVATE);
-
+        activity = this.getActivity();
 
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,11 +111,7 @@ public class LoginFragment extends Fragment {
                 UserModel user = (UserModel)result;
                 /** salvataggio dell'oggetto UserModel ottenuto dall'API di Login all'interno
                  *  delle shared preferences */
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(user);
-                editor.putString("user", json);
-                editor.apply();
+                General.setUserBySharedPreferences(user, activity, root.getContext().MODE_PRIVATE);
                 /** cambio di activity dopo login avvenuta con successo*/
                 loadMainActivity();
             }

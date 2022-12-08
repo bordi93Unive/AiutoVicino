@@ -70,12 +70,27 @@ public class General {
         return response;
     }
 
+    public static UserModel setUserBySharedPreferences(UserModel user, Activity activity, int mode){
+        if(user != null) {
+            SharedPreferences sharedPreferences = activity.getSharedPreferences(SHARED_PREFS, mode);
+            if (sharedPreferences != null) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                Gson gson = new Gson();
+                String json = gson.toJson(user);
+                editor.putString("user", json);
+                editor.apply();
+            }
+        }
+        return user;
+    }
+
     public static UserModel getUserBySharedPreferences(Activity activity, int mode){
         if(user == null) {
-            SharedPreferences sharedpreferences = activity.getSharedPreferences(SHARED_PREFS, mode);
-            if (sharedpreferences != null) {
+            SharedPreferences sharedPreferences = activity.getSharedPreferences(SHARED_PREFS, mode);
+            if (sharedPreferences != null) {
                 Gson gson = new Gson();
-                String json = sharedpreferences.getString("user", "");
+                String json = sharedPreferences.getString("user", "");
 
                 if (json != null && !json.equals("")) {
                     user = gson.fromJson(json, UserModel.class);
@@ -83,5 +98,14 @@ public class General {
             }
         }
         return user;
+    }
+
+    public static void resetSharedPreferences(Activity activity, int mode){
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(SHARED_PREFS, mode);
+        if (sharedPreferences != null) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear().commit();
+            user = null;
+        }
     }
 }
