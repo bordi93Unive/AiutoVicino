@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.logout;
+package it.unive.aiutovicino.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

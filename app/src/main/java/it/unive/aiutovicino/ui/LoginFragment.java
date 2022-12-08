@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.login;
+package it.unive.aiutovicino.ui;
 
 import android.app.Activity;
 import android.content.Intent;

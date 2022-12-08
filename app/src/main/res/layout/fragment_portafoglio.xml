@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_portafoglio" />
 
     <TextView
-        android:id="@+id/text_coins"
+        android:id="@+id/text_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="136 coins"

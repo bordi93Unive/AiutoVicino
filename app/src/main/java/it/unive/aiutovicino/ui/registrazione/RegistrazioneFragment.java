@@ -1,12 +1,7 @@
 package it.unive.aiutovicino.ui.registrazione;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentRegistrazioneBinding;
 import it.unive.aiutovicino.model.UserModel;
-import it.unive.aiutovicino.ui.login.LoginFragment;
 
 
 public class RegistrazioneFragment extends Fragment {
