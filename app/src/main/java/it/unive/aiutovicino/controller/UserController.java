@@ -164,11 +164,11 @@ public class UserController {
                     for(int i = 0; i < jArray.length(); i++) {
                         JSONObject json_data = jArray.getJSONObject(i);
 
-                        if(json_data.has("id") && json_data.has("email") && json_data.has("sunrame") && json_data.has("name")) {
+                        if(json_data.has("id") && json_data.has("email") && json_data.has("surname") && json_data.has("name")) {
                             UserModel user = new UserModel();
-                            user.setId(String.valueOf(json_data.getInt("id")));
+                            user.setId(json_data.getString("id"));
                             user.setEmail(json_data.getString("email"));
-                            user.setSurname(json_data.getString("sunrame"));
+                            user.setSurname(json_data.getString("surname"));
                             user.setName(json_data.getString("name"));
                             if(json_data.has("nickname")) {
                                 user.setNickname(json_data.getString("nickname"));

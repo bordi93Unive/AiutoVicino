@@ -25,8 +25,6 @@ public class ConvalidaFragment extends Fragment {
 
     private FragmentConvalidaBinding binding;
 
-    SearchView searchView;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentConvalidaBinding.inflate(inflater, container, false);
