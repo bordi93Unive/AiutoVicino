@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import it.unive.aiutovicino.General;
@@ -29,8 +30,7 @@ public class ConvalidaFragment extends Fragment {
 
         binding = FragmentConvalidaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), this.getActivity().getSupportFragmentManager());
+        ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         General.setVisibleTabs(this.getActivity(), viewPager);
