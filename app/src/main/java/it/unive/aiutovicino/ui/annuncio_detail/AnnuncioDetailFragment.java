@@ -15,15 +15,20 @@ import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
+import it.unive.aiutovicino.model.UserModel;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+
+import java.util.List;
 
 public class AnnuncioDetailFragment extends Fragment {
 
     private FragmentAnnuncioDetailBinding binding;
     View root;
     AnnouncementModel annuncio = null;
+    List<UserModel> usersApplyed;
+    StringBuffer textApplyed;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         AnnuncioDetailViewModel annuncioDetailViewModel = new ViewModelProvider(this).get(AnnuncioDetailViewModel.class);
@@ -51,10 +56,27 @@ public class AnnuncioDetailFragment extends Fragment {
             switch(type){
                 case "announcement":
                     binding.buttonApplicati.setVisibility(View.VISIBLE);
+                    binding.textNApplicazioni.setVisibility(View.VISIBLE);
+                    usersApplyed = annuncio.getUserApplyed();
+                    if( usersApplyed != null ) {
+                        binding.textNApplicazioni.setText(usersApplyed.size() + " su " + annuncio.getParticipantsNumber());
+                    }
                     break;
                 case "my_announcement":
-                    //mettere bottone "Conferma avvenuta attività
-                    //box con liosta utenti applicati annuncio.getUserApplyed();
+
+                    binding.textApplicazioni.setVisibility(View.VISIBLE);
+                    //box con lista utenti applicati annuncio.getUserApplyed();
+                    usersApplyed = annuncio.getUserApplyed();
+                    if( usersApplyed != null ) {
+                        StringBuffer textApplyed = new StringBuffer();
+                        for (UserModel user : usersApplyed) {
+                            //popolo la textbox con il nome di chi si è applicato
+                            textApplyed.append(user.getName() + " " + user.getSurname() + "\n");
+                        }
+                        binding.textApplicazioni.setText(textApplyed);
+                        binding.buttonConfermaAttivita.setVisibility(View.VISIBLE);
+                    }
+
 
                     break;
             }

@@ -15,7 +15,7 @@ public class AnnouncementModel {
     private int coins;
     private boolean approved;
 
-    private List<UserModel> userApplyed;
+    private List<UserModel> userApplyed = null;
 
     private String status;
 
