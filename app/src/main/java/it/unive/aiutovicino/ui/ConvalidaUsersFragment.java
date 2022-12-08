@@ -1,5 +1,6 @@
 package it.unive.aiutovicino.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,9 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import it.unive.aiutovicino.R;
+import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentConvalidaBinding;
 import it.unive.aiutovicino.databinding.FragmentConvalidaUsersBinding;
+import it.unive.aiutovicino.model.UserModel;
 
 
 public class ConvalidaUsersFragment extends Fragment {
@@ -27,6 +33,15 @@ public class ConvalidaUsersFragment extends Fragment {
         binding = FragmentConvalidaUsersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        List<UserModel> users;
+        try {
+            users = (List<UserModel>)new Connection().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return root;
     }
 
@@ -34,5 +49,12 @@ public class ConvalidaUsersFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private class Connection extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object... arg0){
+            return UserController.getNotApprovedUsers();
+        }
     }
 }

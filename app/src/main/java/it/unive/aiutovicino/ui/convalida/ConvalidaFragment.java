@@ -13,6 +13,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.ConvalidaPagerAdapter;
 import it.unive.aiutovicino.controller.UserController;
@@ -34,18 +35,7 @@ public class ConvalidaFragment extends Fragment {
         ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), this.getActivity().getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = this.getActivity().findViewById(R.id.tabs);
-        tabs.setVisibility(View.VISIBLE);
-        tabs.setupWithViewPager(viewPager);
-        /*List<UserModel> users;
-        try {
-            users = (List<UserModel>)new Connection().execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
+        General.setVisibleTabs(this.getActivity(), viewPager);
 
         return root;
     }
@@ -53,13 +43,7 @@ public class ConvalidaFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        General.setNotVisibleTabs(this.getActivity());
         binding = null;
-    }
-
-    private class Connection extends AsyncTask {
-        @Override
-        protected Object doInBackground(Object... arg0){
-            return UserController.getNotApprovedUsers();
-        }
     }
 }
