@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -107,5 +111,16 @@ public class General {
             editor.clear().commit();
             user = null;
         }
+    }
+
+    public static void setNotVisibleTabs(Activity activity){
+        TabLayout tabs = activity.findViewById(R.id.tabs);
+        tabs.setVisibility(View.GONE);
+    }
+
+    public static void setVisibleTabs(Activity activity, ViewPager viewPager){
+        TabLayout tabs = activity.findViewById(R.id.tabs);
+        tabs.setVisibility(View.VISIBLE);
+        tabs.setupWithViewPager(viewPager);
     }
 }
