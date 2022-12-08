@@ -13,10 +13,13 @@ import java.util.List;
 
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.model.AnnouncementModel;
+import it.unive.aiutovicino.model.UserModel;
 
 public class AnnunciAdapter extends BaseAdapter {
     private LayoutInflater inflter;
     private List<AnnouncementModel> annunci = new ArrayList<>();
+    List<UserModel> usersApplyed;
+    int partecipanti;
 
     public AnnunciAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
@@ -49,10 +52,22 @@ public class AnnunciAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.adapter_annunci, null);
         TextView title = (TextView)view.findViewById(R.id.adapter_annunci_title);
-        TextView description = (TextView)view.findViewById(R.id.adapter_annunci_description);
+        TextView date_time = (TextView)view.findViewById(R.id.adapter_annunci_date_time);
+        TextView participants = (TextView)view.findViewById(R.id.adapter_annunci_partecipanti);
         ImageView icon = (ImageView) view.findViewById(R.id.adapter_annunci_icon);
-        title.setText(this.annunci.get(i).getTitle());
-        description.setText(this.annunci.get(i).getDescription());
+        AnnouncementModel announcement = this.annunci.get(i);
+        title.setText(announcement.getTitle());
+        date_time.setText("Il giorno " + announcement.getDate() + " alle ore " + announcement.getHours());
+
+        usersApplyed = announcement.getUserApplyed();
+        if(announcement.getUserApplyed() == null )
+            partecipanti = 0;
+        else
+            partecipanti = usersApplyed.size();
+
+        participants.setText("Applicazioni: " + partecipanti + "/" + announcement.getParticipantsNumber());
+
+
         switch(this.annunci.get(i).getIdCategory()){
             case "1":
                 icon.setImageResource(R.drawable.category_corsi);

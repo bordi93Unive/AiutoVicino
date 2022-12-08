@@ -37,6 +37,7 @@ public class ConvalidaUsersFragment extends Fragment {
     private ProgressBar progressSpinner;
     private UserAdapter userAdapter;
     private List<UserModel> users;
+    private View rootView;
 
     public static ConvalidaUsersFragment newInstance() {
         ConvalidaUsersFragment fragment = new ConvalidaUsersFragment();
