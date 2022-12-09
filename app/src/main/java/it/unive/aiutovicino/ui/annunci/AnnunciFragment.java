@@ -53,7 +53,9 @@ public class AnnunciFragment extends Fragment {
         viewModel.getFilter().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                announcementAdapter.getFilter().filter(s);
+                if(!(announcementAdapter.getCount() == 0 && s.equals(""))){
+                    announcementAdapter.getFilter().filter(s);
+                }
             }
         });
 
@@ -84,6 +86,7 @@ public class AnnunciFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        announcementAdapter = null;
     }
 
     private class Connection extends AsyncTask {

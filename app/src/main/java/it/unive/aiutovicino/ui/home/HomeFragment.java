@@ -34,12 +34,12 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressSpinner;
     private AnnunciAdapter announcementAdapter;
     private List<AnnouncementModel> announcements;
+    private SearchViewModel viewModel;
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SearchViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
-
+        viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -68,7 +68,9 @@ public class HomeFragment extends Fragment {
         viewModel.getFilter().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                announcementAdapter.getFilter().filter(s);
+                if(!(announcementAdapter.getCount() == 0 && s.equals(""))){
+                    announcementAdapter.getFilter().filter(s);
+                }
             }
         });
 
@@ -79,6 +81,8 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        announcementAdapter = null;
+        viewModel = null;
     }
 
 

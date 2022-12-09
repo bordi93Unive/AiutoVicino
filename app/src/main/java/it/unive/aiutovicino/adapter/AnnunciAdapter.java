@@ -20,9 +20,7 @@ import it.unive.aiutovicino.model.UserModel;
 public class AnnunciAdapter extends BaseAdapter implements Filterable {
     private LayoutInflater inflter;
     private List<AnnouncementModel> annunci = new ArrayList<>();
-    private List<AnnouncementModel> announcementsOriginal;
-    private List<UserModel> usersApplyed;
-    private int partecipanti;
+    private List<AnnouncementModel> announcementsOriginal = null;
 
     public AnnunciAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
@@ -50,6 +48,8 @@ public class AnnunciAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        int participantsApplied = 0;
+
         view = inflter.inflate(R.layout.adapter_annunci, null);
         TextView title = (TextView)view.findViewById(R.id.adapter_annunci_title);
         TextView date_time = (TextView)view.findViewById(R.id.adapter_annunci_date_time);
@@ -59,13 +59,10 @@ public class AnnunciAdapter extends BaseAdapter implements Filterable {
         title.setText(announcement.getTitle());
         date_time.setText("Il giorno " + announcement.getDate() + " alle ore " + announcement.getHours());
 
-        usersApplyed = announcement.getUserApplyed();
-        if(announcement.getUserApplyed() == null )
-            partecipanti = 0;
-        else
-            partecipanti = usersApplyed.size();
+        if(announcement.getUserApplyed() != null )
+            participantsApplied = announcement.getUserApplyed().size();
 
-        participants.setText("Applicazioni: " + partecipanti + "/" + announcement.getParticipantsNumber());
+        participants.setText("Applicazioni: " + participantsApplied + "/" + announcement.getParticipantsNumber());
 
 
         switch(this.annunci.get(i).getIdCategory()){
