@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnouncementController;
@@ -39,7 +40,7 @@ public class AnnunciFragment extends Fragment {
         SearchViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
         binding = FragmentAnnunciBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
+        General.setSearchViewVisible();
         progressSpinner = binding.progressBarMyAnnunci;
         /*searchView = root.findViewById(R.id.action_search);
         searchView.setVisibility(View.VISIBLE);*/

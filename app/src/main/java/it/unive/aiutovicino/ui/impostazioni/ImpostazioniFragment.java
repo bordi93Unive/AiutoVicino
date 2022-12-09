@@ -38,8 +38,7 @@ private FragmentImpostazioniBinding binding;
         binding = FragmentImpostazioniBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
-        toolbar2.getMenu().findItem(R.id.action_search).setVisible(false);
-
+        General.setSearchViewInvisible();
 
         sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
 

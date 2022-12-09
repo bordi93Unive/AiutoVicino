@@ -30,6 +30,7 @@ public class ConvalidaFragment extends Fragment {
 
         binding = FragmentConvalidaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        General.setSearchViewInvisible();
         ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);

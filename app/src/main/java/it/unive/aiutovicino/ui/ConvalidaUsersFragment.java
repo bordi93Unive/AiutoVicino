@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.adapter.UserAdapter;
@@ -48,7 +49,7 @@ public class ConvalidaUsersFragment extends Fragment {
 
         binding = FragmentConvalidaUsersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        General.setSearchViewInvisible();
         progressSpinner = binding.progressBarConvalidaUsers;
 
         listUsers =  binding.listConvalidaUsers;

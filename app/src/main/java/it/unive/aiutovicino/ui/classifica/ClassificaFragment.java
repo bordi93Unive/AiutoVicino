@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.adapter.ClassificaAdapter;
 import it.unive.aiutovicino.controller.RankingController;
 import it.unive.aiutovicino.databinding.FragmentClassificaBinding;
@@ -25,7 +26,7 @@ public class ClassificaFragment extends Fragment {
 
         binding = FragmentClassificaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        General.setSearchViewInvisible();
         RankingModel[] rankings = RankingController.getAllRankings();
 
         ListView listRankings = (ListView) binding.listClassifica;

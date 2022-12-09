@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
@@ -35,8 +36,7 @@ public class AnnuncioDetailFragment extends Fragment {
 
         binding = FragmentAnnuncioDetailBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
-
+        General.setSearchViewInvisible();
 
         Bundle b = this.getArguments();
         Gson gson = new Gson();

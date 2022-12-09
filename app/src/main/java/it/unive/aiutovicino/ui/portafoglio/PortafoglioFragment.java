@@ -29,6 +29,8 @@ public class PortafoglioFragment extends Fragment {
         binding = FragmentPortafoglioBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
+        General.setSearchViewInvisible();
+
         try {
            new Connection().execute().get();
         } catch (ExecutionException e) {

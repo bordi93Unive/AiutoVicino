@@ -56,7 +56,7 @@ public class AnnuncioCreaFragment extends Fragment {
 
         binding = FragmentAnnuncioCreaBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
+        General.setSearchViewInvisible();
         progressSpinner = binding.progressBarCreaAnnuncio;
 
         title = binding.inputTitle;

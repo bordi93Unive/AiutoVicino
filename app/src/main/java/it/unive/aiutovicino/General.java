@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -30,6 +32,18 @@ public class General {
     public static String SHARED_PREFS = "aiuto_vicino";
     public static UserModel user;
     public static List<CategoryModel> categories;
+    public static MenuItem searchView;
+
+    public static void setSearchViewVisible(){
+        if(searchView != null){
+            searchView.setVisible(true);
+        }
+    }
+    public static void setSearchViewInvisible(){
+        if(searchView != null){
+            searchView.setVisible(false);
+        }
+    }
 
     public static String connect(String urlAddress, String requestedMethod, Map<String, String> queryParameters) {
         String response = "";
