@@ -1,17 +1,19 @@
 package it.unive.aiutovicino.ui.impostazioni;
 
+import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -33,14 +35,14 @@ private FragmentImpostazioniBinding binding;
     View root;
     SharedPreferences sharedpreferences;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //ImpostazioniViewModel impostazioniViewModel = new ViewModelProvider(this).get(ImpostazioniViewModel.class);
         binding = FragmentImpostazioniBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
-        General.setSearchViewInvisible();
-
+        setHasOptionsMenu(true);
         sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
+
 
         Gson gson = new Gson();
         String json = sharedpreferences.getString("user", "");
@@ -59,8 +61,6 @@ private FragmentImpostazioniBinding binding;
         descrizione = binding.modDescrizione;
 
 
-
-        //UserModel user = UserController.getUserByID(1);
         nome.setText(String.valueOf(General.user.getName()));
         cognome.setText(String.valueOf(General.user.getSurname()));
         email.setText(String.valueOf(General.user.getEmail()));
@@ -108,6 +108,13 @@ private FragmentImpostazioniBinding binding;
         });
 
         return root;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item=menu.findItem(R.id.action_search);
+        if(item!=null)
+            item.setVisible(false);
     }
 
     @Override

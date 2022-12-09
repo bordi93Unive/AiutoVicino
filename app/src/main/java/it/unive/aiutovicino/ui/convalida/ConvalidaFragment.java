@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,19 +32,25 @@ public class ConvalidaFragment extends Fragment {
 
         binding = FragmentConvalidaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        General.setSearchViewInvisible();
+        setHasOptionsMenu(true);
+
         ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
-        General.setVisibleTabs(this.getActivity(), viewPager);
 
         return root;
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item=menu.findItem(R.id.action_search);
+        if(item!=null)
+            item.setVisible(false);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        General.setNotVisibleTabs(this.getActivity());
         binding = null;
     }
 }

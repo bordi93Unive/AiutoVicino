@@ -3,6 +3,8 @@ package it.unive.aiutovicino.ui.portafoglio;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,8 +30,7 @@ public class PortafoglioFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPortafoglioBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
-        General.setSearchViewInvisible();
+        setHasOptionsMenu(true);
 
         try {
            new Connection().execute().get();
@@ -56,6 +57,12 @@ public class PortafoglioFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem item=menu.findItem(R.id.action_search);
+        if(item!=null)
+            item.setVisible(false);
+    }
 
     @Override
     public void onDestroyView() {
