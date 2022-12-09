@@ -37,7 +37,6 @@ public class AnnunciFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SearchViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
-
         binding = FragmentAnnunciBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
@@ -46,6 +45,8 @@ public class AnnunciFragment extends Fragment {
         searchView.setVisibility(View.VISIBLE);*/
         listAnnunci = (ListView) binding.listMyAnnunci;
         announcementAdapter = new AnnunciAdapter(root.getContext());
+
+
 
         new Connection().execute();
 

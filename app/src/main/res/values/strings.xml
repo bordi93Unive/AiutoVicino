@@ -138,5 +138,6 @@
     <string name="Inserisci_Descrizione">Inserisci Descrizione</string>
     <string name="Inserisci_Categoria">Inserisci Categoria</string>
     <string name="Inserisci_Coin">Inserisci Coin</string>
+    <string name="Inserisci_Titolo">Inserisci Titolo</string>
 
 </resources>
