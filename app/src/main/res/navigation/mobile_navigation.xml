@@ -48,7 +48,11 @@
         android:id="@+id/nav_convalida"
         android:name="it.unive.aiutovicino.ui.convalida.ConvalidaFragment"
         android:label="@string/menu_convalida"
-        tools:layout="@layout/fragment_convalida" />
+        tools:layout="@layout/fragment_convalida" >
+        <action
+            android:id="@+id/action_nav_convalida_to_convalidaCorsoDetailFragment"
+            app:destination="@id/convalidaCorsoDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_impostazioni"
@@ -101,8 +105,16 @@
         android:label="Convalida Utente"
         tools:layout="@layout/fragment_convalida_users" />
     <fragment
+        android:id="@+id/convalidaCorsoDetailFragment"
+        android:name="it.unive.aiutovicino.ui.ConvalidaCorsoDetailFragment"
+        android:label="Convalida Corso"
+        tools:layout="@layout/fragment_convalida_corso_detail" />
+    <fragment
         android:id="@+id/convalidaCorsiFragment"
         android:name="it.unive.aiutovicino.ui.ConvalidaCorsiFragment"
         android:label="Convalida Corsi"
-        tools:layout="@layout/fragment_convalida_corsi" />
+        tools:layout="@layout/fragment_convalida_corsi"/>
+
+
+
 </navigation>

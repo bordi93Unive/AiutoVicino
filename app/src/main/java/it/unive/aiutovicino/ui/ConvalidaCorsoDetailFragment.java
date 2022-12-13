@@ -20,14 +20,14 @@ import java.util.List;
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
-import it.unive.aiutovicino.databinding.FragmentConvalidaCorsiDetailBinding;
+import it.unive.aiutovicino.databinding.FragmentConvalidaCorsoDetailBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
 import it.unive.aiutovicino.model.UserModel;
 import it.unive.aiutovicino.ui.annuncio_detail.AnnuncioDetailViewModel;
 
 public class ConvalidaCorsoDetailFragment extends Fragment {
 
-    private FragmentConvalidaCorsiDetailBinding binding;
+    private FragmentConvalidaCorsoDetailBinding binding;
     View root;
     AnnouncementModel annuncio = null;
     List<UserModel> usersApplyed;
@@ -36,9 +36,8 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         AnnuncioDetailViewModel annuncioDetailViewModel = new ViewModelProvider(this).get(AnnuncioDetailViewModel.class);
 
-        binding = FragmentConvalidaCorsiDetailBinding.inflate(inflater, container, false);
+        binding = FragmentConvalidaCorsoDetailBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        General.setSearchViewInvisible();
 
         Bundle b = this.getArguments();
         Gson gson = new Gson();
