@@ -45,6 +45,17 @@ public class General {
         }
     }
 
+    public static void setNotVisibleTabs(Activity activity){
+        TabLayout tabs = activity.findViewById(R.id.tabs);
+        tabs.setVisibility(View.GONE);
+    }
+
+    public static void setVisibleTabs(Activity activity, ViewPager viewPager){
+        TabLayout tabs = activity.findViewById(R.id.tabs);
+        tabs.setVisibility(View.VISIBLE);
+        tabs.setupWithViewPager(viewPager);
+    }
+
     public static String connect(String urlAddress, String requestedMethod, Map<String, String> queryParameters) {
         String response = "";
         try {

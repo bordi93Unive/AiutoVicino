@@ -20,15 +20,14 @@ import java.util.List;
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
-import it.unive.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
-import it.unive.aiutovicino.databinding.FragmentConvalidaCorsoDetailBinding;
+import it.unive.aiutovicino.databinding.FragmentConvalidaCorsiDetailBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
 import it.unive.aiutovicino.model.UserModel;
 import it.unive.aiutovicino.ui.annuncio_detail.AnnuncioDetailViewModel;
 
-public class ConvalidaCorsiDetailFragment extends Fragment {
+public class ConvalidaCorsoDetailFragment extends Fragment {
 
-    private FragmentConvalidaCorsoDetailBinding binding;
+    private FragmentConvalidaCorsiDetailBinding binding;
     View root;
     AnnouncementModel annuncio = null;
     List<UserModel> usersApplyed;
@@ -37,7 +36,7 @@ public class ConvalidaCorsiDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         AnnuncioDetailViewModel annuncioDetailViewModel = new ViewModelProvider(this).get(AnnuncioDetailViewModel.class);
 
-        binding = FragmentConvalidaCorsoDetailBinding.inflate(inflater, container, false);
+        binding = FragmentConvalidaCorsiDetailBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         General.setSearchViewInvisible();
 
@@ -77,13 +76,13 @@ public class ConvalidaCorsiDetailFragment extends Fragment {
             binding.textDescrizione.setText(annuncio.getDescription());
         }
             /** @todo se premi il bottone poi non posso più andare su Home */
-        binding.buttonApplicati.setOnClickListener(new View.OnClickListener() {
+        /*binding.buttonApplicati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Connection().execute();
 
             }
-        });
+        });*/
 
         return root;
     }

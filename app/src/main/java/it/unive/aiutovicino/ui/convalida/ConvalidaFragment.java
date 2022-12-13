@@ -37,6 +37,7 @@ public class ConvalidaFragment extends Fragment {
         ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), getChildFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
+        General.setVisibleTabs(this.getActivity(), viewPager);
 
         return root;
     }
@@ -51,6 +52,7 @@ public class ConvalidaFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        General.setNotVisibleTabs(this.getActivity());
         binding = null;
     }
 }
