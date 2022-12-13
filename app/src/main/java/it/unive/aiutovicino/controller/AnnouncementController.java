@@ -125,4 +125,10 @@ public class AnnouncementController {
         return getAnnouncements(urlAddress, "POST", queryParameters);
     }
 
+    public static List<AnnouncementModel> getAnnouncementsAppliedByUserId(){
+        String urlAddress = "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-getAnnouncementsAppliedByUserId";
+        Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("userId", General.user.getId());
+        return getAnnouncements(urlAddress, "POST", queryParameters);
+    }
 }

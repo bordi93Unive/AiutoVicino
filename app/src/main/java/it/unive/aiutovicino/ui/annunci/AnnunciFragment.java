@@ -40,14 +40,10 @@ public class AnnunciFragment extends Fragment {
         SearchViewModel viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
         binding = FragmentAnnunciBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        General.setSearchViewVisible();
+
         progressSpinner = binding.progressBarMyAnnunci;
-        /*searchView = root.findViewById(R.id.action_search);
-        searchView.setVisibility(View.VISIBLE);*/
         listAnnunci = (ListView) binding.listMyAnnunci;
         announcementAdapter = new AnnunciAdapter(root.getContext());
-
-
 
         new Connection().execute();
 
