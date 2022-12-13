@@ -107,14 +107,14 @@ public class AnnouncementController {
     public static List<AnnouncementModel> getAllAnnouncements(){
         String urlAddress = "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-getAllAnnouncements";
         Map<String, String> queryParameters = new HashMap<>();
-        queryParameters.put("idUser", General.user.getId());
+        queryParameters.put("userId", General.user.getId());
         return getAnnouncements(urlAddress, "POST", queryParameters);
     }
 
     public static List<AnnouncementModel> getAllMyAnnouncements(){
         String urlAddress = "https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-getAnnouncementsByUserId";
         Map<String, String> queryParameters = new HashMap<>();
-        queryParameters.put("idUser", General.user.getId());
+        queryParameters.put("userId", General.user.getId());
         return getAnnouncements(urlAddress, "POST", queryParameters);
     }
 
