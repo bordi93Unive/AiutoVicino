@@ -18,9 +18,9 @@ import it.unive.aiutovicino.model.UserModel;
 public class AnnouncementController {
     public static Boolean insert(AnnouncementModel announcement){
         Map<String, String> queryParameters = new HashMap<>();
-        queryParameters.put("idUser", General.user.getId());
+        queryParameters.put("userId", General.user.getId());
         queryParameters.put("idCategory", announcement.getIdCategory());
-        //queryParameters.put("title", announcement.getTitle());
+        queryParameters.put("title", announcement.getTitle());
         queryParameters.put("description", announcement.getDescription());
         queryParameters.put("place", announcement.getPlace());
         queryParameters.put("date", announcement.getDate());

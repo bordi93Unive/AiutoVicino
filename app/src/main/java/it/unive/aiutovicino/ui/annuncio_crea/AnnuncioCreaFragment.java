@@ -216,7 +216,7 @@ public class AnnuncioCreaFragment extends Fragment {
             AnnouncementModel annuncio = new AnnouncementModel();
             annuncio.setId(General.user.getId());
             annuncio.setIdCategory(categoria.getId());
-            //annuncio.setTitle(title.getText().toString());
+            annuncio.setTitle(title.getText().toString());
             annuncio.setDescription(description.getText().toString());
             annuncio.setPlace(place.getText().toString());
             annuncio.setDate(mydate);
