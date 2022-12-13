@@ -108,7 +108,11 @@
         android:id="@+id/convalidaCorsoDetailFragment"
         android:name="it.unive.aiutovicino.ui.ConvalidaCorsoDetailFragment"
         android:label="Convalida Corso"
-        tools:layout="@layout/fragment_convalida_corso_detail" />
+        tools:layout="@layout/fragment_convalida_corso_detail" >
+        <action
+            android:id="@+id/action_convalidaCorsoDetailFragment_to_nav_convalida"
+            app:destination="@id/nav_convalida" />
+    </fragment>
     <fragment
         android:id="@+id/convalidaCorsiFragment"
         android:name="it.unive.aiutovicino.ui.ConvalidaCorsiFragment"

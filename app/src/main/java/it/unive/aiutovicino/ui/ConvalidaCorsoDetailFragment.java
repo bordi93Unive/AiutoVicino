@@ -74,14 +74,14 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
             binding.textDescrizione.setText(annuncio.getDescription());
         }
-            /** @todo se premi il bottone poi non posso più andare su Home */
-        /*binding.buttonApplicati.setOnClickListener(new View.OnClickListener() {
+
+        binding.buttonApprovaCorso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Connection().execute();
 
             }
-        });*/
+        });
 
         return root;
     }
@@ -98,9 +98,9 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
     }
 
     private void applyOk(){
-        Snackbar.make(root, "Applicato con successo", Snackbar.LENGTH_LONG)
+        Snackbar.make(root, "Corso validato con successo", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        //Navigation.findNavController(view).navigate(R.id.action_annuncioDetailFragment_to_nav_applicazioni);
+        Navigation.findNavController(root).navigate(R.id.action_convalidaCorsoDetailFragment_to_nav_convalida);
     }
 
     private class Connection extends AsyncTask {
@@ -113,7 +113,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
         @Override
         protected Object doInBackground(Object... arg0){
 
-            return AnnouncementController.apply(annuncio.getId());
+            return AnnouncementController.appoveCourse(annuncio);
         }
 
         @Override
@@ -123,8 +123,6 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 applyError();
             } else {
                 applyOk();
-                //reindirizzo al fragment Miei Annunci
-                //Navigation.findNavController(getView()).navigate(R.id.action_navAnnuncioCrea_to_navAnnunci);
             }
             //progressSpinner.setVisibility(View.GONE);
         }

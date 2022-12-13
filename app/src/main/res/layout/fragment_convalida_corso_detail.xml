@@ -212,7 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_Coin" />
 
             <Button
-                android:id="@+id/button_annulla2"
+                android:id="@+id/buttonEliminaCorso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -224,7 +224,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_Coin" />
 
             <Button
-                android:id="@+id/button_annulla3"
+                android:id="@+id/buttonApprovaCorso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -234,7 +234,7 @@
                 android:enabled="true"
                 android:text="Approva"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button_annulla2"
+                app:layout_constraintStart_toEndOf="@+id/buttonEliminaCorso"
                 app:layout_constraintTop_toBottomOf="@+id/text_Coin" />
 
 

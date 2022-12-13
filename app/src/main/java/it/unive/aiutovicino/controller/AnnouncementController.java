@@ -42,6 +42,15 @@ public class AnnouncementController {
         return !response.equals("");
     }
 
+    public static Boolean appoveCourse(AnnouncementModel announcement){
+        Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("id", announcement.getId());
+        queryParameters.put("userId", General.user.getId());
+        String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-approveAnnouncement", "POST", queryParameters);
+
+        return !response.equals("");
+    }
+
     private static List<AnnouncementModel> getAnnouncements(String urlAddress, String requestedMethod, Map<String, String> queryParameters){
         List<AnnouncementModel> announcements = new ArrayList<>();
 
