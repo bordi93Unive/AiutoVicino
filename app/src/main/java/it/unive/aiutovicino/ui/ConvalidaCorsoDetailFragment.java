@@ -70,7 +70,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             binding.textTime.setText(annuncio.getHours());
             binding.textLocation.setText(annuncio.getPlace());
             binding.textPartecipanti.setText((String.valueOf(annuncio.getParticipantsNumber())));
-
+            binding.textCoin.setText((String.valueOf(annuncio.getCoins())));
             binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
             binding.textDescrizione.setText(annuncio.getDescription());
         }
