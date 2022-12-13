@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.classifica.ClassificaFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBarClassifica"
+        style="@style/Base.Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.812"
+        tools:visibility="invisible" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,4 +38,4 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </ScrollView>
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

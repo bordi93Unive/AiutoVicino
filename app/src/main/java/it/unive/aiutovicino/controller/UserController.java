@@ -216,7 +216,7 @@ public class UserController {
                     Log.e("Error", "GetNotApprovedUsers Json Decode");
                 }
             }
-    }
+        }
 
         return users;
     }

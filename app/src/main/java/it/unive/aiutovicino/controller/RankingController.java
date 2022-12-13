@@ -6,7 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.unive.aiutovicino.General;
@@ -35,11 +37,36 @@ public class RankingController {
     }
 
 
-    public static RankingModel[] getAllRankings(){
-        RankingModel[] rankings = new RankingModel[3];
-        rankings[0] = new RankingModel(1, "Ugo", 136);
-        rankings[1] = new RankingModel(2, "Matte",  126);
-        rankings[2] = new RankingModel(3, "Daniele",  16);
+    public static List<RankingModel> getAllRankings(){
+        List<RankingModel> rankings = new ArrayList<>();
+
+        String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/ranking-getRanking", "GET", null);
+
+        if(!response.equals("")) {
+            try{
+                JSONArray jArray = new JSONArray(response);
+                for(int i = 0; i < jArray.length(); i++) {
+                    JSONObject json_data = jArray.getJSONObject(i);
+
+                    if(json_data.has("id") && json_data.has("userNickname") && json_data.has("userId") && json_data.has("nCoin")) {
+                        RankingModel ranking = new RankingModel();
+
+                        ranking.setId(json_data.getString("id"));
+                        ranking.setUserNickname(json_data.getString("userNickname"));
+                        ranking.setUserId(json_data.getString("userId"));
+                        ranking.setCoins(Integer.valueOf(json_data.getString("nCoin")));
+                        ranking.setPosition(i + 1);
+
+                        rankings.add(ranking);
+                    }
+                }
+
+            }
+            catch (JSONException e) {
+                Log.e("Error", "GetNotApprovedUsers Json Decode");
+            }
+        }
+
         return rankings;
     }
 }

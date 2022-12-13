@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentConvalidaCorsoDetailBinding;
@@ -83,6 +82,14 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             }
         });
 
+        binding.buttonEliminaCorso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new ConnectionDelete().execute();
+
+            }
+        });
+
         return root;
     }
 
@@ -113,7 +120,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
         @Override
         protected Object doInBackground(Object... arg0){
 
-            return AnnouncementController.appoveCourse(annuncio);
+            return AnnouncementController.approveCourse(annuncio);
         }
 
         @Override
@@ -123,6 +130,42 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 applyError();
             } else {
                 applyOk();
+            }
+            //progressSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    private void deleteError(){
+        Snackbar.make(root, "Errore durante l'eliminazione", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private void deleteOk(){
+        Snackbar.make(root, "Eliminato con successo", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+        Navigation.findNavController(root).navigate(R.id.action_convalidaCorsoDetailFragment_to_nav_convalida);
+    }
+
+    private class ConnectionDelete extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            //progressSpinner.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Object doInBackground(Object... arg0){
+
+            return AnnouncementController.delete(annuncio.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Object result)
+        {
+            if(result == null || !((Boolean) result)){
+                deleteError();
+            } else {
+                deleteOk();
             }
             //progressSpinner.setVisibility(View.GONE);
         }

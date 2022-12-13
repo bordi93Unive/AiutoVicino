@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        General.setSearchViewVisible();
         General.getUserBySharedPreferences(this.getActivity(), binding.getRoot().getContext().MODE_PRIVATE);
 
         progressSpinner = binding.progressBarHome;

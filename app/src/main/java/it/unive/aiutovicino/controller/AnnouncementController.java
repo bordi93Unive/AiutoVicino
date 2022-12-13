@@ -42,11 +42,21 @@ public class AnnouncementController {
         return !response.equals("");
     }
 
-    public static Boolean appoveCourse(AnnouncementModel announcement){
+    public static Boolean approveCourse(AnnouncementModel announcement){
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("id", announcement.getId());
         queryParameters.put("userId", General.user.getId());
+        queryParameters.put("coins", String.valueOf(announcement.getCoins()));
         String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-approveAnnouncement", "POST", queryParameters);
+
+        return !response.equals("");
+    }
+
+    public static Boolean delete(String announcementId){
+        Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("announcementId", announcementId);
+        queryParameters.put("userId", General.user.getId());
+        String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-deleteAnnouncement", "POST", queryParameters);
 
         return !response.equals("");
     }
@@ -66,7 +76,7 @@ public class AnnouncementController {
                     announcement.setId(jsonData.getString("id"));
                     announcement.setUserId(jsonData.getString("userId"));
                     announcement.setIdCategory(jsonData.getString("idCategory"));
-                    announcement.setTitle(jsonData.getString("description"));
+                    announcement.setTitle(jsonData.getString("title"));
                     announcement.setDescription(jsonData.getString("description"));
                     announcement.setPlace(jsonData.getString("place"));
                     announcement.setDate(jsonData.getString("date"));

@@ -68,6 +68,13 @@ public class AnnuncioDetailFragment extends Fragment {
                     usersApplyed = annuncio.getUserApplyed();
                     if( usersApplyed == null ) {
                         binding.buttonEliminaAnnuncio.setVisibility(View.VISIBLE);
+
+                        binding.buttonEliminaAnnuncio.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                new ConnectionDelete().execute();
+                            }
+                        });
                     }
                     else {
                         StringBuffer textApplyed = new StringBuffer();
@@ -155,6 +162,42 @@ public class AnnuncioDetailFragment extends Fragment {
                 applyOk();
                 //reindirizzo al fragment Miei Annunci
                 //Navigation.findNavController(getView()).navigate(R.id.action_navAnnuncioCrea_to_navAnnunci);
+            }
+            //progressSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    private void deleteError(){
+        Snackbar.make(root, "Errore durante l'eliminazione", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private void deleteOk(){
+        Snackbar.make(root, "Eliminato con successo", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+        Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
+    }
+
+    private class ConnectionDelete extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            //progressSpinner.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Object doInBackground(Object... arg0){
+
+            return AnnouncementController.delete(annuncio.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Object result)
+        {
+            if(result == null || !((Boolean) result)){
+                deleteError();
+            } else {
+                deleteOk();
             }
             //progressSpinner.setVisibility(View.GONE);
         }

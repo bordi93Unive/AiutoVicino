@@ -8,22 +8,27 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.model.RankingModel;
 
-public class ClassificaAdapter extends BaseAdapter {
+public class RankingAdapter extends BaseAdapter {
     private LayoutInflater inflter;
-    private RankingModel[] rankings;
+    private List<RankingModel> rankings;
     private Context context;
 
-    public ClassificaAdapter(Context context, RankingModel[] rankings){
+    public RankingAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
+    }
+
+    public void setRankings(List<RankingModel> rankings){
         this.rankings = rankings;
     }
 
     @Override
     public int getCount() {
-        return this.rankings.length;
+        return this.rankings.size();
     }
 
     @Override
@@ -44,12 +49,12 @@ public class ClassificaAdapter extends BaseAdapter {
         TextView coins = (TextView)view.findViewById(R.id.adapter_classifica_score);
         ImageView icon = (ImageView) view.findViewById(R.id.adapter_classifica_icon);
 
-        nickname.setText(this.rankings[i].nickname);
-        posizione.setText("Rank " + this.rankings[i].position);
-        coins.setText("Coin " + this.rankings[i].coins);
+        nickname.setText(this.rankings.get(i).getUserNickname());
+        posizione.setText("Rank " + this.rankings.get(i).getPosition());
+        coins.setText("Coin " + this.rankings.get(i).getCoins());
 
 
-        String mipmapName = "ic_" +  this.rankings[i].nickname.toLowerCase().substring(0,1);
+        String mipmapName = "ic_" +  this.rankings.get(i).getUserNickname().toLowerCase().substring(0,1);
         int resID = view.getResources().getIdentifier(mipmapName , "mipmap", view.getContext().getPackageName());
         icon.setImageResource(resID);
 

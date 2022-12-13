@@ -52,7 +52,6 @@ public class ConvalidaFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        General.setNotVisibleTabs(this.getActivity());
         binding = null;
     }
 }
