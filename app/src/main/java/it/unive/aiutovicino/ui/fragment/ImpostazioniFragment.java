@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.impostazioni;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.app.ActionBar;
 import android.content.SharedPreferences;
@@ -37,7 +37,6 @@ private FragmentImpostazioniBinding binding;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //ImpostazioniViewModel impostazioniViewModel = new ViewModelProvider(this).get(ImpostazioniViewModel.class);
         binding = FragmentImpostazioniBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         setHasOptionsMenu(true);
@@ -67,8 +66,6 @@ private FragmentImpostazioniBinding binding;
         nickname.setText(String.valueOf(General.user.getNickname()));
         descrizione.setText(General.user.getDescription());
 
-        //final TextView textView = binding.textImpostazioni;
-        //ImpostazioniViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

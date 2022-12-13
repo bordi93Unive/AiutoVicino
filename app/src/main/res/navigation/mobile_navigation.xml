@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="it.unive.aiutovicino.ui.home.HomeFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/nav_portafoglio"
-        android:name="it.unive.aiutovicino.ui.portafoglio.PortafoglioFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.PortafoglioFragment"
         android:label="@string/menu_portafoglio"
         tools:layout="@layout/fragment_portafoglio" >
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/nav_annunci"
-        android:name="it.unive.aiutovicino.ui.annunci.AnnunciFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.AnnunciFragment"
         android:label="@string/menu_myannunci"
         tools:layout="@layout/fragment_annunci" >
         <action
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/nav_applicazioni"
-        android:name="it.unive.aiutovicino.ui.applicazioni.ApplicazioniFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ApplicazioniFragment"
         android:label="@string/menu_myapplicazioni"
         tools:layout="@layout/fragment_applicazioni" >
         <action
@@ -50,7 +50,7 @@
 
     <fragment
         android:id="@+id/nav_convalida"
-        android:name="it.unive.aiutovicino.ui.convalida.ConvalidaFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ConvalidaFragment"
         android:label="@string/menu_convalida"
         tools:layout="@layout/fragment_convalida" >
         <action
@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/nav_impostazioni"
-        android:name="it.unive.aiutovicino.ui.impostazioni.ImpostazioniFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ImpostazioniFragment"
         android:label="@string/menu_impostazioni"
         tools:layout="@layout/fragment_impostazioni" >
         <action
@@ -70,13 +70,13 @@
 
     <fragment
         android:id="@+id/nav_logout"
-        android:name="it.unive.aiutovicino.ui.LogoutFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
 
     <fragment
         android:id="@+id/annuncioDetailFragment"
-        android:name="it.unive.aiutovicino.ui.annuncio_detail.AnnuncioDetailFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.AnnuncioDetailFragment"
         android:label="Dettaglio Annuncio"
         tools:layout="@layout/fragment_annuncio_detail" >
         <action
@@ -91,7 +91,7 @@
 
     <fragment
         android:id="@+id/nav_annuncio_crea"
-        android:name="it.unive.aiutovicino.ui.annuncio_crea.AnnuncioCreaFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.AnnuncioCreaFragment"
         android:label="@string/menu_crea_annuncio"
         tools:layout="@layout/fragment_annuncio_crea" >
         <action
@@ -100,17 +100,17 @@
     </fragment>
     <fragment
         android:id="@+id/classificaFragment"
-        android:name="it.unive.aiutovicino.ui.classifica.ClassificaFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ClassificaFragment"
         android:label="Classifica"
         tools:layout="@layout/fragment_classifica" />
     <fragment
         android:id="@+id/convalidaUsersFragment"
-        android:name="it.unive.aiutovicino.ui.ConvalidaUsersFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ConvalidaUsersFragment"
         android:label="Convalida Utente"
         tools:layout="@layout/fragment_convalida_users" />
     <fragment
         android:id="@+id/convalidaCorsoDetailFragment"
-        android:name="it.unive.aiutovicino.ui.ConvalidaCorsoDetailFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ConvalidaCorsoDetailFragment"
         android:label="Convalida Corso"
         tools:layout="@layout/fragment_convalida_corso_detail" >
         <action
@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/convalidaCorsiFragment"
-        android:name="it.unive.aiutovicino.ui.ConvalidaCorsiFragment"
+        android:name="it.unive.aiutovicino.ui.fragment.ConvalidaCorsiFragment"
         android:label="Convalida Corsi"
         tools:layout="@layout/fragment_convalida_corsi"/>
 

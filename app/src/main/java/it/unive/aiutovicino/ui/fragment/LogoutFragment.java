@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

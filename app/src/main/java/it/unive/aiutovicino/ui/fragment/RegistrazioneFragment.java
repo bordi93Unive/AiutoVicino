@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.registrazione;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -24,14 +23,12 @@ import it.unive.aiutovicino.model.UserModel;
 public class RegistrazioneFragment extends Fragment {
 
     private FragmentRegistrazioneBinding binding;
-    EditText nome,cognome,email,nickname,password;
-    View root;
-    ProgressBar progressSpinner;
+    private EditText nome,cognome,email,nickname,password;
+    private View root;
+    private ProgressBar progressSpinner;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RegistrazioneViewModel registrazioneViewModel = new ViewModelProvider(this).get(RegistrazioneViewModel.class);
-
         binding = FragmentRegistrazioneBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         progressSpinner = binding.progressBarRegistrazione;

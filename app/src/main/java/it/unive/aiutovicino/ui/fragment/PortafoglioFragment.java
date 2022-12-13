@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.portafoglio;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,7 +45,7 @@ public class PortafoglioFragment extends Fragment {
 
         textPortafoglio.setText("Ciao " + General.user.getName() + " " + General.user.getSurname() + "!");
         textScore.setText(String.valueOf(General.user.getScore()));
-
+        new Connection().execute();
 
         binding.buttonVisualizzaClassifica.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,5 +76,15 @@ public class PortafoglioFragment extends Fragment {
             RankingController.getUserScore();
             return General.user.getScore();
         }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            if (result!= null) {
+                int score = (Integer)result;
+                textScore.setText(String.valueOf(score));
+            }
+
+        }
     }
+
 }

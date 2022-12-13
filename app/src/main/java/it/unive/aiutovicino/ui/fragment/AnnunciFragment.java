@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.annunci;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,13 +19,12 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentAnnunciBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.ui.SearchViewModel;
+import it.unive.aiutovicino.ui.viewmodel.SearchViewModel;
 
 public class AnnunciFragment extends Fragment {
 

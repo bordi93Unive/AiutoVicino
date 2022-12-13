@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui;
+package it.unive.aiutovicino.ui.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

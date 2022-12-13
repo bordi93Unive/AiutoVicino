@@ -23,10 +23,7 @@ public class RankingController {
 
         if (!response.equals("")) {
             try {
-                JSONArray JArr = new JSONArray(response);
-                JSONObject jObject = JArr.getJSONObject(0);
-
-                //General.user.setScore(100);
+                JSONObject jObject = new JSONObject(response);
                 if(jObject.has("score") && !jObject.getString("score").equals("null") ) {
                     General.user.setScore(Integer.valueOf(jObject.getString("score")));
                 }

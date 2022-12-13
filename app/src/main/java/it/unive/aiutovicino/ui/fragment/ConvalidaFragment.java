@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.convalida;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,10 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.ConvalidaPagerAdapter;
-import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentConvalidaBinding;
-
-import com.google.android.material.tabs.TabLayout;
 
 public class ConvalidaFragment extends Fragment {
 

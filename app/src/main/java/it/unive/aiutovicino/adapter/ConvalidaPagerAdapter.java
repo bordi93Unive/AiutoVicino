@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import it.unive.aiutovicino.R;
-import it.unive.aiutovicino.ui.ConvalidaCorsiFragment;
-import it.unive.aiutovicino.ui.ConvalidaUsersFragment;
+import it.unive.aiutovicino.ui.fragment.ConvalidaCorsiFragment;
+import it.unive.aiutovicino.ui.fragment.ConvalidaUsersFragment;
 
 public class ConvalidaPagerAdapter extends FragmentPagerAdapter {
     @StringRes

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import it.unive.aiutovicino.controller.CategoryController;
 import it.unive.aiutovicino.model.UserModel;
@@ -24,7 +23,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import it.unive.aiutovicino.databinding.ActivityMainBinding;
-import it.unive.aiutovicino.ui.SearchViewModel;
+import it.unive.aiutovicino.ui.viewmodel.SearchViewModel;
 
 import androidx.lifecycle.ViewModelProvider;
 

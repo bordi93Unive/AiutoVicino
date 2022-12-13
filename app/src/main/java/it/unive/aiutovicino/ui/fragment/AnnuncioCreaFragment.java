@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.annuncio_crea;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -52,8 +52,6 @@ public class AnnuncioCreaFragment extends Fragment {
     TimePickerDialog pickerTime;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        AnnuncioCreaViewModel annuncioCreaViewModel = new ViewModelProvider(this).get(AnnuncioCreaViewModel.class);
-
         binding = FragmentAnnuncioCreaBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         General.setSearchViewInvisible();

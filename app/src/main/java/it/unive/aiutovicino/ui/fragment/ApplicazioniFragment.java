@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.applicazioni;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,8 +24,7 @@ import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentApplicazioniBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.ui.SearchViewModel;
-import it.unive.aiutovicino.ui.annunci.AnnunciFragment;
+import it.unive.aiutovicino.ui.viewmodel.SearchViewModel;
 
 public class ApplicazioniFragment extends Fragment {
 

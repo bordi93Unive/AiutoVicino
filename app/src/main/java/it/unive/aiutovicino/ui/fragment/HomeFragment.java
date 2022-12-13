@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.home;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import it.unive.aiutovicino.adapter.AnnunciAdapter;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.databinding.FragmentHomeBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.ui.SearchViewModel;
+import it.unive.aiutovicino.ui.viewmodel.SearchViewModel;
 
 import com.google.gson.Gson;
 

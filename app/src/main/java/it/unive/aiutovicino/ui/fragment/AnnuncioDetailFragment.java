@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -6,37 +6,35 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+
+import it.unive.aiutovicino.General;
+import it.unive.aiutovicino.R;
+import it.unive.aiutovicino.controller.AnnouncementController;
+import it.unive.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
+import it.unive.aiutovicino.model.AnnouncementModel;
+import it.unive.aiutovicino.model.UserModel;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-import it.unive.aiutovicino.R;
-import it.unive.aiutovicino.controller.AnnouncementController;
-import it.unive.aiutovicino.databinding.FragmentConvalidaCorsoDetailBinding;
-import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.model.UserModel;
-import it.unive.aiutovicino.ui.annuncio_detail.AnnuncioDetailViewModel;
+public class AnnuncioDetailFragment extends Fragment {
 
-public class ConvalidaCorsoDetailFragment extends Fragment {
-
-    private FragmentConvalidaCorsoDetailBinding binding;
+    private FragmentAnnuncioDetailBinding binding;
     View root;
     AnnouncementModel annuncio = null;
     List<UserModel> usersApplyed;
     StringBuffer textApplyed;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        AnnuncioDetailViewModel annuncioDetailViewModel = new ViewModelProvider(this).get(AnnuncioDetailViewModel.class);
-
-        binding = FragmentConvalidaCorsoDetailBinding.inflate(inflater, container, false);
+        binding = FragmentAnnuncioDetailBinding.inflate(inflater, container, false);
         root = binding.getRoot();
+        General.setSearchViewInvisible();
 
         Bundle b = this.getArguments();
         Gson gson = new Gson();
@@ -53,6 +51,44 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             Navigation.findNavController(this.getActivity(), R.id.nav_host_fragment_content_main).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
         }
         else {
+            switch(type){
+                case "announcement":
+                    binding.buttonApplicati.setVisibility(View.VISIBLE);
+                    binding.textNApplicazioni.setVisibility(View.VISIBLE);
+                    usersApplyed = annuncio.getUserApplyed();
+                    if( usersApplyed != null ) {
+                        binding.textNApplicazioni.setText(usersApplyed.size() + " su " + annuncio.getParticipantsNumber());
+                    }
+                    break;
+                case "my_announcement":
+                    binding.textApplicazioni.setVisibility(View.VISIBLE);
+                    //box con lista utenti applicati annuncio.getUserApplyed();
+                    usersApplyed = annuncio.getUserApplyed();
+                    if( usersApplyed == null ) {
+                        binding.buttonEliminaAnnuncio.setVisibility(View.VISIBLE);
+
+                        binding.buttonEliminaAnnuncio.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                new ConnectionDelete().execute();
+                            }
+                        });
+                    }
+                    else {
+                        StringBuffer textApplyed = new StringBuffer();
+                        for (UserModel user : usersApplyed) {
+                            //popolo la textbox con il nome di chi si è applicato
+                            textApplyed.append(user.getName() + " " + user.getSurname() + "\n");
+                        }
+                        binding.textApplicazioni.setText(textApplyed);
+                        binding.buttonConfermaAttivita.setVisibility(View.VISIBLE);
+                    }
+
+
+
+                    break;
+            }
+
             binding.textAnnuncioTitle.setText(annuncio.getTitle());
             switch(annuncio.getIdCategory()) {
                 case "1":
@@ -69,23 +105,15 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             binding.textTime.setText(annuncio.getHours());
             binding.textLocation.setText(annuncio.getPlace());
             binding.textPartecipanti.setText((String.valueOf(annuncio.getParticipantsNumber())));
-            binding.textCoin.setText((String.valueOf(annuncio.getCoins())));
+            binding.textCoin.setText(String.valueOf(annuncio.getCoins()));
             binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
             binding.textDescrizione.setText(annuncio.getDescription());
         }
 
-        binding.buttonApprovaCorso.setOnClickListener(new View.OnClickListener() {
+        binding.buttonApplicati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Connection().execute();
-
-            }
-        });
-
-        binding.buttonEliminaCorso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new ConnectionDelete().execute();
 
             }
         });
@@ -105,9 +133,9 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
     }
 
     private void applyOk(){
-        Snackbar.make(root, "Corso validato con successo", Snackbar.LENGTH_LONG)
+        Snackbar.make(root, "Applicato con successo", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        Navigation.findNavController(root).navigate(R.id.action_convalidaCorsoDetailFragment_to_nav_convalida);
+        //Navigation.findNavController(view).navigate(R.id.action_annuncioDetailFragment_to_nav_applicazioni);
     }
 
     private class Connection extends AsyncTask {
@@ -120,7 +148,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
         @Override
         protected Object doInBackground(Object... arg0){
 
-            return AnnouncementController.approveCourse(annuncio);
+            return AnnouncementController.apply(annuncio.getId());
         }
 
         @Override
@@ -130,6 +158,8 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 applyError();
             } else {
                 applyOk();
+                //reindirizzo al fragment Miei Annunci
+                //Navigation.findNavController(getView()).navigate(R.id.action_navAnnuncioCrea_to_navAnnunci);
             }
             //progressSpinner.setVisibility(View.GONE);
         }
@@ -143,7 +173,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
     private void deleteOk(){
         Snackbar.make(root, "Eliminato con successo", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        Navigation.findNavController(root).navigate(R.id.action_convalidaCorsoDetailFragment_to_nav_convalida);
+        Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
     }
 
     private class ConnectionDelete extends AsyncTask {

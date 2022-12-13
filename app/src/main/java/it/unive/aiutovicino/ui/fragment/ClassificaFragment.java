@@ -1,4 +1,4 @@
-package it.unive.aiutovicino.ui.classifica;
+package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
