@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import it.unive.aiutovicino.R;
+import it.unive.aiutovicino.ui.ConvalidaCorsiFragment;
 import it.unive.aiutovicino.ui.ConvalidaUsersFragment;
 
 public class ConvalidaPagerAdapter extends FragmentPagerAdapter {
@@ -24,7 +25,16 @@ public class ConvalidaPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return ConvalidaUsersFragment.newInstance();
+        Fragment fragment = null;
+        switch(position) {
+            case 0:
+                fragment =  ConvalidaUsersFragment.newInstance();
+                break;
+            case 1:
+                fragment = ConvalidaCorsiFragment.newInstance();
+                 break;
+        }
+        return fragment;
     }
 
     @Nullable

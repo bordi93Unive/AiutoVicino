@@ -1,23 +1,15 @@
 package it.unive.aiutovicino.controller;
 
-import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.model.AnnouncementModel;
@@ -63,7 +55,7 @@ public class AnnouncementController {
                     AnnouncementModel announcement = new AnnouncementModel();
 
                     announcement.setId(jsonData.getString("id"));
-                    announcement.setIdUser(jsonData.getString("idUser"));
+                    announcement.setUserId(jsonData.getString("userId"));
                     announcement.setIdCategory(jsonData.getString("idCategory"));
                     announcement.setTitle(jsonData.getString("description"));
                     announcement.setDescription(jsonData.getString("description"));

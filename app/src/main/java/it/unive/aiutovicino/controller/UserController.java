@@ -53,13 +53,26 @@ public class UserController {
         return !response.equals("");
     }
 
-    public static Boolean approveUser(String idUser){
+    public static Boolean approveUser(String userId){
         if(General.user.isAdmin()) {
             Map<String, String> queryParameters = new HashMap<>();
             queryParameters.put("adminUserId", General.user.getId());
-            queryParameters.put("userId", idUser);
+            queryParameters.put("userId", userId);
 
             String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-approveUser", "POST", queryParameters);
+
+            return !response.equals("");
+        }
+        return false;
+    }
+
+    public static Boolean deleteUser(String userId){
+        if(General.user.isAdmin()) {
+            Map<String, String> queryParameters = new HashMap<>();
+            queryParameters.put("adminUserId", General.user.getId());
+            queryParameters.put("userId", userId);
+
+            String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-deleteUser", "POST", queryParameters);
 
             return !response.equals("");
         }
@@ -117,11 +130,11 @@ public class UserController {
         return user;
     }
 
-    public static UserModel getUserById(String idUser)  {
+    public static UserModel getUserById(String userId)  {
         UserModel user = null;
 
         Map<String, String> queryParameters = new HashMap<>();
-        queryParameters.put("userId", idUser);
+        queryParameters.put("userId", userId);
         String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-getUserById", "POST", queryParameters);
 
         if (!response.equals("")) {
@@ -166,11 +179,14 @@ public class UserController {
         return user;
     }
 
-    public static List<UserModel> getNotApprovedUsers() {
+    public static List<UserModel> getNotApprovedUsers(String userId) {
         List<UserModel> users = new ArrayList<>();
 
         if(General.user.isAdmin()){
-            String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-getNotApprovedUsers", "GET", null);
+            Map<String, String> queryParameters = new HashMap<>();
+            queryParameters.put("userId", userId);
+            String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/user-getNotApprovedUsers", "POST", queryParameters);
+
             if(!response.equals("")) {
                 try{
                     JSONArray jArray = new JSONArray(response);
@@ -200,7 +216,7 @@ public class UserController {
                     Log.e("Error", "GetNotApprovedUsers Json Decode");
                 }
             }
-        }
+    }
 
         return users;
     }

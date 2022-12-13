@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AnnouncementModel {
     private String id;
-    private String idUser;
+    private String userId;
     private String idCategory;
     private String title;
     private String description;
@@ -28,12 +28,12 @@ public class AnnouncementModel {
         this.id = id;
     }
 
-    public String getIdUser() {
-        return idUser;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getIdCategory() {

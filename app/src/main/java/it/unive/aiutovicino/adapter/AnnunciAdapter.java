@@ -15,7 +15,6 @@ import java.util.List;
 
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.model.AnnouncementModel;
-import it.unive.aiutovicino.model.UserModel;
 
 public class AnnunciAdapter extends BaseAdapter implements Filterable {
     private LayoutInflater inflter;
@@ -51,10 +50,10 @@ public class AnnunciAdapter extends BaseAdapter implements Filterable {
         int participantsApplied = 0;
 
         view = inflter.inflate(R.layout.adapter_annunci, null);
-        TextView title = (TextView)view.findViewById(R.id.adapter_annunci_title);
-        TextView date_time = (TextView)view.findViewById(R.id.adapter_annunci_date_time);
-        TextView participants = (TextView)view.findViewById(R.id.adapter_annunci_partecipanti);
-        ImageView icon = (ImageView) view.findViewById(R.id.adapter_annunci_icon);
+        TextView title = (TextView)view.findViewById(R.id.adapter_corsi_title);
+        TextView date_time = (TextView)view.findViewById(R.id.adapter_corsi_date_time);
+        TextView participants = (TextView)view.findViewById(R.id.adapter_corsi_partecipanti);
+        ImageView icon = (ImageView) view.findViewById(R.id.adapter_corsi_icon);
         AnnouncementModel announcement = this.annunci.get(i);
         title.setText(announcement.getTitle());
         date_time.setText("Il giorno " + announcement.getDate() + " alle ore " + announcement.getHours());

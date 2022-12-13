@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class UserAdapter extends BaseAdapter {
     private LayoutInflater inflter;
     private List<UserModel> users = new ArrayList<>();
     private int index = -1;
+    private ProgressBar progressBar;
 
     public UserAdapter(Context context){
         this.inflter = (LayoutInflater.from(context));
@@ -54,6 +56,7 @@ public class UserAdapter extends BaseAdapter {
         name.setText(users.get(i).getName() + " " + users.get(i).getSurname());
         email.setText(users.get(i).getEmail());
 
+        progressBar = view.findViewById(R.id.progress_bar_convalida);
         ImageButton confirm = view.findViewById(R.id.adapterUserButtonConfirm);
         ImageButton cancel = view.findViewById(R.id.adapterUserButtonCancel);
 
@@ -61,15 +64,15 @@ public class UserAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 index = i;
-                new Connection().execute();
+                new ConnectionConfirm().execute();
             }
         });
 
         cancel.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                users.remove(i);
-                notifyDataSetChanged();
+                index = i;
+                new ConnectionDelete().execute();
             }
         });
         return view;
@@ -80,7 +83,12 @@ public class UserAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    private class Connection extends AsyncTask {
+    private class ConnectionConfirm extends AsyncTask {
+        @Override
+        protected void onPreExecute() {
+
+            progressBar.setVisibility(View.VISIBLE);
+        }
         @Override
         protected Object doInBackground(Object... arg0)
         {
@@ -95,7 +103,31 @@ public class UserAdapter extends BaseAdapter {
                     removeItem();
                 }
             }
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 
+    private class ConnectionDelete extends AsyncTask {
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        @Override
+        protected Object doInBackground(Object... arg0)
+        {
+            UserModel user = users.get(index);
+            return UserController.deleteUser(user.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            if (result!= null) {
+                if((Boolean)result == true){
+                    removeItem();
+                }
+
+            }
+            progressBar.setVisibility(View.GONE);
         }
     }
 }

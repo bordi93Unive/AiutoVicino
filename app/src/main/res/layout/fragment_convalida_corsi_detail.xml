@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-41dp"
-        tools:layout_editor_absoluteY="-141dp">
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-130dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:editable="false"
                 android:text="Data"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -104,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="25dp"
+                android:editable="false"
                 android:text="Orario"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -118,6 +120,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="3dp"
+                android:editable="false"
                 android:text="Location"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,6 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="25dp"
+                android:editable="false"
                 android:text="Numero Partecipanti"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -160,30 +164,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_Partecipanti"
                 app:layout_constraintTop_toBottomOf="@+id/text_Partecipanti" />
-
-            <TextView
-                android:id="@+id/text_NApplicazioni"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="70dp"
-                android:textSize="18sp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView_Descrizione2"
-                app:layout_constraintTop_toTopOf="@+id/text_Descrizione" />
-
-            <TextView
-                android:id="@+id/text_Applicazioni"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="70dp"
-                android:textSize="18sp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView_Descrizione2"
-                app:layout_constraintTop_toTopOf="@+id/text_Descrizione" />
 
             <TextView
                 android:id="@+id/textView_Partecipanti"
@@ -212,6 +192,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="25dp"
+                android:editable="false"
                 android:scrollbars="vertical"
                 android:text="Descrizione:"
                 android:textSize="18sp"
@@ -230,50 +211,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_Coin" />
 
-
-            <TextView
-                android:id="@+id/textView_Descrizione2"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:text="Applcazioni:"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView_Descrizione" />
-
             <Button
-                android:id="@+id/button_Applicati"
+                android:id="@+id/button_annulla2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Applicati"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.392"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="100dp"
+                android:enabled="true"
+                android:text="Elimina"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_Applicazioni" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_Coin" />
 
             <Button
-                android:id="@+id/button_ConfermaAttivita"
+                android:id="@+id/button_annulla3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Conferma avvenuta attività"
-                android:visibility="invisible"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="15dp"
+                android:enabled="true"
+                android:text="Approva"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_Applicazioni" />
+                app:layout_constraintStart_toEndOf="@+id/button_annulla2"
+                app:layout_constraintTop_toBottomOf="@+id/text_Coin" />
 
-            <Button
-                android:id="@+id/button_EliminaAnnuncio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Elimina Annuncio"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_Applicazioni" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -98,6 +98,11 @@
     <fragment
         android:id="@+id/convalidaUsersFragment"
         android:name="it.unive.aiutovicino.ui.ConvalidaUsersFragment"
-        android:label="fragment_convalida_users"
+        android:label="Convalida Utente"
         tools:layout="@layout/fragment_convalida_users" />
+    <fragment
+        android:id="@+id/convalidaCorsiFragment"
+        android:name="it.unive.aiutovicino.ui.ConvalidaCorsiFragment"
+        android:label="Convalida Corsi"
+        tools:layout="@layout/fragment_convalida_corsi" />
 </navigation>
