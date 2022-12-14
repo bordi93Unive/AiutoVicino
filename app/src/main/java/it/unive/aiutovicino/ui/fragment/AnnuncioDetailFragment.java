@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import it.unive.aiutovicino.General;
@@ -55,7 +54,7 @@ public class AnnuncioDetailFragment extends Fragment {
                 case "announcement":
                     binding.buttonApplicati.setVisibility(View.VISIBLE);
                     binding.textNApplicazioni.setVisibility(View.VISIBLE);
-                    usersApplyed = annuncio.getUserApplyed();
+                    usersApplyed = annuncio.getUserApplied();
                     if( usersApplyed != null ) {
                         binding.textNApplicazioni.setText(usersApplyed.size() + " su " + annuncio.getParticipantsNumber());
                     }
@@ -63,7 +62,7 @@ public class AnnuncioDetailFragment extends Fragment {
                 case "my_announcement":
                     binding.textApplicazioni.setVisibility(View.VISIBLE);
                     //box con lista utenti applicati annuncio.getUserApplyed();
-                    usersApplyed = annuncio.getUserApplyed();
+                    usersApplyed = annuncio.getUserApplied();
                     if( usersApplyed == null ) {
                         binding.buttonEliminaAnnuncio.setVisibility(View.VISIBLE);
 

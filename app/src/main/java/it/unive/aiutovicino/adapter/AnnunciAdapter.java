@@ -58,8 +58,8 @@ public class AnnunciAdapter extends BaseAdapter implements Filterable {
         title.setText(announcement.getTitle());
         date_time.setText("Il giorno " + announcement.getDate() + " alle ore " + announcement.getHours());
 
-        if(announcement.getUserApplyed() != null )
-            participantsApplied = announcement.getUserApplyed().size();
+        if(announcement.getUserApplied() != null )
+            participantsApplied = announcement.getUserApplied().size();
 
         participants.setText("Applicazioni: " + participantsApplied + "/" + announcement.getParticipantsNumber());
 

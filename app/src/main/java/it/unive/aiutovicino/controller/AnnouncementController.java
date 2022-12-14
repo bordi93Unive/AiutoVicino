@@ -84,23 +84,17 @@ public class AnnouncementController {
                     announcement.setParticipantsNumber(jsonData.getInt("partecipantsNumber"));
                     announcement.setCoins(jsonData.getInt("coins"));
                     announcement.setApproved(jsonData.getBoolean("approved"));
-                    if (jsonData.has("userApplyed")) {
-                        announcement.setUserApplyed(new ArrayList<>());
-                        String[] userApplyed = new String[1];
-                        userApplyed[0] = "zPVvd9Mzhk1tXAurtjnL";
-
-                        for (int index = 0; index < userApplyed.length; index++) {
-                            UserModel user = UserController.getUserById(userApplyed[index]);
-                            if (user != null) {
-                                announcement.getUserApplyed().add(user);
+                    if (jsonData.has("userApplied")) {
+                        JSONArray userApplied = jsonData.getJSONArray("userApplied");
+                        List<UserModel> listUserApplied = new ArrayList<UserModel>();
+                        for(int y = 0; y < userApplied.length(); y++){
+                            UserModel u = UserController.getUserById(userApplied.get(y).toString());
+                            if(u != null){
+                                listUserApplied.add(u);
                             }
+                            //listUserApplied.add(userApplied.getJSONObject(y).toString());
                         }
-                        /*JSONArray userApplyed = jsonData.getJSONArray("userApplyed");
-                        List<String> listUserApplyed = new ArrayList<String>();
-                        for(int y = 0; y < userApplyed.length(); y++){
-                            listUserApplyed.add(userApplyed.getJSONObject(y));
-                        }
-                        announcement.setUserApplyed((String[]) listUserApplyed.toArray());*/
+                        announcement.setUserApplied(listUserApplied);
                     }
                     announcement.setStatus(jsonData.getString("status"));
 

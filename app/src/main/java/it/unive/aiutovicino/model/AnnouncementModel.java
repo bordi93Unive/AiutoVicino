@@ -15,7 +15,7 @@ public class AnnouncementModel {
     private int coins;
     private boolean approved;
 
-    private List<UserModel> userApplyed = null;
+    private List<UserModel> userApplied = null;
 
     private String status;
 
@@ -108,12 +108,12 @@ public class AnnouncementModel {
         this.approved = approved;
     }
 
-    public List<UserModel> getUserApplyed() {
-        return userApplyed;
+    public List<UserModel> getUserApplied() {
+        return userApplied;
     }
 
-    public void setUserApplyed(List<UserModel> userApplyed) {
-        this.userApplyed = userApplyed;
+    public void setUserApplied(List<UserModel> userApplied) {
+        this.userApplied = userApplied;
     }
 
     public String getStatus() {
