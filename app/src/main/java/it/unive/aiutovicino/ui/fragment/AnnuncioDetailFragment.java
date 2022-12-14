@@ -135,7 +135,7 @@ public class AnnuncioDetailFragment extends Fragment {
     private void applyOk(){
         Snackbar.make(root, "Applicato con successo", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        //Navigation.findNavController(view).navigate(R.id.action_annuncioDetailFragment_to_nav_applicazioni);
+        Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_applicazioni);
     }
 
     private class Connection extends AsyncTask {

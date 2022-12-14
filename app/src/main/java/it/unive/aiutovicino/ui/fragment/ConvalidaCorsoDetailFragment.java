@@ -73,6 +73,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
         binding.buttonApprovaCorso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                annuncio.setCoins(Integer.parseInt(binding.textCoin.getText().toString().trim()));
                 new Connection().execute();
 
             }

@@ -22,11 +22,11 @@
 
         <TextView
             android:id="@+id/adapter_corsi_title"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="25dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Titolo"
@@ -39,11 +39,11 @@
 
         <TextView
             android:id="@+id/adapter_corsi_date_time"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Data Ora"
@@ -55,11 +55,11 @@
 
         <TextView
             android:id="@+id/adapter_corsi_partecipanti"
-            android:layout_width="300dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Partecipanti"

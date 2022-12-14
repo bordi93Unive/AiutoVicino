@@ -19,7 +19,7 @@
             android:noHistory="true"
             android:name=".LoginActivity"
             android:exported="true"
-            android:label="Login"
+            android:label="AiutoVicino"
             android:theme="@style/Theme.AiutoVicino.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

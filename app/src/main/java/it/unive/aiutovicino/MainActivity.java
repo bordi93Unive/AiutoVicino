@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         Menu nav_Menu = navigationView.getMenu();
         nav_Menu.findItem(R.id.nav_convalida).setVisible(false);
 
-        if(General.user.isAdmin()) {
+        if(General.user != null && General.user.isAdmin()) {
             nav_Menu.findItem(R.id.nav_convalida).setVisible(true);
         }
         /** esecuzione di chiamate all'API Category per ottenerne la lista */
