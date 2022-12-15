@@ -41,6 +41,7 @@ public class UserController {
 
     public static Boolean update(UserModel user){
         Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("userId", user.getId());
         queryParameters.put("email", user.getEmail());
         queryParameters.put("password", user.getPassword());
         queryParameters.put("surname", user.getSurname());
