@@ -54,12 +54,26 @@ public class AnnunciAdapter extends BaseAdapter implements Filterable {
         TextView date_time = (TextView)view.findViewById(R.id.adapter_corsi_date_time);
         TextView participants = (TextView)view.findViewById(R.id.adapter_corsi_partecipanti);
         ImageView icon = (ImageView) view.findViewById(R.id.adapter_corsi_icon);
+        TextView status = (TextView)view.findViewById(R.id.adapter_corsi_text_status);
         AnnouncementModel announcement = this.annunci.get(i);
         title.setText(announcement.getTitle());
         date_time.setText("Il giorno " + announcement.getDate() + " alle ore " + announcement.getHours());
 
         if(announcement.getUserApplied() != null )
             participantsApplied = announcement.getUserApplied().size();
+
+        //se l'annuncio è stato completato
+        if(announcement.getStatus().equals("completed")){
+            status.setText("Completato");
+        }
+        else{
+            //se ha raggiunto il numero massimo di partecipanti
+            if(announcement.getUserApplied().size() == announcement.getParticipantsNumber())
+                status.setText("In corso");
+            else
+                status.setText("Aperto"); //se non si è ancora raggiunto il numero massimo di applicazioni
+        }
+
 
         participants.setText("Applicazioni: " + participantsApplied + "/" + announcement.getParticipantsNumber());
 

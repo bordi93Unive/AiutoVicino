@@ -51,12 +51,21 @@ public class AnnouncementController {
 
         return !response.equals("");
     }
-
+    //far sistemare chiamata a daniele sennò non funziona
     public static Boolean delete(String announcementId){
         Map<String, String> queryParameters = new HashMap<>();
-        queryParameters.put("announcementId", announcementId);
         queryParameters.put("userId", General.user.getId());
+        queryParameters.put("announcementId", announcementId);
         String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/announcements-deleteAnnouncement", "POST", queryParameters);
+
+        return !response.equals("");
+    }
+
+    public static Boolean confirm(String idAnnouncement){
+        Map<String, String> queryParameters = new HashMap<>();
+        queryParameters.put("userId", General.user.getId());
+        queryParameters.put("idAnnouncement", idAnnouncement);
+        String response = General.connect("https://europe-west1-ing-sw-c6b56.cloudfunctions.net/applications-applicationConfirmation", "POST", queryParameters);
 
         return !response.equals("");
     }

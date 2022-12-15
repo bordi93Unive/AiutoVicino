@@ -16,9 +16,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
             tools:layout_editor_absoluteY="1dp">
 
 
@@ -43,7 +40,7 @@
 
             <TextView
                 android:id="@+id/mod_text_nome"
-                android:layout_width="130dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="96dp"
                 android:hint="@string/Nome"
@@ -56,16 +53,15 @@
                 android:text="Nome:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/mod_nome"
-                app:layout_constraintHorizontal_bias="0.083"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <EditText
                 android:id="@+id/mod_nome"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="96dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_graphic"
@@ -85,7 +81,7 @@
 
             <TextView
                 android:id="@+id/mod_text_cognome"
-                android:layout_width="130dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:hint="@string/Nome"
@@ -98,7 +94,7 @@
                 android:text="Cognome:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/mod_cognome"
-                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mod_text_nome" />
 
@@ -106,7 +102,7 @@
                 android:id="@+id/mod_cognome"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_graphic"
@@ -130,7 +126,7 @@
                 android:id="@+id/mod_email"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_graphic"
@@ -152,7 +148,7 @@
                 android:id="@+id/mod_nickname"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_graphic"
@@ -176,7 +172,7 @@
                 android:id="@+id/mod_password"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_graphic"
@@ -197,7 +193,7 @@
 
             <TextView
                 android:id="@+id/mod_text_email"
-                android:layout_width="130dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:hint="@string/Nome"
@@ -210,13 +206,13 @@
                 android:text="Email:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/mod_email"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mod_text_cognome" />
 
             <TextView
                 android:id="@+id/mod_text_nickname"
-                android:layout_width="130dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:hint="@string/Nome"
@@ -229,13 +225,13 @@
                 android:text="Nickname:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/mod_nickname"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mod_text_email" />
 
             <TextView
                 android:id="@+id/mod_text_password"
-                android:layout_width="130dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:hint="@string/Nome"
@@ -248,13 +244,13 @@
                 android:text="Password:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/mod_nickname"
-                app:layout_constraintHorizontal_bias="0.068"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mod_text_nickname" />
 
             <TextView
                 android:id="@+id/mod_text_descrizione"
-                android:layout_width="130dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:hint="@string/Nome"
@@ -267,7 +263,7 @@
                 android:text="Descrizione:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/mod_nickname"
-                app:layout_constraintHorizontal_bias="0.103"
+                app:layout_constraintHorizontal_bias="0.3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mod_text_password" />
 
@@ -301,7 +297,7 @@
                 android:id="@+id/mod_descrizione"
                 android:layout_width="230dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_graphic"

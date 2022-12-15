@@ -6,6 +6,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -29,6 +31,7 @@ public class AnnuncioDetailFragment extends Fragment {
     AnnouncementModel annuncio = null;
     List<UserModel> usersApplyed;
     StringBuffer textApplyed;
+    private ProgressBar progressSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAnnuncioDetailBinding.inflate(inflater, container, false);
@@ -40,7 +43,7 @@ public class AnnuncioDetailFragment extends Fragment {
         String json = (String)b.get("announcement");
         String type = (String)b.get("type");
 
-
+        progressSpinner = binding.progressBarDetail;
 
         if(json != null && !json.equals("")) {
             annuncio = gson.fromJson(json, AnnouncementModel.class);
@@ -50,11 +53,18 @@ public class AnnuncioDetailFragment extends Fragment {
             Navigation.findNavController(this.getActivity(), R.id.nav_host_fragment_content_main).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
         }
         else {
+            usersApplyed = annuncio.getUserApplied();
+
             switch(type){
                 case "announcement":
                     binding.buttonApplicati.setVisibility(View.VISIBLE);
                     binding.textNApplicazioni.setVisibility(View.VISIBLE);
-                    usersApplyed = annuncio.getUserApplied();
+                    if(usersApplyed != null ) {
+                        binding.textNApplicazioni.setText(usersApplyed.size() + " su " + annuncio.getParticipantsNumber());
+                    }
+                    break;
+                case "my_application":
+                    binding.textNApplicazioni.setVisibility(View.VISIBLE);
                     if( usersApplyed != null ) {
                         binding.textNApplicazioni.setText(usersApplyed.size() + " su " + annuncio.getParticipantsNumber());
                     }
@@ -63,9 +73,9 @@ public class AnnuncioDetailFragment extends Fragment {
                     binding.textApplicazioni.setVisibility(View.VISIBLE);
                     //box con lista utenti applicati annuncio.getUserApplyed();
                     usersApplyed = annuncio.getUserApplied();
-                    if( usersApplyed == null ) {
+                    if( usersApplyed == null || usersApplyed.isEmpty() ) {
+                        //mostro il bottone cancello annuncio solo se nessuno si è applicato
                         binding.buttonEliminaAnnuncio.setVisibility(View.VISIBLE);
-
                         binding.buttonEliminaAnnuncio.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -77,14 +87,20 @@ public class AnnuncioDetailFragment extends Fragment {
                         StringBuffer textApplyed = new StringBuffer();
                         for (UserModel user : usersApplyed) {
                             //popolo la textbox con il nome di chi si è applicato
-                            textApplyed.append(user.getName() + " " + user.getSurname() + "\n");
+                            textApplyed.append(user.getNickname() + "\n");
                         }
                         binding.textApplicazioni.setText(textApplyed);
-                        binding.buttonConfermaAttivita.setVisibility(View.VISIBLE);
+                        //mostro il bottone di conferma attività solo se tutti si sono applicati
+                        if(usersApplyed.size() == annuncio.getParticipantsNumber() && annuncio.getStatus().equals("open")) {
+                            binding.buttonConfermaAttivita.setVisibility(View.VISIBLE);
+                            binding.buttonConfermaAttivita.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    new ConnectionConfirm().execute();
+                                }
+                            });
+                        }
                     }
-
-
-
                     break;
             }
 
@@ -141,7 +157,7 @@ public class AnnuncioDetailFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            //progressSpinner.setVisibility(View.VISIBLE);
+            progressSpinner.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -157,10 +173,8 @@ public class AnnuncioDetailFragment extends Fragment {
                 applyError();
             } else {
                 applyOk();
-                //reindirizzo al fragment Miei Annunci
-                //Navigation.findNavController(getView()).navigate(R.id.action_navAnnuncioCrea_to_navAnnunci);
             }
-            //progressSpinner.setVisibility(View.GONE);
+            progressSpinner.setVisibility(View.GONE);
         }
     }
 
@@ -179,7 +193,7 @@ public class AnnuncioDetailFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            //progressSpinner.setVisibility(View.VISIBLE);
+            progressSpinner.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -196,7 +210,44 @@ public class AnnuncioDetailFragment extends Fragment {
             } else {
                 deleteOk();
             }
-            //progressSpinner.setVisibility(View.GONE);
+            progressSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    private void confirmError(){
+        Snackbar.make(root, "Errore durante la conferma dell'attività", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private void confirmOk(){
+        Snackbar.make(root, "Attività confermata con successo", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+        Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_annunci);
+    }
+
+
+    private class ConnectionConfirm extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            progressSpinner.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Object doInBackground(Object... arg0){
+
+            return AnnouncementController.confirm(annuncio.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Object result)
+        {
+            if(result == null || !((Boolean) result)){
+                confirmError();
+            } else {
+                confirmOk();
+            }
+            progressSpinner.setVisibility(View.GONE);
         }
     }
 }

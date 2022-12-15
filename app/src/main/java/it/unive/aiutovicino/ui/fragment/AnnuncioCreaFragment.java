@@ -25,6 +25,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
@@ -118,17 +120,18 @@ public class AnnuncioCreaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
-                int hour = cldr.get(Calendar.HOUR_OF_DAY);
-                int minutes = cldr.get(Calendar.MINUTE);
+                final int[] hour = {cldr.get(Calendar.HOUR_OF_DAY)};
+                final int[] minutes = {cldr.get(Calendar.MINUTE)};
                 //se a TimePickerDialog non passo il secondo parametro allora viene in stile orologio
                 pickerTime = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                         new TimePickerDialog.OnTimeSetListener () {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int sHour, int sMinute) {
-                                time.setText(hour+ ":" + minutes);
+                                hour[0] = sHour;
+                                minutes[0] = sMinute;
+                                time.setText(String.format(Locale.getDefault(),"%02d:%02d", hour[0], minutes[0]));
                             }
-
-                        }, hour,minutes,true);
+                        }, hour[0], minutes[0],true);
                 pickerTime.show();
             }
         });

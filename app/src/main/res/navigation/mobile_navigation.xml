@@ -87,6 +87,9 @@
             app:destination="@id/nav_applicazioni"
             app:popUpTo="@id/mobile_navigation"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_annuncioDetailFragment_to_nav_annunci"
+            app:destination="@id/nav_annunci" />
     </fragment>
 
     <fragment
