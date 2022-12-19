@@ -61,6 +61,9 @@ public class General {
         try {
             URL url = new URL(urlAddress);
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            if(General.user != null) {
+                //conn.addRequestProperty("Authorization", General.user.getToken());
+            }
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod(requestedMethod);

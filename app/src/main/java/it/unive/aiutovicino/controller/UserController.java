@@ -43,7 +43,9 @@ public class UserController {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put("userId", user.getId());
         queryParameters.put("email", user.getEmail());
-        queryParameters.put("password", user.getPassword());
+        if(user.getPassword() != null && !user.getPassword().equals("")) {
+            queryParameters.put("password", user.getPassword());
+        }
         queryParameters.put("surname", user.getSurname());
         queryParameters.put("name", user.getName());
         queryParameters.put("nickname", user.getNickname());
