@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_annuncioDetailFragment"
             app:destination="@id/annuncioDetailFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment
@@ -23,6 +26,9 @@
         <action
             android:id="@+id/action_nav_portafoglio_to_classificaFragment"
             app:destination="@id/classificaFragment" />
+        <action
+            android:id="@+id/action_nav_portafoglio_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment

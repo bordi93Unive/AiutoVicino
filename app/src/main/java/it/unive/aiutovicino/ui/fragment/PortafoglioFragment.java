@@ -1,5 +1,7 @@
 package it.unive.aiutovicino.ui.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import java.util.concurrent.ExecutionException;
@@ -32,27 +35,33 @@ public class PortafoglioFragment extends Fragment {
         root = binding.getRoot();
         setHasOptionsMenu(true);
 
-        try {
-           new Connection().execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(General.checkTokenExpiration()){
+            NavController n = findNavController(this);
+            n.navigate(R.id.action_nav_portafoglio_to_nav_logout);
         }
-
-        textPortafoglio = binding.textPortafoglio;
-        textScore = binding.textScore;
-
-        textPortafoglio.setText("Ciao " + General.user.getName() + " " + General.user.getSurname() + "!");
-        textScore.setText(String.valueOf(General.user.getScore()));
-        new Connection().execute();
-
-        binding.buttonVisualizzaClassifica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_nav_portafoglio_to_classificaFragment);
+        else {
+            try {
+                new Connection().execute().get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
+
+            textPortafoglio = binding.textPortafoglio;
+            textScore = binding.textScore;
+
+            textPortafoglio.setText("Ciao " + General.user.getName() + " " + General.user.getSurname() + "!");
+            textScore.setText(String.valueOf(General.user.getScore()));
+            new Connection().execute();
+
+            binding.buttonVisualizzaClassifica.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(R.id.action_nav_portafoglio_to_classificaFragment);
+                }
+            });
+        }
 
         return root;
     }

@@ -27,6 +27,9 @@ import it.unive.aiutovicino.ui.viewmodel.SearchViewModel;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import java.time.Instant;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;

@@ -3,6 +3,7 @@ package it.unive.aiutovicino.model;
 public class UserModel {
     private String id;
     private String token;
+    private long tokenExpiration;
     private String email;
     private String password;
     private String surname;
@@ -28,6 +29,12 @@ public class UserModel {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public long getTokenExpiration() {
+        return tokenExpiration;
+    }
+
+    public void setTokenExpiration(long tokenExpiration) { this.tokenExpiration = tokenExpiration; }
 
     public String getEmail() {
         return email;

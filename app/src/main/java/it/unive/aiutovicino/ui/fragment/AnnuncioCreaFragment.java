@@ -169,6 +169,16 @@ public class AnnuncioCreaFragment extends Fragment {
                     coin.requestFocus();
                     return;
                 }
+                CategoryModel category = General.categories.get(spinner.getSelectedItemPosition());
+                if(!category.getId().equals("1")){
+                    int coins = Integer.valueOf(coin.getText().toString().trim());
+                    int partecipants = Integer.valueOf(partecipantsNumber.getText().toString().trim());
+                    if((General.user.getScore() - (coins * partecipants)) < 0){
+                        Snackbar.make(root, "Coins non sufficienti per creare l'annuncio", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        return;
+                    }
+                }
 
                 new Connection().execute();
             }

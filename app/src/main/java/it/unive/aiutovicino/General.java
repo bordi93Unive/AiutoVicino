@@ -92,6 +92,9 @@ public class General {
                 while ((line=br.readLine()) != null) {
                     response +=line;
                 }
+                if(General.user != null){
+                    General.user.setTokenExpiration(System.currentTimeMillis() + 86400000);
+                }
             }
 
         } catch (
@@ -130,6 +133,14 @@ public class General {
             }
         }
         return user;
+    }
+
+    public static boolean checkTokenExpiration(){
+        boolean expired = true;
+        if(General.user != null && General.user.getTokenExpiration() > System.currentTimeMillis()){
+            expired = false;
+        }
+        return expired;
     }
 
     public static void resetSharedPreferences(Activity activity, int mode){

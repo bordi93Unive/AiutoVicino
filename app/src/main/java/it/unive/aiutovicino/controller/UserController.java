@@ -124,6 +124,16 @@ public class UserController {
                     else{
                         user.setApproved(false);
                     }
+
+                    if(jObject.has("expiration")) {
+                        JSONObject expiration = jObject.getJSONObject("expiration");
+                        if(expiration.has("_seconds") && expiration.has("_nanoseconds")){
+                            String t = expiration.getInt("_seconds") + "" + expiration.getInt("_nanoseconds");
+                            long timestamp = Long.valueOf(t);
+                            timestamp /= 1000000;
+                            user.setTokenExpiration(timestamp);
+                        }
+                    }
                 }
             } catch(JSONException e) {
                 Log.e("Error", "Login Json Decode");
