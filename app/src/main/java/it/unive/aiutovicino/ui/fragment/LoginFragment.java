@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -44,6 +48,7 @@ public class LoginFragment extends Fragment {
         binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 /** verifiche su campi email e password per la loro corretta compilazione */
                 if(username.getText().toString().trim().isEmpty()) {
                     username.setError("Compilare il campo username!");
@@ -80,8 +85,7 @@ public class LoginFragment extends Fragment {
 
     private void loginError(){
         /** messaggio di errore generico per indicare fallimento login */
-        Snackbar.make(root, "Utente e/o password errati", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        Snackbar.make(root, "Utente e/o password errati", Snackbar.LENGTH_LONG).show();
     }
 
     @Override

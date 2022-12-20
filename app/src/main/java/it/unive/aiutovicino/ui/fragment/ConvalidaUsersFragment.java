@@ -1,10 +1,13 @@
 package it.unive.aiutovicino.ui.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import it.unive.aiutovicino.General;
+import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.adapter.UserAdapter;
 import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentConvalidaBinding;
@@ -41,20 +45,25 @@ public class ConvalidaUsersFragment extends Fragment {
         binding = FragmentConvalidaUsersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         General.setSearchViewInvisible();
-        progressSpinner = binding.progressBarConvalidaUsers;
 
-        listUsers =  binding.listConvalidaUsers;
-        userAdapter = new UserAdapter(root.getContext());
+        if(General.checkTokenExpiration()){
+            NavController n = findNavController(this);
+            n.navigate(R.id.action_nav_convalida_users_to_nav_logout);
+        }
+        else {
+            progressSpinner = binding.progressBarConvalidaUsers;
+            listUsers = binding.listConvalidaUsers;
+            userAdapter = new UserAdapter(root.getContext());
 
-        new Connection().execute();
+            new Connection().execute();
 
-        listUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            listUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
-        });
-
+                }
+            });
+        }
         return root;
     }
 

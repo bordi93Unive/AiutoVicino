@@ -1,5 +1,7 @@
 package it.unive.aiutovicino.ui.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import java.util.List;
 
@@ -36,12 +39,18 @@ public class ClassificaFragment extends Fragment {
         View root = binding.getRoot();
         setHasOptionsMenu(true);
 
-        progressSpinner = binding.progressBarClassifica;
-        listRankings = binding.listClassifica;
-        rankingAdapter = new RankingAdapter(root.getContext());
+        if(General.checkTokenExpiration()){
+            NavController n = findNavController(this);
+            n.navigate(R.id.action_nav_classifica_to_nav_logout);
+        }
+        else {
 
-        new Connection().execute();
+            progressSpinner = binding.progressBarClassifica;
+            listRankings = binding.listClassifica;
+            rankingAdapter = new RankingAdapter(root.getContext());
 
+            new Connection().execute();
+        }
         return root;
     }
 

@@ -14,6 +14,10 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentRegistrazioneBinding;
@@ -64,20 +68,25 @@ public class RegistrazioneFragment extends Fragment {
                     nickname.requestFocus();
                     return;
                 }
-                if(password.getText().toString().trim().isEmpty()) {
+                if(password.getText().toString().isEmpty()) {
                     password.setError("Compilare il campo password!");
                     password.requestFocus();
                     return;
                 }
-
+               if(!General.isValid(password.getText().toString())){
+                    password.setError("La password non rispetta i requisiti minimi di sicurezza!");
+                    password.requestFocus();
+                    return;
+                }
                 new Connection().execute();
-
             }
 
         });
 
         return root;
     }
+
+
 
     @Override
     public void onDestroyView() {

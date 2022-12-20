@@ -1,5 +1,7 @@
 package it.unive.aiutovicino.ui.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,6 +17,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import it.unive.aiutovicino.General;
@@ -42,68 +45,80 @@ private FragmentImpostazioniBinding binding;
         setHasOptionsMenu(true);
         sharedpreferences = this.getActivity().getSharedPreferences(General.SHARED_PREFS, binding.getRoot().getContext().MODE_PRIVATE);
 
-
-        Gson gson = new Gson();
-        String json = sharedpreferences.getString("user", "");
-
-        if(json != null && !json.equals("")) {
-            General.user = gson.fromJson(json, UserModel.class);
+        if(General.checkTokenExpiration()){
+            NavController n = findNavController(this);
+            n.navigate(R.id.action_nav_home_to_nav_logout);
         }
+        else {
 
-        progressSpinner = binding.progressBarImpostazioni;
+            Gson gson = new Gson();
+            String json = sharedpreferences.getString("user", "");
 
-        nome = binding.modNome;
-        cognome = binding.modCognome;
-        email = binding.modEmail;
-        nickname = binding.modNickname;
-        password = binding.modPassword;
-        descrizione = binding.modDescrizione;
-
-
-        nome.setText(String.valueOf(General.user.getName()));
-        cognome.setText(String.valueOf(General.user.getSurname()));
-        email.setText(String.valueOf(General.user.getEmail()));
-        nickname.setText(String.valueOf(General.user.getNickname()));
-        descrizione.setText(General.user.getDescription());
-
-        binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(nome.getText().toString().trim().isEmpty()) {
-                    nome.setError("Compilare il campo nome!");
-                    nome.requestFocus();
-                    return;
-                }
-                if(cognome.getText().toString().trim().isEmpty()) {
-                    cognome.setError("Compilare il campo cognome!");
-                    cognome.requestFocus();
-                    return;
-                }
-                if(email.getText().toString().trim().isEmpty()) {
-                    email.setError("Compilare il campo email!");
-                    email.requestFocus();
-                    return;
-                }
-                if(nickname.getText().toString().trim().isEmpty()) {
-                    nickname.setError("Compilare il campo nickname!");
-                    nickname.requestFocus();
-                    return;
-                }
-
-
-                new Connection().execute();
-
+            if (json != null && !json.equals("")) {
+                General.user = gson.fromJson(json, UserModel.class);
             }
-        });
 
-        binding.buttonAnnulla.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_nav_impostazioni_to_nav_home);
-            }
-        });
+            progressSpinner = binding.progressBarImpostazioni;
 
+            nome = binding.modNome;
+            cognome = binding.modCognome;
+            email = binding.modEmail;
+            nickname = binding.modNickname;
+            password = binding.modPassword;
+            descrizione = binding.modDescrizione;
+
+
+            nome.setText(String.valueOf(General.user.getName()));
+            cognome.setText(String.valueOf(General.user.getSurname()));
+            email.setText(String.valueOf(General.user.getEmail()));
+            nickname.setText(String.valueOf(General.user.getNickname()));
+            descrizione.setText(General.user.getDescription());
+
+            binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (nome.getText().toString().trim().isEmpty()) {
+                        nome.setError("Compilare il campo nome!");
+                        nome.requestFocus();
+                        return;
+                    }
+                    if (cognome.getText().toString().trim().isEmpty()) {
+                        cognome.setError("Compilare il campo cognome!");
+                        cognome.requestFocus();
+                        return;
+                    }
+                    if (email.getText().toString().trim().isEmpty()) {
+                        email.setError("Compilare il campo email!");
+                        email.requestFocus();
+                        return;
+                    }
+                    if (nickname.getText().toString().trim().isEmpty()) {
+                        nickname.setError("Compilare il campo nickname!");
+                        nickname.requestFocus();
+                        return;
+                    }
+                    if(!password.getText().toString().isEmpty()){
+                        if(!General.isValid(password.getText().toString())) {
+                            password.setError("La password non rispetta i requisiti minimi di sicurezza!");
+                            password.requestFocus();
+                            return;
+                        }
+                    }
+
+
+                    new Connection().execute();
+
+                }
+            });
+
+            binding.buttonAnnulla.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(R.id.action_nav_impostazioni_to_nav_home);
+                }
+            });
+        }
         return root;
     }
 

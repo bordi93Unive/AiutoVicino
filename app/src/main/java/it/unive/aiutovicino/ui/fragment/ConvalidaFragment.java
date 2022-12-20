@@ -1,5 +1,7 @@
 package it.unive.aiutovicino.ui.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
 import androidx.viewpager.widget.ViewPager;
 
 import it.unive.aiutovicino.General;
@@ -31,11 +34,17 @@ public class ConvalidaFragment extends Fragment {
         View root = binding.getRoot();
         setHasOptionsMenu(true);
 
-        ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), getChildFragmentManager());
-        ViewPager viewPager = binding.viewPager;
-        viewPager.setAdapter(sectionsPagerAdapter);
-        General.setVisibleTabs(this.getActivity(), viewPager);
+        if(General.checkTokenExpiration()){
+            NavController n = findNavController(this);
+            n.navigate(R.id.action_nav_convalida_to_nav_logout);
+        }
+        else {
 
+            ConvalidaPagerAdapter sectionsPagerAdapter = new ConvalidaPagerAdapter(this.getContext(), getChildFragmentManager());
+            ViewPager viewPager = binding.viewPager;
+            viewPager.setAdapter(sectionsPagerAdapter);
+            General.setVisibleTabs(this.getActivity(), viewPager);
+        }
         return root;
     }
 

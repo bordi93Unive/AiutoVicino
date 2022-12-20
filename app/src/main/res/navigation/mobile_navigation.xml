@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_nav_annunci_to_nav_annuncio_crea"
             app:destination="@id/nav_annuncio_crea" />
+        <action
+            android:id="@+id/action_nav_annunci_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment
@@ -52,6 +55,9 @@
         <action
             android:id="@+id/action_nav_applicazioni_to_annuncioDetailFragment"
             app:destination="@id/annuncioDetailFragment" />
+        <action
+            android:id="@+id/action_nav_applicazioni_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment
@@ -62,6 +68,9 @@
         <action
             android:id="@+id/action_nav_convalida_to_convalidaCorsoDetailFragment"
             app:destination="@id/convalidaCorsoDetailFragment" />
+        <action
+            android:id="@+id/action_nav_convalida_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment
@@ -72,6 +81,9 @@
         <action
             android:id="@+id/action_nav_impostazioni_to_nav_home"
             app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_impostazioni_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment
@@ -96,6 +108,9 @@
         <action
             android:id="@+id/action_annuncioDetailFragment_to_nav_annunci"
             app:destination="@id/nav_annunci" />
+        <action
+            android:id="@+id/action_nav_annuncio_detail_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
 
     <fragment
@@ -106,17 +121,28 @@
         <action
             android:id="@+id/action_navAnnuncioCrea_to_navAnnunci"
             app:destination="@id/nav_annunci" />
+        <action
+            android:id="@+id/action_nav_annunci_crea_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
     <fragment
         android:id="@+id/classificaFragment"
         android:name="it.unive.aiutovicino.ui.fragment.ClassificaFragment"
         android:label="Classifica"
-        tools:layout="@layout/fragment_classifica" />
+        tools:layout="@layout/fragment_classifica" >
+        <action
+            android:id="@+id/action_nav_classifica_to_nav_logout"
+            app:destination="@id/nav_logout" />
+    </fragment>
     <fragment
         android:id="@+id/convalidaUsersFragment"
         android:name="it.unive.aiutovicino.ui.fragment.ConvalidaUsersFragment"
         android:label="Convalida Utente"
-        tools:layout="@layout/fragment_convalida_users" />
+        tools:layout="@layout/fragment_convalida_users" >
+        <action
+            android:id="@+id/action_nav_convalida_users_to_nav_logout"
+            app:destination="@id/nav_logout" />
+    </fragment>
     <fragment
         android:id="@+id/convalidaCorsoDetailFragment"
         android:name="it.unive.aiutovicino.ui.fragment.ConvalidaCorsoDetailFragment"
@@ -125,12 +151,19 @@
         <action
             android:id="@+id/action_convalidaCorsoDetailFragment_to_nav_convalida"
             app:destination="@id/nav_convalida" />
+        <action
+            android:id="@+id/action_nav_convalida_corso_detail_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
     <fragment
         android:id="@+id/convalidaCorsiFragment"
         android:name="it.unive.aiutovicino.ui.fragment.ConvalidaCorsiFragment"
         android:label="Convalida Corsi"
-        tools:layout="@layout/fragment_convalida_corsi"/>
+        tools:layout="@layout/fragment_convalida_corsi">
+        <action
+            android:id="@+id/action_nav_convalida_corsi_to_nav_logout"
+            app:destination="@id/nav_logout" />
+    </fragment>
 
 
 

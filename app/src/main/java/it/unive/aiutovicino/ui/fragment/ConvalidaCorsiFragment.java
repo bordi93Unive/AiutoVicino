@@ -1,5 +1,7 @@
 package it.unive.aiutovicino.ui.fragment;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.gson.Gson;
@@ -40,26 +43,32 @@ public class ConvalidaCorsiFragment extends Fragment {
 
         binding = FragmentConvalidaCorsiBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        General.setSearchViewInvisible();
-        progressSpinner = binding.progressBarConvalidaCorsi;
 
-        listCorsi =  binding.listConvalidaCorsi;
-        announcementAdapter = new AnnunciAdapter(root.getContext());
+        if(General.checkTokenExpiration()){
+            NavController n = findNavController(this);
+            n.navigate(R.id.action_nav_convalida_corsi_to_nav_logout);
+        }
+        else {
+            General.setSearchViewInvisible();
+            progressSpinner = binding.progressBarConvalidaCorsi;
 
-        new Connection().execute();
+            listCorsi = binding.listConvalidaCorsi;
+            announcementAdapter = new AnnunciAdapter(root.getContext());
 
-        listCorsi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Gson gson = new Gson();
-                String json = gson.toJson(announcements.get(i));
+            new Connection().execute();
 
-                Bundle b = new Bundle();
-                b.putString("announcement", json);
-                Navigation.findNavController(view).navigate(R.id.action_nav_convalida_to_convalidaCorsoDetailFragment, b);
-            }
-        });
+            listCorsi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(announcements.get(i));
 
+                    Bundle b = new Bundle();
+                    b.putString("announcement", json);
+                    Navigation.findNavController(view).navigate(R.id.action_nav_convalida_to_convalidaCorsoDetailFragment, b);
+                }
+            });
+        }
         return root;
     }
 
