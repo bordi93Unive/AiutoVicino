@@ -139,8 +139,13 @@ public class General {
 
     public static boolean checkTokenExpiration(){
         boolean expired = true;
-        if(General.user != null && General.user.getTokenExpiration() > System.currentTimeMillis()){
+        if(General.user == null){
             expired = false;
+        }
+        else {
+            if (General.user != null && General.user.getTokenExpiration() > System.currentTimeMillis()) {
+                expired = false;
+            }
         }
         return expired;
     }
