@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class LoginFragment extends Fragment {
     View root;
     EditText username;
     EditText password;
+    Button buttonLogin,buttonRegistrati;
     ProgressBar progressSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
@@ -41,11 +43,13 @@ public class LoginFragment extends Fragment {
 
         username = binding.username;
         password = binding.password;
+        buttonLogin = binding.buttonLogin;
+        buttonRegistrati = binding.buttonRegistrazione;
         progressSpinner = binding.progressBarLogin;
 
         activity = this.getActivity();
 
-        binding.buttonLogin.setOnClickListener(new View.OnClickListener() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -66,7 +70,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        binding.buttonRegistrazione.setOnClickListener(new View.OnClickListener() {
+        buttonRegistrati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /** navigazione verso il fragment della registrazione*/
@@ -99,6 +103,8 @@ public class LoginFragment extends Fragment {
         protected void onPreExecute() {
             /** cambio visibilità progress bar in VISIBLE*/
             progressSpinner.setVisibility(View.VISIBLE);
+            buttonLogin.setEnabled(false);
+            buttonRegistrati.setEnabled(false);
         }
 
         @Override
@@ -121,6 +127,8 @@ public class LoginFragment extends Fragment {
             }
             /** cambio visibilità progress bar in GONE*/
             progressSpinner.setVisibility(View.GONE);
+            buttonLogin.setEnabled(true);
+            buttonRegistrati.setEnabled(true);
         }
     }
 }

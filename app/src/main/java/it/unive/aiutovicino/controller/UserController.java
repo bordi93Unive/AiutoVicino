@@ -134,6 +134,9 @@ public class UserController {
                             user.setTokenExpiration(timestamp);
                         }
                     }
+                    if(jObject.has("score")) {
+                        user.setScore(jObject.getInt("score"));
+                    }
                 }
             } catch(JSONException e) {
                 Log.e("Error", "Login Json Decode");

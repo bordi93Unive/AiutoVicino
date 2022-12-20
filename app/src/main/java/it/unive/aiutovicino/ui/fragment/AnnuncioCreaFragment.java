@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -50,6 +51,7 @@ public class AnnuncioCreaFragment extends Fragment {
     EditText date;
     EditText time;
     EditText title;
+    Button buttonCrea;
     ProgressBar progressSpinner;
     Spinner spinner;
     ArrayAdapter<String> adapterItems;
@@ -75,6 +77,7 @@ public class AnnuncioCreaFragment extends Fragment {
             date = binding.inputDate;
             time = binding.inputTime;
             coin = binding.inputCoin;
+            buttonCrea = binding.buttonCrea;
 
             /** dropdown menù per le categorie*/
             //new Categoria().execute();
@@ -145,7 +148,7 @@ public class AnnuncioCreaFragment extends Fragment {
                 }
             });
 
-            binding.buttonCrea.setOnClickListener(new View.OnClickListener() {
+            buttonCrea.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (date.getText().toString().isEmpty()) {
@@ -218,6 +221,7 @@ public class AnnuncioCreaFragment extends Fragment {
         protected void onPreExecute() {
 
             progressSpinner.setVisibility(View.VISIBLE);
+            buttonCrea.setEnabled(false);
         }
 
         @Override
@@ -259,6 +263,7 @@ public class AnnuncioCreaFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(R.id.action_navAnnuncioCrea_to_navAnnunci);
             }
             progressSpinner.setVisibility(View.GONE);
+            buttonCrea.setEnabled(true);
         }
     }
 }

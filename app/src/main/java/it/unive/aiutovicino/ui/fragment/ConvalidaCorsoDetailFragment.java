@@ -120,6 +120,8 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             //progressSpinner.setVisibility(View.VISIBLE);
+            binding.buttonApprovaCorso.setEnabled(false);
+            binding.buttonEliminaCorso.setEnabled(false);
         }
 
         @Override
@@ -137,6 +139,8 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 applyOk();
             }
             //progressSpinner.setVisibility(View.GONE);
+            binding.buttonApprovaCorso.setEnabled(true);
+            binding.buttonEliminaCorso.setEnabled(true);
         }
     }
 
@@ -156,6 +160,8 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             //progressSpinner.setVisibility(View.VISIBLE);
+            binding.buttonApprovaCorso.setEnabled(false);
+            binding.buttonEliminaCorso.setEnabled(false);
         }
 
         @Override
@@ -173,6 +179,8 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 deleteOk();
             }
             //progressSpinner.setVisibility(View.GONE);
+            binding.buttonApprovaCorso.setEnabled(true);
+            binding.buttonEliminaCorso.setEnabled(true);
         }
     }
 }

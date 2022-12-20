@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
@@ -35,6 +36,7 @@ private FragmentImpostazioniBinding binding;
 
     EditText nome,cognome,email,nickname,descrizione,password;
     ProgressBar progressSpinner;
+    Button buttonModDati,buttonAnnulla;
     View root;
     SharedPreferences sharedpreferences;
 
@@ -66,6 +68,8 @@ private FragmentImpostazioniBinding binding;
             nickname = binding.modNickname;
             password = binding.modPassword;
             descrizione = binding.modDescrizione;
+            buttonModDati = binding.buttonModDati;
+            buttonAnnulla = binding.buttonAnnulla;
 
 
             nome.setText(String.valueOf(General.user.getName()));
@@ -74,7 +78,7 @@ private FragmentImpostazioniBinding binding;
             nickname.setText(String.valueOf(General.user.getNickname()));
             descrizione.setText(General.user.getDescription());
 
-            binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
+            buttonModDati.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -112,7 +116,7 @@ private FragmentImpostazioniBinding binding;
                 }
             });
 
-            binding.buttonAnnulla.setOnClickListener(new View.OnClickListener() {
+            buttonAnnulla.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Navigation.findNavController(view).navigate(R.id.action_nav_impostazioni_to_nav_home);
@@ -150,8 +154,10 @@ private FragmentImpostazioniBinding binding;
 
         @Override
         protected void onPreExecute() {
-
+            //mostra lo spinner di loading e blocco i bottoni
             progressSpinner.setVisibility(View.VISIBLE);
+            buttonModDati.setEnabled(false);
+            buttonAnnulla.setEnabled(false);
         }
 
         @Override
@@ -179,6 +185,8 @@ private FragmentImpostazioniBinding binding;
             }
 
             progressSpinner.setVisibility(View.GONE);
+            buttonModDati.setEnabled(true);
+            buttonAnnulla.setEnabled(true);
 
         }
     }

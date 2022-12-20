@@ -70,6 +70,7 @@ public class ClassificaFragment extends Fragment {
     private class Connection extends AsyncTask {
         @Override
         protected void onPreExecute() {
+
             progressSpinner.setVisibility(View.VISIBLE);
         }
 
