@@ -34,6 +34,7 @@ import java.util.Locale;
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
+import it.unive.aiutovicino.controller.RankingController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioCreaBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
 import it.unive.aiutovicino.model.CategoryModel;
@@ -249,7 +250,11 @@ public class AnnuncioCreaFragment extends Fragment {
             annuncio.setParticipantsNumber(Integer.parseInt(partecipantsNumber.getText().toString()));
             annuncio.setCoins(Integer.parseInt(coin.getText().toString()));
 
-            return AnnouncementController.insert(annuncio);
+            boolean result = AnnouncementController.insert(annuncio);
+            if(result){
+                RankingController.getUserScore();
+            }
+            return result;
         }
 
         @Override
