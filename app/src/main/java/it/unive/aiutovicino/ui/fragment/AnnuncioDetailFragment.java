@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
+import it.unive.aiutovicino.controller.RankingController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
 import it.unive.aiutovicino.model.UserModel;
@@ -171,8 +172,11 @@ public class AnnuncioDetailFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object... arg0){
-
-            return AnnouncementController.apply(annuncio.getId());
+            boolean result = AnnouncementController.apply(annuncio.getId());
+            if(result){
+                RankingController.getUserScore();
+            }
+            return result;
         }
 
         @Override
@@ -207,8 +211,11 @@ public class AnnuncioDetailFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object... arg0){
-
-            return AnnouncementController.delete(annuncio.getId());
+            boolean result = AnnouncementController.delete(annuncio.getId());
+            if(result){
+                RankingController.getUserScore();
+            }
+            return result;
         }
 
         @Override
@@ -244,8 +251,11 @@ public class AnnuncioDetailFragment extends Fragment {
 
         @Override
         protected Object doInBackground(Object... arg0){
-
-            return AnnouncementController.confirm(annuncio.getId());
+            boolean result = AnnouncementController.confirm(annuncio.getId());
+            if(result){
+                RankingController.getUserScore();
+            }
+            return result;
         }
 
         @Override
