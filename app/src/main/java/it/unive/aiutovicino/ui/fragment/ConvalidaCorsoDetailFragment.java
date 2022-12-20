@@ -8,6 +8,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
     AnnouncementModel annuncio = null;
     List<UserModel> usersApplyed;
     StringBuffer textApplyed;
+    private ProgressBar progressSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentConvalidaCorsoDetailBinding.inflate(inflater, container, false);
@@ -76,6 +78,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 binding.textCoin.setText((String.valueOf(annuncio.getCoins())));
                 binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
                 binding.textDescrizione.setText(annuncio.getDescription());
+                progressSpinner = binding.progressBarConvalidaCorsoDetail;
             }
 
             binding.buttonApprovaCorso.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +122,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            //progressSpinner.setVisibility(View.VISIBLE);
+            progressSpinner.setVisibility(View.VISIBLE);
             binding.buttonApprovaCorso.setEnabled(false);
             binding.buttonEliminaCorso.setEnabled(false);
         }
@@ -138,7 +141,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             } else {
                 applyOk();
             }
-            //progressSpinner.setVisibility(View.GONE);
+            progressSpinner.setVisibility(View.GONE);
             binding.buttonApprovaCorso.setEnabled(true);
             binding.buttonEliminaCorso.setEnabled(true);
         }
