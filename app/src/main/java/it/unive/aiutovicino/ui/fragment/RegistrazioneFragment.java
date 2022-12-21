@@ -2,6 +2,8 @@ package it.unive.aiutovicino.ui.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +44,16 @@ public class RegistrazioneFragment extends Fragment {
         email = binding.regEmail;
         nickname = binding.nickname;
         password = binding.regPassword;
+
+        binding.buttonEyeRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                else
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        });
 
 
         binding.buttonRegistrati.setOnClickListener(new View.OnClickListener() {

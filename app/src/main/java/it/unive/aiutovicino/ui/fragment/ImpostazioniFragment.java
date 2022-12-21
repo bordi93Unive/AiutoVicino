@@ -6,6 +6,8 @@ import android.app.ActionBar;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,7 +80,21 @@ private FragmentImpostazioniBinding binding;
             nickname.setText(String.valueOf(General.user.getNickname()));
             descrizione.setText(General.user.getDescription());
 
+<<<<<<< Updated upstream
             buttonModDati.setOnClickListener(new View.OnClickListener() {
+=======
+            binding.buttonEyeImpostazioni.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+                        password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    else
+                        password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            });
+
+            binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
+>>>>>>> Stashed changes
                 @Override
                 public void onClick(View view) {
 

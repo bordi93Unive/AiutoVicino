@@ -329,6 +329,19 @@
                 app:layout_constraintVertical_bias="1.0"
                 tools:visibility="invisible" />
 
+            <ImageButton
+                android:id="@+id/button_eye_impostazioni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="#FFFFFF"
+                android:src="@drawable/ic_password_eye"
+                app:layout_constraintBottom_toBottomOf="@+id/mod_password"
+                app:layout_constraintEnd_toEndOf="@+id/mod_password"
+                app:layout_constraintTop_toTopOf="@+id/mod_password" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

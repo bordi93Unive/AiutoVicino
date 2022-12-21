@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +80,16 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        binding.buttonEye.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                 else
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
+        });
+
         return root;
     }
 
@@ -127,8 +139,12 @@ public class LoginFragment extends Fragment {
             }
             /** cambio visibilità progress bar in GONE*/
             progressSpinner.setVisibility(View.GONE);
+<<<<<<< Updated upstream
             buttonLogin.setEnabled(true);
             buttonRegistrati.setEnabled(true);
+=======
+
+>>>>>>> Stashed changes
         }
     }
 }
