@@ -80,9 +80,6 @@ private FragmentImpostazioniBinding binding;
             nickname.setText(String.valueOf(General.user.getNickname()));
             descrizione.setText(General.user.getDescription());
 
-<<<<<<< Updated upstream
-            buttonModDati.setOnClickListener(new View.OnClickListener() {
-=======
             binding.buttonEyeImpostazioni.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -94,7 +91,6 @@ private FragmentImpostazioniBinding binding;
             });
 
             binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
->>>>>>> Stashed changes
                 @Override
                 public void onClick(View view) {
 
@@ -125,10 +121,7 @@ private FragmentImpostazioniBinding binding;
                             return;
                         }
                     }
-
-
                     new Connection().execute();
-
                 }
             });
 
