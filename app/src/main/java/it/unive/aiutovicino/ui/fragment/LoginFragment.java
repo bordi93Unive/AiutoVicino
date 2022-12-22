@@ -139,12 +139,10 @@ public class LoginFragment extends Fragment {
             }
             /** cambio visibilità progress bar in GONE*/
             progressSpinner.setVisibility(View.GONE);
-<<<<<<< Updated upstream
             buttonLogin.setEnabled(true);
             buttonRegistrati.setEnabled(true);
-=======
 
->>>>>>> Stashed changes
+
         }
     }
 }
