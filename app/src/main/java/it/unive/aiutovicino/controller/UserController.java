@@ -130,7 +130,7 @@ public class UserController {
                         if(expiration.has("_seconds") && expiration.has("_nanoseconds")){
                             String t = expiration.getInt("_seconds") + "" + expiration.getInt("_nanoseconds");
                             long timestamp = Long.valueOf(t);
-                            timestamp /= 1000000;
+                            timestamp /= 100000;
                             user.setTokenExpiration(timestamp);
                         }
                     }
