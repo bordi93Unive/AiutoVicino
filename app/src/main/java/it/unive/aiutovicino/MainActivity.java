@@ -69,12 +69,13 @@ public class MainActivity extends AppCompatActivity {
         TextView textNameSurname = header.findViewById(R.id.id_badge_user_name_surname);
         TextView textEmail = header.findViewById(R.id.id_badge_user_email);
         ImageView image = header.findViewById(R.id.id_badge_image);
-
-        textNameSurname.setText(user.getName() + " " + user.getSurname());
-        textEmail.setText(user.getEmail());
-        String mipmapName = "ic_" + user.getName().toLowerCase().substring(0, 1);
-        int resID = getResources().getIdentifier(mipmapName, "mipmap", getPackageName());
-        image.setImageResource(resID);
+        if(user != null) {
+            textNameSurname.setText(user.getName() + " " + user.getSurname());
+            textEmail.setText(user.getEmail());
+            String mipmapName = "ic_" + user.getName().toLowerCase().substring(0, 1);
+            int resID = getResources().getIdentifier(mipmapName, "mipmap", getPackageName());
+            image.setImageResource(resID);
+        }
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 
