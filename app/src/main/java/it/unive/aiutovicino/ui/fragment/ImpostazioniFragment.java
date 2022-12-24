@@ -3,6 +3,8 @@ package it.unive.aiutovicino.ui.fragment;
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -83,12 +85,24 @@ private FragmentImpostazioniBinding binding;
             binding.buttonEyeImpostazioni.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+                    if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                        binding.buttonEyeImpostazioni.setImageResource(R.drawable.ic_password_eye_off);
                         password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    else
+                    }
+                    else {
+                        binding.buttonEyeImpostazioni.setImageResource(R.drawable.ic_password_eye);
                         password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
                 }
             });
+
+            binding.buttonInfoPswImpostazioni.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    General.showAlertDialog(view);
+                }
+            });
+
 
             binding.buttonModDati.setOnClickListener(new View.OnClickListener() {
                 @Override

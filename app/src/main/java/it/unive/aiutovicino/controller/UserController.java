@@ -92,8 +92,10 @@ public class UserController {
 
         if (!response.equals("")) {
             try {
-                JSONArray JArr = new JSONArray(response);
-                JSONObject jObject = JArr.getJSONObject(0);
+                //commentato 24/12/22 perchè daniele ritora un oggetto e non un array
+                //JSONArray JArr = new JSONArray(response);
+                JSONObject jObject = new JSONObject(response);
+
 
                 if(jObject.has("id") && jObject.has("token") && jObject.has("email") && jObject.has("surname") && jObject.has("name")) {
                     user = new UserModel();

@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,8 @@ public class LoginFragment extends Fragment {
     View root;
     EditText username;
     EditText password;
-    Button buttonLogin,buttonRegistrati;
+    Button buttonLogin;
+    TextView textRegistrati;
     ProgressBar progressSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class LoginFragment extends Fragment {
         username = binding.username;
         password = binding.password;
         buttonLogin = binding.buttonLogin;
-        buttonRegistrati = binding.buttonRegistrazione;
+        textRegistrati = binding.idTextRegistrationLink;
         progressSpinner = binding.progressBarLogin;
 
         activity = this.getActivity();
@@ -72,7 +74,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        buttonRegistrati.setOnClickListener(new View.OnClickListener() {
+        textRegistrati.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /** navigazione verso il fragment della registrazione*/
@@ -83,10 +85,14 @@ public class LoginFragment extends Fragment {
         binding.buttonEye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+                if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                    binding.buttonEye.setImageResource(R.drawable.ic_password_eye_off);
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                 else
+                }
+                 else {
+                    binding.buttonEye.setImageResource(R.drawable.ic_password_eye);
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
             }
         });
 
@@ -116,7 +122,7 @@ public class LoginFragment extends Fragment {
             /** cambio visibilità progress bar in VISIBLE*/
             progressSpinner.setVisibility(View.VISIBLE);
             buttonLogin.setEnabled(false);
-            buttonRegistrati.setEnabled(false);
+            textRegistrati.setEnabled(false);
         }
 
         @Override
@@ -140,7 +146,7 @@ public class LoginFragment extends Fragment {
             /** cambio visibilità progress bar in GONE*/
             progressSpinner.setVisibility(View.GONE);
             buttonLogin.setEnabled(true);
-            buttonRegistrati.setEnabled(true);
+            textRegistrati.setEnabled(true);
 
 
         }

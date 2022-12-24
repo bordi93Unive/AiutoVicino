@@ -48,10 +48,21 @@ public class RegistrazioneFragment extends Fragment {
         binding.buttonEyeRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+                if(password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                    binding.buttonEyeRegister.setImageResource(R.drawable.ic_password_eye_off);
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                else
+                }
+                else {
+                    binding.buttonEyeRegister.setImageResource(R.drawable.ic_password_eye);
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
+        binding.buttonInfoPswRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                General.showAlertDialog(view);
             }
         });
 

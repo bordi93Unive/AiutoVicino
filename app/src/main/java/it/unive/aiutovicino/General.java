@@ -1,6 +1,8 @@
 package it.unive.aiutovicino;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
@@ -169,5 +171,26 @@ public class General {
         final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
+    }
+
+    public static AlertDialog.Builder showAlertDialog(View view){
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
+        alertDialog.setCancelable(false);
+        alertDialog.setTitle("Password Policy:");
+        alertDialog.setMessage(" La passowrd deve contenere: \n" +
+                "- Almeno 1 cifra [0-9] \n" +
+                "- Almeno un carattere minuscolo [a-z] \n" +
+                "- Almeno un carattere maiuscolo [A-Z] \n" +
+                "- Almeno un carattere speciale [! @ # & ( )] \n" +
+                "- Lunghezza compresa tra 8 e 20 caratteri");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).show();
+
+        return alertDialog;
     }
 }

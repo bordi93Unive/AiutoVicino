@@ -127,7 +127,8 @@ public class AnnunciAdapter extends BaseAdapter implements Filterable {
                     constraint = constraint.toString().toLowerCase();
                     for (int i = 0; i < announcementsOriginal.size(); i++) {
                         String data = announcementsOriginal.get(i).getTitle();
-                        if (data.toLowerCase().startsWith(constraint.toString())) {
+                        //24/12/22 modificato startsWith con contains. Test OK!
+                        if (data.toLowerCase().contains(constraint.toString())) {
                             FilteredArrList.add(announcementsOriginal.get(i));
                         }
                     }

@@ -342,6 +342,18 @@
                 app:layout_constraintEnd_toEndOf="@+id/mod_password"
                 app:layout_constraintTop_toTopOf="@+id/mod_password" />
 
+            <ImageButton
+                android:id="@+id/button_info_psw_impostazioni"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#FFFFFF"
+                android:src="@drawable/ic_info"
+                android:tooltipText="Password policy"
+                app:layout_constraintBottom_toBottomOf="@+id/mod_text_password"
+                app:layout_constraintEnd_toStartOf="@+id/mod_password"
+                app:layout_constraintTop_toTopOf="@+id/mod_text_password" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

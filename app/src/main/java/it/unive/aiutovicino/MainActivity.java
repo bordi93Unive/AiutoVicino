@@ -27,9 +27,6 @@ import it.unive.aiutovicino.ui.viewmodel.SearchViewModel;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import java.time.Instant;
-import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -64,14 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 .setOpenableLayout(drawer)
                 .build();
 
-        /** Imposta il nome utente, foto e la relativa email nel menù di navigazione*/
+        /** Imposta il nome utente, immagine e la relativa email nel menù di navigazione*/
         View header = navigationView.getHeaderView(0);
         TextView textNameSurname = header.findViewById(R.id.id_badge_user_name_surname);
         TextView textEmail = header.findViewById(R.id.id_badge_user_email);
+        TextView role = header.findViewById(R.id.id_badge_role);
         ImageView image = header.findViewById(R.id.id_badge_image);
         if(user != null) {
             textNameSurname.setText(user.getName() + " " + user.getSurname());
             textEmail.setText(user.getEmail());
+            if(user.isAdmin())
+                role.setVisibility(View.VISIBLE);
             String mipmapName = "ic_" + user.getName().toLowerCase().substring(0, 1);
             int resID = getResources().getIdentifier(mipmapName, "mipmap", getPackageName());
             image.setImageResource(resID);

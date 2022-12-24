@@ -170,5 +170,17 @@
         app:layout_constraintEnd_toEndOf="@+id/reg_password"
         app:layout_constraintTop_toTopOf="@+id/reg_password" />
 
+    <ImageButton
+        android:id="@+id/button_info_psw_registration"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="1dp"
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/ic_info"
+        android:tooltipText="Password policy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reg_password" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
