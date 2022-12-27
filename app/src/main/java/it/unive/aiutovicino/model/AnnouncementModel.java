@@ -5,6 +5,7 @@ import java.util.List;
 public class AnnouncementModel {
     private String id;
     private String userId;
+    private String creator;
     private String idCategory;
     private String title;
     private String description;
@@ -122,5 +123,13 @@ public class AnnouncementModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

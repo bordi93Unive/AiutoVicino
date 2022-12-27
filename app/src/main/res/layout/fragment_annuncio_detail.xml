@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-41dp"
-        tools:layout_editor_absoluteY="-141dp">
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="16dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,10 +24,11 @@
 
             <TextView
                 android:id="@+id/text_annuncio_title"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
                 android:text="Titolo"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,11 +37,12 @@
 
             <TextView
                 android:id="@+id/textView_Titolo"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Titolo:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,10 +62,11 @@
 
             <TextView
                 android:id="@+id/text_date"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
                 android:text="Data"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,12 +75,13 @@
 
             <TextView
                 android:id="@+id/textView_Date"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:text="Data:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,12 +90,13 @@
 
             <TextView
                 android:id="@+id/textView_Time"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="8dp"
                 android:text="Orario:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,10 +105,11 @@
 
             <TextView
                 android:id="@+id/text_Time"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
                 android:text="Orario"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -113,11 +119,11 @@
 
             <TextView
                 android:id="@+id/text_Location"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginEnd="3dp"
+                android:layout_marginEnd="10dp"
                 android:text="Location"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -126,12 +132,13 @@
 
             <TextView
                 android:id="@+id/textView_Location"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="8dp"
                 android:text="Location:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,10 +146,11 @@
 
             <TextView
                 android:id="@+id/text_Partecipanti"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
                 android:text="Numero Partecipanti"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -151,10 +159,11 @@
 
             <TextView
                 android:id="@+id/text_Coin"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
                 android:text="NCoin"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -162,11 +171,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_Partecipanti" />
 
             <TextView
-                android:id="@+id/text_NApplicazioni"
-                android:layout_width="250dp"
+                android:id="@+id/text_Creatore"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:text="Creatore"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView_Partecipanti"
+                app:layout_constraintTop_toBottomOf="@+id/text_Coin" />
+
+            <TextView
+                android:id="@+id/text_NApplicazioni"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="70dp"
+                android:layout_marginEnd="10dp"
                 android:textSize="18sp"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -175,10 +199,11 @@
 
             <TextView
                 android:id="@+id/text_Applicazioni"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="70dp"
+                android:layout_marginEnd="10dp"
                 android:textSize="18sp"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -187,57 +212,75 @@
 
             <TextView
                 android:id="@+id/textView_Partecipanti"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="Partecipanti:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_Location" />
 
 
             <TextView
                 android:id="@+id/textView_Coin"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="Coin:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_Partecipanti" />
 
             <TextView
-                android:id="@+id/text_Descrizione"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
+                android:id="@+id/textView_Creator"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:text="Creatore:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Coin" />
+
+            <TextView
+                android:id="@+id/text_Descrizione"
+                android:layout_width="230dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:text="Descrizione:"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_Descrizione"
-                app:layout_constraintTop_toBottomOf="@+id/text_Coin" />
+                app:layout_constraintTop_toBottomOf="@+id/text_Creatore" />
 
 
             <TextView
                 android:id="@+id/textView_Descrizione"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="Descrizione:"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_Coin" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_Creator" />
 
 
             <TextView
                 android:id="@+id/textView_Descrizione2"
-                android:layout_width="110dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:text="Applcazioni:"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView_Descrizione" />
 

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/adapter_users_name_surname"
-        android:layout_width="200dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/adapter_users_email"
-        android:layout_width="200dp"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"

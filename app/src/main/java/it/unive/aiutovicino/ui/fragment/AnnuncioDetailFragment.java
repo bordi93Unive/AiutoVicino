@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -19,6 +20,7 @@ import it.unive.aiutovicino.General;
 import it.unive.aiutovicino.R;
 import it.unive.aiutovicino.controller.AnnouncementController;
 import it.unive.aiutovicino.controller.RankingController;
+import it.unive.aiutovicino.controller.UserController;
 import it.unive.aiutovicino.databinding.FragmentAnnuncioDetailBinding;
 import it.unive.aiutovicino.model.AnnouncementModel;
 import it.unive.aiutovicino.model.UserModel;
@@ -117,22 +119,40 @@ public class AnnuncioDetailFragment extends Fragment {
                 binding.textAnnuncioTitle.setText(annuncio.getTitle());
                 switch (annuncio.getIdCategory()) {
                     case "1":
-                        binding.annuncioIcon.setImageResource(R.drawable.category_anziani);
+                        binding.annuncioIcon.setImageResource(R.drawable.category_corsi);
                         break;
                     case "2":
                         binding.annuncioIcon.setImageResource(R.drawable.category_bambini);
                         break;
                     case "3":
+                        binding.annuncioIcon.setImageResource(R.drawable.category_anziani);
+                        break;
+                    case "4":
                         binding.annuncioIcon.setImageResource(R.drawable.category_cani);
                         break;
+                    case "5":
+                        binding.annuncioIcon.setImageResource(R.drawable.category_trasporti);
+                        break;
+
                 }
                 binding.textDate.setText(annuncio.getDate());
                 binding.textTime.setText(annuncio.getHours());
                 binding.textLocation.setText(annuncio.getPlace());
                 binding.textPartecipanti.setText((String.valueOf(annuncio.getParticipantsNumber())));
+                binding.textCreatore.setText(annuncio.getCreator());
                 binding.textCoin.setText(String.valueOf(annuncio.getCoins()));
-                binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
                 binding.textDescrizione.setText(annuncio.getDescription());
+                binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
+                binding.textDescrizione.setOnTouchListener(new View.OnTouchListener() {
+
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        binding.textDescrizione.getParent().requestDisallowInterceptTouchEvent(true);
+
+                        return false;
+                    }
+                });
             }
 
             binding.buttonApplicati.setOnClickListener(new View.OnClickListener() {

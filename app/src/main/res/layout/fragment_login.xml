@@ -68,7 +68,7 @@
         android:paddingRight="12dp"
         android:paddingBottom="12dp"
         android:selectAllOnFocus="true"
-        android:text="ughino"
+        android:text="#Ughino123"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"

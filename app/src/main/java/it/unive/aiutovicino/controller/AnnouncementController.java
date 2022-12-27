@@ -84,6 +84,8 @@ public class AnnouncementController {
 
                     announcement.setId(jsonData.getString("id"));
                     announcement.setUserId(jsonData.getString("userId"));
+                    UserModel creatore = UserController.getUserById(announcement.getUserId());
+                    announcement.setCreator(creatore.getNickname());
                     announcement.setIdCategory(jsonData.getString("idCategory"));
                     announcement.setTitle(jsonData.getString("title"));
                     announcement.setDescription(jsonData.getString("description"));

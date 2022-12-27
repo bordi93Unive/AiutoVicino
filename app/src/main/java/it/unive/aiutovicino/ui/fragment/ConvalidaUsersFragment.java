@@ -16,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 
 import it.unive.aiutovicino.General;
@@ -33,7 +35,7 @@ public class ConvalidaUsersFragment extends Fragment {
     private ProgressBar progressSpinner;
     private UserAdapter userAdapter;
     private List<UserModel> users;
-    private View rootView;
+    private View root;
 
     public static ConvalidaUsersFragment newInstance() {
         ConvalidaUsersFragment fragment = new ConvalidaUsersFragment();
@@ -71,6 +73,16 @@ public class ConvalidaUsersFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void updateError(){
+        Snackbar.make(root, "Errore durante il cambio dati", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    private void updateok(){
+        Snackbar.make(root, "Dati aggiornati correttamente", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
     private class Connection extends AsyncTask {
