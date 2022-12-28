@@ -75,6 +75,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
                 binding.textTime.setText(annuncio.getHours());
                 binding.textLocation.setText(annuncio.getPlace());
                 binding.textPartecipanti.setText((String.valueOf(annuncio.getParticipantsNumber())));
+                binding.textCreatoreConvalida.setText(annuncio.getCreator());
                 binding.textCoin.setText((String.valueOf(annuncio.getCoins())));
                 binding.textDescrizione.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
                 binding.textDescrizione.setText(annuncio.getDescription());
@@ -162,7 +163,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            //progressSpinner.setVisibility(View.VISIBLE);
+            progressSpinner.setVisibility(View.VISIBLE);
             binding.buttonApprovaCorso.setEnabled(false);
             binding.buttonEliminaCorso.setEnabled(false);
         }
@@ -181,7 +182,7 @@ public class ConvalidaCorsoDetailFragment extends Fragment {
             } else {
                 deleteOk();
             }
-            //progressSpinner.setVisibility(View.GONE);
+            progressSpinner.setVisibility(View.GONE);
             binding.buttonApprovaCorso.setEnabled(true);
             binding.buttonEliminaCorso.setEnabled(true);
         }

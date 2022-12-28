@@ -219,7 +219,7 @@ public class AnnuncioDetailFragment extends Fragment {
     private void deleteOk(){
         Snackbar.make(root, "Eliminato con successo", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_home);
+        Navigation.findNavController(root).navigate(R.id.action_annuncioDetailFragment_to_nav_annunci);
     }
 
     private class ConnectionDelete extends AsyncTask {
