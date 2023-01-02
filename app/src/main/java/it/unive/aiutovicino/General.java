@@ -150,6 +150,7 @@ public class General {
             }
         }
         return expired;
+        //return false per test
     }
 
     public static void resetSharedPreferences(Activity activity, int mode){

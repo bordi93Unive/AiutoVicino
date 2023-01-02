@@ -52,7 +52,7 @@ public class PortafoglioFragment extends Fragment {
             textScore = binding.textScore;
 
             textPortafoglio.setText("Ciao " + General.user.getName() + " " + General.user.getSurname() + "!");
-            textScore.setText(String.valueOf(General.user.getScore()));
+            //textScore.setText(String.valueOf(General.user.getScore()));
             new Connection().execute();
 
             binding.buttonVisualizzaClassifica.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,7 @@ public class PortafoglioFragment extends Fragment {
         protected void onPostExecute(Object result) {
             if (result!= null) {
                 int score = (Integer)result;
-                textScore.setText(String.valueOf(score));
+                textScore.setText(String.valueOf(score) + " coins");
             }
 
         }

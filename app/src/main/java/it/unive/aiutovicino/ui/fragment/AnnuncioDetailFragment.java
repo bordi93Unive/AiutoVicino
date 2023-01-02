@@ -102,6 +102,18 @@ public class AnnuncioDetailFragment extends Fragment {
                                 textApplyed.append(user.getNickname() + "\n");
                             }
                             binding.textApplicazioni.setText(textApplyed);
+                            binding.textApplicazioni.setMovementMethod(new ScrollingMovementMethod()); //per rendere la textView scrollabile
+                            binding.textApplicazioni.setOnTouchListener(new View.OnTouchListener() {
+
+                                @Override
+                                public boolean onTouch(View v, MotionEvent event) {
+
+                                    binding.textApplicazioni.getParent().requestDisallowInterceptTouchEvent(true);
+
+                                    return false;
+                                }
+                            });
+
                             //mostro il bottone di conferma attività solo se tutti si sono applicati
                             if (usersApplyed.size() == annuncio.getParticipantsNumber() && annuncio.getStatus().equals("open")) {
                                 binding.buttonConfermaAttivita.setVisibility(View.VISIBLE);
